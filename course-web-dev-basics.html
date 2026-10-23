@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌐 Lesson 5: Web Development Basics — Full Course</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#fffef9;--text:#1a1a1a;--accent:#0ea5e9;--accent-light:#e0f2fe;
+  --light:#f0f4f8;--border:#cbd5e1;--code-bg:#f6f8fa;
+  --success:#10b981;--warn:#f59e0b;--danger:#ef4444;--arrow:#0284c7
+}
+@media(prefers-color-scheme:dark){
+  :root{--bg:#0f172a;--text:#e2e8f0;--accent:#38bdf8;--accent-light:#1e293b;
+  --light:#1e293b;--border:#475569;--code-bg:#1e293b}
+}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;padding:0}
+.progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--accent);width:0;z-index:999}
+.top-nav{position:sticky;top:0;background:var(--light);border-bottom:1px solid var(--border);padding:.8rem 2rem;display:flex;justify-content:space-between;align-items:center;z-index:99}
+.top-nav a{color:var(--accent);text-decoration:none;font-weight:bold}
+.top-nav a:hover{text-decoration:underline}
+.controls{display:flex;gap:.5rem}
+.ctrl-btn{padding:.4rem .8rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;cursor:pointer}
+.ctrl-btn:hover{background:var(--accent);color:#fff}
+.content{max-width:900px;margin:0 auto;padding:2rem}
+.book-header{text-align:center;margin-bottom:2.5rem;padding-bottom:2rem;border-bottom:2px solid var(--accent)}
+.book-header h1{font-size:2rem;margin-bottom:.5rem;color:var(--accent)}
+.tag{display:inline-block;padding:.25rem .6rem;border-radius:20px;font-size:.75rem;font-weight:bold;margin-right:.5rem}
+.tag-beginner{background:#bae6fd;color:#075985}
+.tag-advanced{background:#fef3c7;color:#92400e}
+.chapter{margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px dashed var(--border)}
+.chapter h2{font-size:1.5rem;margin:1.8rem 0 1rem;color:var(--accent)}
+.chapter h3{font-size:1.15rem;margin:1.4rem 0 .7rem}
+.chapter p{margin-bottom:1rem}
+.chapter ul,.chapter ol{margin:1rem 0 1rem 2rem}
+.chapter li{margin:.6rem 0}
+pre{background:var(--code-bg);border-radius:10px;padding:1.3rem;overflow-x:auto;margin:1.2rem 0;border:1px solid var(--border);font-size:.85rem;line-height:1.6}
+code{font-family:'Consolas','Monaco',monospace}
+:not(pre)>code{background:var(--code-bg);padding:.2rem .5rem;border-radius:4px}
+.box{border-radius:12px;padding:1.3rem;margin:1.5rem 0}
+.box-tip{background:#ecfdf5;border-left:5px solid #10b981}
+.box-note{background:var(--accent-light);border-left:5px solid var(--accent)}
+.box-warn{background:#fffbeb;border-left:5px solid var(--warn)}
+.box-success{background:#f0fdf4;border-left:5px solid var(--success)}
+.arrow{color:var(--arrow);font-weight:bold;margin:0 .3rem}
+.nav-buttons{display:flex;justify-content:space-between;margin:2.5rem 0;padding-top:1.5rem;border-top:2px solid var(--border)}
+.nav-btn{padding:.9rem 1.5rem;background:var(--accent);color:#fff;border:none;border-radius:10px;cursor:pointer;font-size:1rem;text-decoration:none;display:inline-block;text-align:center;font-weight:bold;transition:transform .2s}
+.nav-btn:hover{transform:translateY(-2px)}
+/* Tagalog subtitle style — added */
+.tagalog-sub{color:#9ca3af;font-size:.85rem;font-style:italic;margin-top:-.5rem;margin-bottom:1rem;display:block;line-height:1.5}
+.tagalog-note{color:#9ca3af;font-size:.8rem;font-style:italic;margin-top:.3rem}
+@media(max-width:768px){.top-nav{padding:.8rem 1rem;flex-wrap:wrap;gap:.5rem}.content{padding:1rem}}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progress"></div>
+<nav class="top-nav">
+  <a href="index.html">🏠 Portal</a>
+  <span style="font-weight:bold">🌐 Lesson 5: Web Development Basics</span>
+  <div class="controls">
+    <button class="ctrl-btn" id="themeBtn">🌙</button>
+    <button class="ctrl-btn" id="fontDown">A-</button>
+    <button class="ctrl-btn" id="fontUp">A+</button>
+  </div>
+</nav>
+<main class="content">
+  <header class="book-header">
+    <h1>🌐 Lesson 5: Web Development Basics</h1>
+    <p>Build Pages Anyone Can Visit — From Your Computer to the World Wide Web</p>
+    <span class="tagalog-sub">Gumawa ng pahinang maaaring bisitahin ng kahit sino — mula sa iyong kompyuter hanggang sa buong mundo</span>
+    <p style="margin-top:.8rem">
+      <span class="tag tag-beginner">🟢 Zero Experience Needed</span>
+      <span class="tag tag-advanced">🔵 Full Reference Included</span>
+    </p>
+    <span class="tagalog-sub">🟢 Hindi kailangan ng karanasan | 🔵 Kasama ang buong sanggunian</span>
+  </header>
+
+  <section class="chapter">
+    <h2>📖 Chapter 1 — How the Web Works</h2>
+    <span class="tagalog-sub">Paano gumagana ang World Wide Web</span>
+    <p>Three languages — one team! Every website you visit uses these together:</p>
+    <span class="tagalog-sub">Tatlong wika — nagtutulungan! Lahat ng website ay ginagamit ang mga ito nang sabay:</span>
+    
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin:1.5rem 0">
+      <div class="box-note">
+        <strong>📄 HTML — Structure</strong><br>
+        The skeleton: headings, paragraphs, images, buttons<br>
+        <em>What you see</em>
+        <span class="tagalog-note">Ang balangkas: pamagat, talata, larawan, pindutan — ang nakikita mo</span>
+      </div>
+      <div class="box-note">
+        <strong>🎨 CSS — Style</strong><br>
+        The beauty: colors, fonts, spacing, layout, mobile design<br>
+        <em>How it looks</em>
+        <span class="tagalog-note">Ang anyo: kulay, font, espasyo, disenyo — kung paano ito lumalabas</span>
+      </div>
+      <div class="box-note">
+        <strong>⚡ JS — Behavior</strong><br>
+        The action: buttons that do things, forms that respond, live updates<br>
+        <em>How it works</em>
+        <span class="tagalog-note">Ang kilos: pindutang gumagana, pormularyong tumutugon — kung paano ito kumilos</span>
+      </div>
+    </div>
+    <h3>Your First Page — 3 Steps:</h3>
+    <span class="tagalog-sub">Ang iyong unang pahina — sa 3 hakbang:</span>
+    <ol>
+      <li>Open Notepad <span class="arrow">→</span> Save As
+        <span class="tagalog-note">Buksan ang Notepad → I-save Bilang</span>
+      </li>
+      <li>File name: <code>index.html</code> <span class="arrow">→</span> Save as type: All Files
+        <span class="tagalog-note">Pangalan ng file: index.html → Uri: Lahat ng File</span>
+      </li>
+      <li>Double-click it — opens in your browser! ✅
+        <span class="tagalog-note">I-double-click — bubukas sa iyong browser!</span>
+      </li>
+    </ol>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 2 — HTML: Build the Structure</h2>
+    <span class="tagalog-sub">HTML: Bumuo ng balangkas at nilalaman</span>
+    <p>HTML uses <strong>tags</strong> — words inside angle brackets. Most have an opening and closing tag.</p>
+    <span class="tagalog-sub">Gumagamit ng mga &lt;tag&gt; — salita sa loob ng panaklong. Karamihan ay may pambungad at pangsara.</span>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;My First Website&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- ← This is a comment — invisible! --&gt;
+    &lt;h1&gt;Hello! I Built This! 🎉&lt;/h1&gt;
+    &lt;h2&gt;This is a smaller heading&lt;/h2&gt;
+    &lt;p&gt;This is a paragraph. Write anything here.&lt;/p&gt;
+    &lt;p&gt;New paragraph starts on new line.&lt;/p&gt;
+    &lt;!-- Links --&gt;
+    &lt;a href="https://google.com"&gt;Click me to go to Google&lt;/a&gt;
+    &lt;!-- Image --&gt;
+    &lt;img src="photo.jpg" alt="Description of photo" width="300"&gt;
+    &lt;!-- List --&gt;
+    &lt;h3&gt;My Favorite Things:&lt;/h3&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Learning code 💻&lt;/li&gt;
+        &lt;li&gt;Good food 🍜&lt;/li&gt;
+        &lt;li&gt;Friends &amp; family ❤️&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+    <div class="box-tip">
+      💡 <strong>Tag Cheat Sheet</strong><br>
+      <span class="tagalog-note">Madaling Talaan ng Mga Tag</span>
+      <code>&lt;h1&gt;</code> = biggest heading → <code>&lt;h6&gt;</code> smallest<br>
+      <span class="tagalog-note">pinakamalaki hanggang pinakamaliit na pamagat</span>
+      <code>&lt;p&gt;</code> = paragraph<br>
+      <span class="tagalog-note">talata</span>
+      <code>&lt;a href="url"&gt;</code> = link<br>
+      <span class="tagalog-note">tugnay / link</span>
+      <code>&lt;img src="file" alt=""&gt;</code> = image (no closing tag!)<br>
+      <span class="tagalog-note">larawan — walang kailangang pangsarang tag</span>
+      <code>&lt;ul&gt;</code> = bullet list, <code>&lt;ol&gt;</code> = numbered list
+      <span class="tagalog-note">tuldok na talaan / may bilang na talaan</span>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 3 — CSS: Make It Beautiful</h2>
+    <span class="tagalog-sub">CSS: Pagandahin ang iyong pahina</span>
+    <p>Add style — 3 ways: in a <code>&lt;style&gt;</code> block, separate file, or directly. We start with the style block.</p>
+    <span class="tagalog-sub">Tatlong paraan: sa loob ng pahina, hiwalay na file, o direkta. Magsisimula tayo sa loob ng pahina.</span>
+<pre><code>&lt;head&gt;
+    &lt;style&gt;
+        /* Whole page */
+        body {
+            background-color: #f0f9ff; /* light blue */
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            line-height: 1.6;
+        }
+        /* By tag name */
+        h1 {
+            color: #0369a1;
+            text-align: center;
+        }
+        /* By class — reusable! */
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin: 15px 0;
+        }
+        /* By ID — unique only once */
+        #intro {
+            font-size: 1.2em;
+            border-left: 4px solid #0ea5e9;
+            padding-left: 15px;
+        }
+        /* Hover effect */
+        a {
+            color: #0284c7;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #0369a1;
+            text-decoration: underline;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;My Styled Page&lt;/h1&gt;
+    &lt;p id="intro"&gt;This paragraph has special styling.&lt;/p&gt;
+    &lt;div class="card"&gt;
+        &lt;h3&gt;Card Title&lt;/h3&gt;
+        &lt;p&gt;Content inside a nice box ✨&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/body&gt;</code></pre>
+    <h3>Responsive Design — Works on Phones Too</h3>
+    <span class="tagalog-sub">Disenyong umaangkop — gumagana rin sa cellphone</span>
+<pre><code>@media (max-width: 600px) {
+    body {
+        margin: 15px; /* Less space on small screens */
+    }
+    .card {
+        padding: 12px;
+    }
+}</code></pre>
+    <p>That code says: "If screen is smaller than 600px, do this instead." ✅</p>
+    <span class="tagalog-sub">Ibig sabihin: "Kung mas maliit ang screen sa 600px, gamitin ang ganitong sukat."</span>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 4 — JavaScript: Make It Interactive</h2>
+    <span class="tagalog-sub">JavaScript: Bigyan ito ng kakayahang tumugon</span>
+    <p>React to clicks, calculate, change content — all without reloading the page!</p>
+    <span class="tagalog-sub">Tumugon sa pagpindot, magkalkula, magbago ng laman — nang hindi kailangang i-refresh ang pahina!</span>
+<pre><code>&lt;body&gt;
+    &lt;h1&gt;JS Demo&lt;/h1&gt;
+    &lt;!-- Button --&gt;
+    &lt;button id="myBtn" style="padding:10px 20px;font-size:16px;cursor:pointer"&gt;
+        Click Me!
+    &lt;/button&gt;
+    &lt;!-- Where answer appears --&gt;
+    &lt;p id="output" style="margin-top:15px;font-size:18px"&gt;&lt;/p&gt;
+    &lt;script&gt;
+        // Find the button and output
+        const btn = document.getElementById('myBtn');
+        const output = document.getElementById('output');
+        // Count variable
+        let count = 0;
+        // What happens on click
+        btn.addEventListener('click', function() {
+            count++; // Add 1
+            output.textContent = `You clicked ${count} times! 🎉`;
+        });
+    &lt;/script&gt;
+&lt;/body&gt;</code></pre>
+    <h3>Simple Calculator</h3>
+    <span class="tagalog-sub">Payak na Tagapagkalkula</span>
+<pre><code>&lt;input type="number" id="num1" placeholder="First number"&gt;
+&lt;input type="number" id="num2" placeholder="Second number"&gt;
+&lt;button onclick="addNumbers()"&gt;Add ✅&lt;/button&gt;
+&lt;p id="result"&gt;&lt;/p&gt;
+&lt;script&gt;
+function addNumbers() {
+    // Get values from boxes
+    const n1 = Number(document.getElementById('num1').value);
+    const n2 = Number(document.getElementById('num2').value);
+    
+    // Calculate
+    const sum = n1 + n2;
+    
+    // Show result
+    document.getElementById('result').textContent = 
+        `Answer: ${n1} + ${n2} = ${sum}`;
+}
+&lt;/script&gt;</code></pre>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 5 — Mini Project: Personal Portfolio</h2>
+    <span class="tagalog-sub">Maliit na Proyekto: Sariling Pahina ng Portfolio</span>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;My Portfolio | Future Developer&lt;/title&gt;
+    &lt;style&gt;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #e0f2fe, #f0fdf4);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        h1 { font-size: 2.5rem; color: #0369a1; margin-bottom: 10px; }
+        .tagline { color: #475569; font-size: 1.2rem; }
+        section {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        h2 { color: #0ea5e9; margin-bottom: 20px; border-bottom: 2px solid #e0f2fe; padding-bottom: 10px; }
+        .skill-tag {
+            display: inline-block;
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 8px 16px;
+            border-radius: 20px;
+            margin: 5px;
+            font-weight: 500;
+        }
+        .project {
+            border-left: 4px solid #10b981;
+            padding-left: 20px;
+            margin: 15px 0;
+        }
+        button {
+            background: #0ea5e9;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background .2s;
+        }
+        button:hover { background: #0284c7; }
+        footer { text-align: center; margin-top: 30px; color: #64748b; }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="container"&gt;
+        &lt;header&gt;
+            &lt;h1&gt;👋 Hi, I'm [Your Name]&lt;/h1&gt;
+            &lt;p class="tagline"&gt;Aspiring Developer • Building Things That Matter ✨&lt;/p&gt;
+            &lt;span class="tagalog-note">Nagsisimulang Programador • Lumilikha ng kapaki-pakinabang na gawain&lt;/span&gt;
+        &lt;/header&gt;
+        &lt;section&gt;
+            &lt;h2&gt;About Me&lt;/h2&gt;
+            &lt;p&gt;I'm learning to code! I started with Java and now I'm building web pages. I love creating things and solving problems. Every day I learn something new. 💻&lt;/p&gt;
+            &lt;span class="tagalog-note">Nag-aaral akong mag-code! Nagsimula sa Java at ngayon ay gumagawa ng pahina. Mahilig akong lumikha at lumutas ng problema. Araw-araw may natututunan.&lt;/span&gt;
+        &lt;/section&gt;
+        &lt;section&gt;
+            &lt;h2&gt;Skills&lt;/h2&gt;
+            &lt;span class="skill-tag">Java ☕&lt;/span&gt;
+            &lt;span class="skill-tag">HTML 📄&lt;/span&gt;
+            &lt;span class="skill-tag">CSS 🎨&lt;/span&gt;
+            &lt;span class="skill-tag">JavaScript ⚡&lt;/span&gt;
+            &lt;span class="skill-tag">SQL 🗄️&lt;/span&gt;
+        &lt;/section&gt;
+        &lt;section&gt;
+            &lt;h2&gt;Projects&lt;/h2&gt;
+            &lt;div class="project"&gt;
+                &lt;h3&gt;Student Grade Calculator&lt;/h3&gt;
+                &lt;p&gt;Java app that computes averages and shows pass/fail status.&lt;/p&gt;
+                &lt;span class="tagalog-note">Programang nagku-kuwenta ng marka at nagpapakita kung pumasa o hindi&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div class="project"&gt;
+                &lt;h3&gt;Library Management System&lt;/h3&gt;
+                &lt;p&gt;OOP-based app to track books, borrows, and returns.&lt;/p&gt;
+                &lt;span class="tagalog-note">Sistemang sumusunod sa OOP — pagsubaybay sa aklat, paghiram, at pagsasauli&lt;/span&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+        &lt;section&gt;
+            &lt;h2&gt;Contact Me&lt;/h2&gt;
+            &lt;p&gt;Click to say hello! 👇&lt;/p&gt;
+            &lt;span class="tagalog-note">Pindutin para bumati!&lt;/span&gt;
+            &lt;button onclick="greet()"&gt;Say Hello!&lt;/button&gt;
+            &lt;p id="greeting" style="margin-top:15px;font-weight:bold;color:#0369a1"&gt;&lt;/p&gt;
+        &lt;/section&gt;
+        &lt;footer&gt;
+            &lt;p&gt;Made with 💙 — Learning Every Day © 2026&lt;/p&gt;
+            &lt;span class="tagalog-note">Ginawa nang may pagmamahal — Araw-araw na pag-aaral © 2026&lt;/span&gt;
+        &lt;/footer&gt;
+    &lt;/div&gt;
+    &lt;script&gt;
+    function greet() {
+        const name = prompt("What's your name?");
+        if(name) {
+            document.getElementById('greeting').textContent = 
+                `Hello ${name}! Nice to meet you! 🎉`;
+        }
+    }
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 6 — Put It Online! (Free & Easy)</h2>
+    <span class="tagalog-sub">Ilathala sa internet — Libre at Madali!</span>
+    <p>Your page lives on your computer now — let's share it with the world!</p>
+    <span class="tagalog-sub">Nasa iyong kompyuter pa lamang ito — ibahagi na natin sa iba!</span>
+    <ol>
+      <li>Go to <code>github.com</code> <span class="arrow">→</span> Create free account
+        <span class="tagalog-note">Pumunta sa github.com → Gumawa ng libreng akawnt</span>
+      </li>
+      <li>Click <strong>New Repository</strong> <span class="arrow">→</span> Name: <code>my-portfolio</code>
+        <span class="tagalog-note">Pindutin ang Bagong Repositoryo → Pangalan: my-portfolio</span>
+      </li>
+      <li>Check "Add a README" <span class="arrow">→</span> Create Repository
+        <span class="tagalog-note">Tsekang "Magdagdag ng README" → Lumikha</span>
+      </li>
+      <li>Click <strong>uploading an existing file</strong> <span class="arrow">→</span> Drag your <code>index.html</code>
+        <span class="tagalog-note">Pindutin ang pag-upload ng file → I-drag ang iyong index.html</span>
+      </li>
+      <li>Scroll down <span class="arrow">→</span> Commit changes
+        <span class="tagalog-note">Pumunta sa ibaba → I-save ang pagbabago</span>
+      </li>
+      <li>Go to <strong>Settings</strong> tab <span class="arrow">→</span> Scroll to <strong>Pages</strong> (left sidebar)
+        <span class="tagalog-note">Pumunta sa Mga Setting → Hanapin ang Pahina sa gilid</span>
+      </li>
+      <li>Source: <code>main</code> <span class="arrow">→</span> Save <span class="arrow">→</span> Wait 1–3 minutes
+        <span class="tagalog-note">Pinagmulan: main → I-save → Maghintay ng 1–3 minuto</span>
+      </li>
+      <li>Refresh <span class="arrow">→</span> Your link appears! ✅
+        <span class="tagalog-note">I-refresh — lalabas na ang iyong link!</span>
+      </li>
+    </ol>
+    <div class="box-success">
+      🎉 <strong>You're Live!</strong> Anyone with your link can see your page from anywhere!
+      <span class="tagalog-note">Nakapaskil ka na! Kahit saan, makikita ng sinumang may link ang iyong pahina</span>
+    </div>
+  </section>
+
+  <div class="box-success">
+    <strong>🎉 Web Dev Complete!</strong><br>
+    ✅ HTML — Page structure & content<br>
+    <span class="tagalog-note">Balangkas at nilalaman ng pahina</span>
+    ✅ CSS — Colors, layout, responsive design<br>
+    <span class="tagalog-note">Kulay, ayos, at disenyong umaangkop</span>
+    ✅ JavaScript — Buttons, reactions, interactivity<br>
+    <span class="tagalog-note">Pindutan, pagtugon, at pakikipag-ugnayan</span>
+    ✅ Personal Portfolio — Complete multi-section page<br>
+    <span class="tagalog-note">Sariling pahina na may iba't ibang bahagi</span>
+    ✅ GitHub Pages — Publish to the internet FREE<br>
+    <span class="tagalog-note">Ilathala sa internet nang walang bayad</span><br>
+    <strong>Next:</strong> Track your work like a pro →
+    <a href="course-git-github.html" style="color:var(--success);font-weight:bold">Lesson 6: Git & GitHub →</a>
+    <span class="tagalog-note">Susunod: Pamahalaan ang iyong code — Git & GitHub</span>
+  </div>
+
+  <nav class="nav-buttons">
+    <a href="course-database-systems.html" class="nav-btn">← Back</a>
+    <a href="course-git-github.html" class="nav-btn">Next →</a>
+  </nav>
+</main>
+
+<script>
+let isDark = localStorage.getItem('web-theme') === 'true';
+function applyTheme(){document.getElementById('themeBtn').textContent = isDark ? '☀️' : '🌙';}
+applyTheme();
+document.getElementById('themeBtn').addEventListener('click', () => {
+  isDark = !isDark; localStorage.setItem('web-theme', isDark); applyTheme();
+});
+let fs = parseInt(localStorage.getItem('web-fs')) || 16;
+function applyFontSize(){document.body.style.fontSize = fs + 'px';}
+applyFontSize();
+document.getElementById('fontUp').addEventListener('click', () => {
+  if(fs < 22){ fs += 2; applyFontSize(); localStorage.setItem('web-fs', fs); }
+});
+document.getElementById('fontDown').addEventListener('click', () => {
+  if(fs > 12){ fs -= 2; applyFontSize(); localStorage.setItem('web-fs', fs); }
+});
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('progress').style.width = (window.scrollY / h) * 100 + '%';
+});
+</script>
+</body>
+</html>

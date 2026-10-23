@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>💻 Computer Fundamentals — Foundations</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#fffef9;--text:#1a1a1a;--accent:#0ea5e9;--accent-light:#e0f2fe;
+  --light:#f0f4f8;--border:#cbd5e1;--code-bg:#f6f8fa;
+  --success:#22c55e;--warn:#f59e0b;--danger:#ef4444;--arrow:#0284c7
+}
+@media(prefers-color-scheme:dark){
+  :root{--bg:#0f172a;--text:#e2e8f0;--accent:#38bdf8;--accent-light:#1e293b;
+  --light:#1e293b;--border:#475569;--code-bg:#1e293b}
+}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;padding:0}
+.progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--accent);width:0;z-index:999}
+.top-nav{position:sticky;top:0;background:var(--light);border-bottom:1px solid var(--border);padding:.8rem 2rem;display:flex;justify-content:space-between;align-items:center;z-index:99}
+.top-nav a{color:var(--accent);text-decoration:none;font-weight:bold}
+.top-nav a:hover{text-decoration:underline}
+.controls{display:flex;gap:.5rem}
+.ctrl-btn{padding:.4rem .8rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;cursor:pointer}
+.ctrl-btn:hover{background:var(--accent);color:#fff}
+.content{max-width:900px;margin:0 auto;padding:2rem}
+.book-header{text-align:center;margin-bottom:2.5rem;padding-bottom:2rem;border-bottom:2px solid var(--accent)}
+.book-header h1{font-size:2rem;margin-bottom:.5rem;color:var(--accent)}
+.tag{display:inline-block;padding:.25rem .6rem;border-radius:20px;font-size:.75rem;font-weight:bold;margin-right:.5rem}
+.tag-phase{background:var(--accent-light);color:#0369a1}
+.tag-found{background:#dcfce7;color:#166534}
+/* Tagalog subtitle style — consistent */
+.tagalog-sub{color:#9ca3af;font-size:.85rem;font-style:italic;margin-top:-.3rem;margin-bottom:1rem;display:block;line-height:1.5}
+.tagalog-note{color:#9ca3af;font-size:.8rem;font-style:italic;margin-top:.3rem;display:block}
+.chapter{margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px dashed var(--border)}
+.chapter h2{font-size:1.5rem;margin:1.8rem 0 1rem;color:var(--accent)}
+.chapter h3{font-size:1.15rem;margin:1.4rem 0 .7rem}
+.chapter p{margin-bottom:1rem}
+.chapter ul,.chapter ol{margin:1rem 0 1rem 2rem}
+.chapter li{margin:.6rem 0}
+table{width:100%;border-collapse:collapse;margin:1.2rem 0}
+th,td{padding:10px 14px;text-align:left;border:1px solid var(--border)}
+th{background:var(--accent-light);font-weight:bold}
+pre{background:var(--code-bg);border-radius:10px;padding:1.3rem;overflow-x:auto;margin:1.2rem 0;border:1px solid var(--border);font-size:.85rem;line-height:1.6}
+code{font-family:'Consolas','Monaco',monospace}
+:not(pre)>code{background:var(--code-bg);padding:.2rem .5rem;border-radius:4px}
+.box{border-radius:12px;padding:1.3rem;margin:1.5rem 0}
+.box-tip{background:#fef3c7;border-left:5px solid #f59e0b}
+.box-note{background:var(--accent-light);border-left:5px solid var(--accent)}
+.box-success{background:#f0fdf4;border-left:5px solid var(--success)}
+.box-warn{background:#fee2e2;border-left:5px solid #ef4444}
+.diagram{background:var(--light);border-radius:10px;padding:1.5rem;margin:1.2rem 0;text-align:center}
+.nav-buttons{display:flex;justify-content:space-between;margin:2.5rem 0;padding-top:1.5rem;border-top:2px solid var(--border)}
+.nav-btn{padding:.9rem 1.5rem;background:var(--accent);color:#fff;border:none;border-radius:10px;cursor:pointer;font-size:1rem;text-decoration:none;display:inline-block;text-align:center;font-weight:bold;transition:transform .2s}
+.nav-btn:hover{transform:translateY(-2px)}
+@media(max-width:768px){.top-nav{padding:.8rem 1rem;flex-wrap:wrap;gap:.5rem}.content{padding:1rem}}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progress"></div>
+<nav class="top-nav">
+  <a href="index.html">🏠 Portal</a>
+  <span style="font-weight:bold">💻 Computer Fundamentals — Phase 1: Foundations</span>
+  <div class="controls">
+    <button class="ctrl-btn" id="themeBtn">🌙</button>
+    <button class="ctrl-btn" id="fontDown">A-</button>
+    <button class="ctrl-btn" id="fontUp">A+</button>
+  </div>
+</nav>
+<main class="content">
+  <header class="book-header">
+    <span class="tag tag-phase">Phase 1 — Foundations</span>
+    <span class="tag tag-found">✅ #2 of 7 Remaining</span>
+    <h1>💻 Computer Fundamentals</h1>
+    <p>How Computers Really Work — From 0s and 1s to Running Programs ✅</p>
+    <span class="tagalog-sub">Paano gumagana ang kompyuter — mula 0 at 1 hanggang sa pagtakbo ng programa</span>
+  </header>
+
+  <section class="chapter">
+    <h2>📖 Chapter 1 — What Is a Computer, Exactly?</h2>
+    <span class="tagalog-sub">Ano ba talaga ang kompyuter?</span>
+    <p>A computer is <strong>a combination of Hardware and Software</strong> — two parts that cannot work without each other 💻</p>
+    <span class="tagalog-note">Hindi gagana ang isa kung wala ang isa — pisikal na katawan at utos</span>
+
+    <div class="diagram">
+      <p style="font-size:1.2rem; font-weight:bold;">Hardware ↔ Software</p>
+      <p style="margin-top:.5rem; color:var(--arrow);">Physical Parts ↔ Instructions & Logic</p>
+    </div>
+
+    <h3>Hardware = The Physical Parts 🛠️</h3>
+    <span class="tagalog-sub">Pisikal na bahagi — nahahawakan mo</span>
+    <ul>
+      <li><strong>CPU — Processor</strong> — The brain; follows instructions and does calculations
+        <span class="tagalog-note">Utak — nagpoproseso ng utos at nagkukuwenta</span>
+      </li>
+      <li><strong>RAM — Memory</strong> — Short-term workspace; where active programs live
+        <span class="tagalog-note">Panandaliang alaala — kung saan tumatakbo ang bukas na programa</span>
+      </li>
+      <li><strong>Storage</strong> — Long-term saving; Hard Drive, SSD — keeps data even when powered off
+        <span class="tagalog-note">Pangmatagalang imbakan — hindi nabubura kahit patayin</span>
+      </li>
+      <li><strong>Motherboard</strong> — The bridge connecting all parts together
+        <span class="tagalog-note">Tulay — nag-uugnay sa lahat ng piyesa</span>
+      </li>
+      <li><strong>Input / Output</strong> — Keyboard, mouse, screen, printer
+        <span class="tagalog-note">Pagpasok at paglabas — nakikipag-usap sa tao</span>
+      </li>
+    </ul>
+
+    <h3>Software = Programs & Instructions 📦</h3>
+    <span class="tagalog-sub">Mga programa — utos na sinusunod ng kompyuter</span>
+    <ul>
+      <li><strong>Operating System (OS)</strong> — Windows, macOS, Android — manages everything; connects hardware to other software
+        <span class="tagalog-note">Tagapamahala — nag-uugnay sa piyesa at programa</span>
+      </li>
+      <li><strong>Application</strong> — Browser, Word, Games — tools people use for specific tasks
+        <span class="tagalog-note">Gamit — para sa tiyak na gawain</span>
+      </li>
+    </ul>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 2 — Binary: The Computer's Language 0️⃣1️⃣</h2>
+    <span class="tagalog-sub">Ang wika ng kompyuter — dalawang numero lang</span>
+    <p>Deep inside, computers understand <strong>nothing but 0 and 1</strong> — like a light switch: OFF or ON ⚡</p>
+    <span class="tagalog-note">Walang iba — patay o bukas, walang kuryente o mayroon</span>
+
+    <div class="box-note">
+      💡 <strong>Bit = Binary Digit</strong><br>
+      • 0 = OFF / No / False<br>
+      • 1 = ON / Yes / True<br>
+      • This is the smallest piece of information
+      <span class="tagalog-note mt-1 block">Pinakamaliit na yunit — ito ang pundasyon ng lahat</span>
+    </div>
+
+    <h3>How Computers Count</h3>
+    <span class="tagalog-sub">Paano magbilang ang kompyuter</span>
+    <p>Humans — Decimal: 0 to 9 → ten digits before repeating<br>
+    Computers — Binary: only 0 and 1 → two digits before repeating</p>
+    <table>
+      <tr><th>Decimal</th><th>Binary</th><th>Meaning</th></tr>
+      <tr><td>0</td><td>0</td><td>zero</td></tr>
+      <tr><td>1</td><td>1</td><td>one</td></tr>
+      <tr><td>2</td><td>10</td><td>one-two + zero</td></tr>
+      <tr><td>3</td><td>11</td><td>one-two + one</td></tr>
+      <tr><td>4</td><td>100</td><td>four + zero + zero</td></tr>
+      <tr><td>8</td><td>1000</td><td>eight + zero + zero + zero</td></tr>
+    </table>
+
+    <h3>Byte = 8 Bits</h3>
+    <p>8 bits together = 1 byte — enough space for one letter or symbol.</p>
+<pre><code>'A' → 01000001
+'B' → 01000010
+'1' → 00110001</code></pre>
+
+    <h3>Storage Sizes:</h3>
+    <span class="tagalog-sub">Sukat ng espasyo sa imbakan</span>
+    <ul>
+      <li>1 Byte = 8 bits → 1 character</li>
+      <li>1 KB (Kilobyte) ≈ 1,000 Bytes → short paragraph</li>
+      <li>1 MB (Megabyte) ≈ 1 Million Bytes → one photo</li>
+      <li>1 GB (Gigabyte) ≈ 1 Billion Bytes → thousands of photos</li>
+      <li>1 TB (Terabyte) ≈ 1 Trillion Bytes → entire library</li>
+    </ul>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 3 — The CPU: The Brain 🧠</h2>
+    <span class="tagalog-sub">Ang Utak — CPU</span>
+    <p>The CPU does only three things, over and over, billions of times every second:</p>
+    <ol>
+      <li><strong>Fetch</strong> — get the instruction from memory
+        <span class="tagalog-note">Kunin ang utos mula sa memorya</span>
+      </li>
+      <li><strong>Execute</strong> — calculate, compare, move data
+        <span class="tagalog-note">Isagawa — kuwenta o ilipat ang impormasyon</span>
+      </li>
+      <li><strong>Next</strong> — move to the next instruction
+        <span class="tagalog-note">Ituloy sa susunod</span>
+      </li>
+    </ol>
+
+    <div class="diagram">
+      <p>Fetch → Execute → Fetch → Execute → ... forever ♾️</p>
+    </div>
+
+    <h3>Speed = Hertz (Hz)</h3>
+    <p>How fast this cycle repeats:<br>
+    • 1 Hz = 1 time per second<br>
+    • 1 GHz = 1 Billion times per second ⚡<br>
+    • Modern CPU = 3–5 GHz → billions of operations in an instant!</p>
+
+    <h3>Cores = Extra Brains</h3>
+    <span class="tagalog-sub">Dagdag na utak — mas marami, mas sabay-sabay</span>
+    <ul>
+      <li>Dual-Core = 2 brains</li>
+      <li>Quad-Core = 4 brains</li>
+      <li>More cores = more tasks handled at the same time ✅</li>
+    </ul>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 4 — RAM vs Storage: Workspace vs Closet 💾</h2>
+    <span class="tagalog-sub">Pagkakaiba ng RAM at Storage — madalas nakakalito</span>
+    <p>These are NOT the same thing — here's how to tell them apart:</p>
+    <table>
+      <tr><th>Feature</th><th>RAM (Memory)</th><th>Storage (Drive)</th></tr>
+      <tr><td>Full Name</td><td>Random Access Memory</td><td>SSD / HDD / Flash Drive</td></tr>
+      <tr><td>Purpose</td><td>Active programs running right now</td><td>Saving files forever</td></tr>
+      <tr><td>Speed</td><td>Extremely fast ⚡</td><td>Slower compared to RAM</td></tr>
+      <tr><td>Survives Shutdown?</td><td>Everything erased ❌</td><td>Everything saved ✅</td></tr>
+      <tr><td>Typical Size</td><td>8GB, 16GB, 32GB</td><td>256GB, 512GB, 1TB+</td></tr>
+      <tr><td>Analogy</td><td>Your desk — work here now</td><td>Your shelf — store things away</td></tr>
+    </table>
+
+    <div class="box-tip">
+      💡 <strong>More RAM = more open apps running smoothly at the same time!</strong>
+      <span class="tagalog-note mt-1 block">Mas malaking RAM — hindi bumabagal kahit maraming bukas na programa</span>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 5 — Software: From Code to Running 💻</h2>
+    <span class="tagalog-sub">Mula nakasulat na code hanggang gumagana ang programa</span>
+    <p>You write code — how does it turn into something a computer understands?</p>
+
+    <h3>Two Ways to Translate:</h3>
+    <span class="tagalog-sub">Dalawang paraan ng pagsasalin</span>
+    <ol>
+      <li><strong>Compiler</strong> — translates the whole program at once → creates a separate ready-to-run file<br>
+      ✅ Examples: Java, C++
+        <span class="tagalog-note">Isinasalin lahat nang sabay — nagiging hiwalay na file</span>
+      </li>
+      <li><strong>Interpreter</strong> — translates line-by-line while running<br>
+      ✅ Examples: JavaScript, Python
+        <span class="tagalog-note">Isinasalin habang tumatakbo — bawat linya</span>
+      </li>
+    </ol>
+
+    <h3>Operating System = The Middleman</h3>
+    <span class="tagalog-sub">Ang OS — hindi direktang nakikipag-usap ang programa sa piyesa</span>
+    <p>Programs never talk directly to hardware — everything goes through the OS:</p>
+<pre><code>Program → OS → Driver → Hardware ✅</code></pre>
+    <p>That's why new hardware needs a <strong>driver</strong> — it's the translator for the OS.</p>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 6 — Networks: Connecting Computers 🌐</h2>
+    <span class="tagalog-sub">Pag-uugnay — paano nagpapalitan ng impormasyon</span>
+    <p>The Internet is just millions of computers sending binary data to each other through wires or waves 🔗</p>
+
+    <h3>IP Address = Home Address 🏠</h3>
+    <span class="tagalog-sub">Tirahan sa internet — para alam kung saan ipadala</span>
+    <p>Every device on a network gets a unique number — so data knows where to go.</p>
+    <ul>
+      <li>IPv4: <code>192.168.1.1</code> — four groups of numbers</li>
+      <li>IPv6: <code>2001:0db8:...</code> — longer format, for many more devices</li>
+    </ul>
+
+    <h3>Client-Server Model</h3>
+    <div class="diagram">
+      <p>📱 Client (You) → Ask → 🖥️ Server → Reply → 📱 You</p>
+    </div>
+    <p>• Client = your browser/app — asks for things<br>
+    • Server = always-on computer — holds & sends things back</p>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 7 — The Full Picture 🧩</h2>
+    <span class="tagalog-sub">Buod — mula simula hanggang sagot</span>
+    <p>Now you understand the whole journey:</p>
+
+    <div class="diagram">
+      <p style="font-weight:bold; font-size:1.1rem;">From keypress to screen:</p>
+      <p style="margin-top:.5rem;">
+        Press a key → <br>
+        Signal sent to CPU → <br>
+        Check RAM: which app is active? → <br>
+        Send instruction to that program → <br>
+        Process the change → <br>
+        Update the screen → <br>
+        All in an instant! ⚡
+      </p>
+    </div>
+
+    <h3>Key Concepts to Remember:</h3>
+    <ul>
+      <li>✅ Everything inside is 0s and 1s — text, numbers, photos, video, all of it
+        <span class="tagalog-note">Lahat — teksto, larawan, video — nagiging 0 at 1</span>
+      </li>
+      <li>✅ CPU = brain, RAM = desk, Storage = shelf</li>
+      <li>✅ Software = instructions, Hardware = body, OS = manager</li>
+      <li>✅ Network = connection, IP = address, Client-Server = ask-and-respond</li>
+    </ul>
+  </section>
+
+  <div class="box-success">
+    <h3>✅ Computer Fundamentals — COMPLETE!</h3>
+    <p>You now understand computers from the ground up 💻✨</p>
+    <ul>
+      <li>✅ Hardware vs Software & how they work together</li>
+      <li>✅ Binary, bits, bytes, and storage sizes</li>
+      <li>✅ CPU, cores, speed, and the fetch-execute cycle</li>
+      <li>✅ RAM vs Storage — clear difference</li>
+      <li>✅ Compilers, interpreters, and the OS role</li>
+      <li>✅ Networks, IP, and Client-Server basics</li>
+    </ul>
+    <span class="tagalog-note">Alam mo na ang pundasyon — handa ka na sa susunod!</span>
+    
+    <p style="margin-top:1rem"><strong>Next:</strong> <code>course-java-fundamentals.html</code> — start programming in Java with NetBeans ☕</p>
+    <p>Just say <strong>"next"</strong> when you're ready! 💜🚀</p>
+  </div>
+
+  <nav class="nav-buttons">
+    <a href="course-logic-problem-solving.html" class="nav-btn">← Previous</a>
+    <a href="index.html" class="nav-btn">🏠 Portal</a>
+    <a href="course-java-fundamentals.html" class="nav-btn">Next →</a>
+  </nav>
+</main>
+
+<script>
+let isDark = localStorage.getItem('cf-theme') === 'true';
+function applyTheme(){document.getElementById('themeBtn').textContent = isDark ? '☀️' : '🌙';}
+applyTheme();
+document.getElementById('themeBtn').addEventListener('click', () => {
+  isDark = !isDark; localStorage.setItem('cf-theme', isDark); applyTheme();
+});
+let fs = parseInt(localStorage.getItem('cf-fs')) || 16;
+function applyFontSize(){document.body.style.fontSize = fs + 'px';}
+applyFontSize();
+document.getElementById('fontUp').addEventListener('click', () => {
+  if(fs < 22){ fs += 2; applyFontSize(); localStorage.setItem('cf-fs', fs); }
+});
+document.getElementById('fontDown').addEventListener('click', () => {
+  if(fs > 12){ fs -= 2; applyFontSize(); localStorage.setItem('cf-fs', fs); }
+});
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('progress').style.width = (window.scrollY / h) * 100 + '%';
+});
+</script>
+</body>
+</html>

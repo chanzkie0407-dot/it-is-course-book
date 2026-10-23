@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🗄️ Database Systems — Core Skills</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#fffef9;--text:#1a1a1a;--accent:#3b82f6;--accent-light:#dbeafe;
+  --light:#f0f4f8;--border:#cbd5e1;--code-bg:#f6f8fa;
+  --success:#22c55e;--warn:#f59e0b;--danger:#ef4444;--arrow:#2563eb
+}
+@media(prefers-color-scheme:dark){
+  :root{--bg:#0f172a;--text:#e2e8f0;--accent:#60a5fa;--accent-light:#1e293b;
+  --light:#1e293b;--border:#475569;--code-bg:#1e293b}
+}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;padding:0}
+.progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--accent);width:0;z-index:999}
+.top-nav{position:sticky;top:0;background:var(--light);border-bottom:1px solid var(--border);padding:.8rem 2rem;display:flex;justify-content:space-between;align-items:center;z-index:99}
+.top-nav a{color:var(--accent);text-decoration:none;font-weight:bold}
+.top-nav a:hover{text-decoration:underline}
+.controls{display:flex;gap:.5rem}
+.ctrl-btn{padding:.4rem .8rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;cursor:pointer}
+.ctrl-btn:hover{background:var(--accent);color:#fff}
+.content{max-width:900px;margin:0 auto;padding:2rem}
+.book-header{text-align:center;margin-bottom:2.5rem;padding-bottom:2rem;border-bottom:2px solid var(--accent)}
+.book-header h1{font-size:2rem;margin-bottom:.5rem;color:var(--accent)}
+.tag{display:inline-block;padding:.25rem .6rem;border-radius:20px;font-size:.75rem;font-weight:bold;margin-right:.5rem}
+.tag-phase{background:var(--accent-light);color:#1d4ed8}
+.tag-found{background:#dcfce7;color:#166534}
+/* Tagalog subtitle style — consistent */
+.tagalog-sub{color:#9ca3af;font-size:.85rem;font-style:italic;margin-top:-.3rem;margin-bottom:1rem;display:block;line-height:1.5}
+.tagalog-note{color:#9ca3af;font-size:.8rem;font-style:italic;margin-top:.3rem;display:block}
+.chapter{margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px dashed var(--border)}
+.chapter h2{font-size:1.5rem;margin:1.8rem 0 1rem;color:var(--accent)}
+.chapter h3{font-size:1.15rem;margin:1.4rem 0 .7rem}
+.chapter p{margin-bottom:1rem}
+.chapter ul,.chapter ol{margin:1rem 0 1rem 2rem}
+.chapter li{margin:.6rem 0}
+table{width:100%;border-collapse:collapse;margin:1.2rem 0}
+th,td{padding:10px 14px;text-align:left;border:1px solid var(--border)}
+th{background:var(--accent-light);font-weight:bold}
+pre{background:var(--code-bg);border-radius:10px;padding:1.3rem;overflow-x:auto;margin:1.2rem 0;border:1px solid var(--border);font-size:.85rem;line-height:1.6}
+code{font-family:'Consolas','Monaco',monospace}
+:not(pre)>code{background:var(--code-bg);padding:.2rem .5rem;border-radius:4px}
+.box{border-radius:12px;padding:1.3rem;margin:1.5rem 0}
+.box-tip{background:#fef3c7;border-left:5px solid #f59e0b}
+.box-note{background:var(--accent-light);border-left:5px solid var(--accent)}
+.box-success{background:#f0fdf4;border-left:5px solid var(--success)}
+.box-warn{background:#fee2e2;border-left:5px solid #ef4444}
+.diagram{background:var(--light);border-radius:10px;padding:1.5rem;margin:1.2rem 0;text-align:center}
+.nav-buttons{display:flex;justify-content:space-between;margin:2.5rem 0;padding-top:1.5rem;border-top:2px solid var(--border)}
+.nav-btn{padding:.9rem 1.5rem;background:var(--accent);color:#fff;border:none;border-radius:10px;cursor:pointer;font-size:1rem;text-decoration:none;display:inline-block;text-align:center;font-weight:bold;transition:transform .2s}
+.nav-btn:hover{transform:translateY(-2px)}
+@media(max-width:768px){.top-nav{padding:.8rem 1rem;flex-wrap:wrap;gap:.5rem}.content{padding:1rem}}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progress"></div>
+<nav class="top-nav">
+  <a href="index.html">🏠 Portal</a>
+  <span style="font-weight:bold">🗄️ Database Systems — Phase 3: Data Management</span>
+  <div class="controls">
+    <button class="ctrl-btn" id="themeBtn">🌙</button>
+    <button class="ctrl-btn" id="fontDown">A-</button>
+    <button class="ctrl-btn" id="fontUp">A+</button>
+  </div>
+</nav>
+<main class="content">
+  <header class="book-header">
+    <span class="tag tag-phase">Phase 3 — Data Management</span>
+    <span class="tag tag-found">✅ #6 of 7 Remaining</span>
+    <h1>🗄️ Database Systems</h1>
+    <p>Store, Retrieve, and Relate Information — From Tables to SQL ✅</p>
+    <span class="tagalog-sub">Mag-imbak, maghanap, at pag-ugnayin ang impormasyon — mula simpleng talahanayan hanggang buong SQL</span>
+  </header>
+
+  <section class="chapter">
+    <h2>📖 Chapter 1 — What Is a Database?</h2>
+    <span class="tagalog-sub">Ano ang Database?</span>
+    <p>A database is <strong>organized, reliable storage for information</strong> — not just a plain list, but structured, connected, and fast to search 💾</p>
+    <span class="tagalog-note">Ito ay maayos na imbakan — hindi basta listahan, mabilis hanapin at hindi madaling mawala</span>
+
+    <div class="box-note">
+      💡 <strong>Why not just use a text file or Excel?</strong><br>
+      • Blazing-fast searches — even with millions of records ⚡<br>
+      • Safe & consistent — prevents conflicting changes<br>
+      • No duplicates — data is stored once and reused<br>
+      • Always available — survives computer restarts
+      <span class="tagalog-note mt-1 block">Mas mabilis, mas ligtas, hindi nauulit — ito ang dahilan kung bakit ginagamit ito sa lahat ng sistema</span>
+    </div>
+
+    <h3>Main Types of Databases:</h3>
+    <span class="tagalog-sub">Dalawang pangunahing uri</span>
+    <ul>
+      <li><strong>Relational (SQL)</strong> — organized into tables with relationships ✅ (this is what we'll learn)</li>
+      <li><strong>NoSQL</strong> — document or collection-based; great for large, rapidly-changing data
+        <span class="tagalog-note">Iba't ibang ayos — ang Relational ay pinakaangkop para sa karamihan ng sistema</span>
+      </li>
+    </ul>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 2 — Structure of a Relational Database 📋</h2>
+    <span class="tagalog-sub">Ang ayos ng talahanayan at ugnayan</span>
+
+    <h3>Table = Talahanayan</h3>
+    <p>Like an Excel sheet — made of rows and columns:</p>
+    <span class="tagalog-note">Parang Excel — may hanay at haligi, pero mas malakas at maayos</span>
+    <table>
+      <tr><th>id</th><th>name</th><th>category</th><th>price</th></tr>
+      <tr><td>1</td><td>Coffee</td><td>Drink</td><td>35.00</td></tr>
+      <tr><td>2</td><td>Bread</td><td>Food</td><td>15.50</td></tr>
+      <tr><td>3</td><td>Egg</td><td>Food</td><td>8.00</td></tr>
+    </table>
+    <ul>
+      <li><strong>Column</strong> — one type of info: name, price, category
+        <span class="tagalog-note">Haligi — uri ng impormasyon</span>
+      </li>
+      <li><strong>Row</strong> — one complete record: Coffee, 35.00
+        <span class="tagalog-note">Hanay — isang buong tala</span>
+      </li>
+      <li><strong>Primary Key</strong> — unique ID number (<code>id</code>), never repeats ✅
+        <span class="tagalog-note">Pangunahing Susi — walang kapareha, tumutukoy sa tala</span>
+      </li>
+      <li><strong>Foreign Key</strong> — links to the primary key in another table
+        <span class="tagalog-note">Pangalawang Susi — nag-uugnay sa ibang talahanayan</span>
+      </li>
+    </ul>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 3 — SQL: The Language of Databases ⌨️</h2>
+    <span class="tagalog-sub">SQL — ang wika ng database</span>
+    <p><strong>Structured Query Language</strong> — the standard way to ask questions, add, change, or remove information</p>
+    <span class="tagalog-note">Ito ang utos na nauunawaan ng lahat ng database — MySQL, SQLite, PostgreSQL</span>
+
+    <h3>The Four Core Commands (CRUD):</h3>
+    <span class="tagalog-sub">Apat na pangunahing gawain</span>
+    <table>
+      <tr><th>Operation</th><th>SQL Keyword</th><th>Meaning</th></tr>
+      <tr><td><strong>C</strong>reate</td><td><code>INSERT</code></td><td>Add new record</td></tr>
+      <tr><td><strong>R</strong>ead</td><td><code>SELECT</code></td><td>Search / retrieve data</td></tr>
+      <tr><td><strong>U</strong>pdate</td><td><code>UPDATE</code></td><td>Modify existing data</td></tr>
+      <tr><td><strong>D</strong>elete</td><td><code>DELETE</code></td><td>Remove a record</td></tr>
+    </table>
+
+    <h3>Search — SELECT:</h3>
+<pre><code>/* Get everything from Products */
+SELECT * FROM Product;
+
+/* Specific columns only */
+SELECT name, price FROM Product;
+
+/* With a condition */
+SELECT * FROM Product WHERE category = 'Food';
+
+/* Sorted by price — lowest first */
+SELECT * FROM Product ORDER BY price ASC;
+
+/* More expensive than 20 */
+SELECT * FROM Product WHERE price > 20;
+</code></pre>
+
+    <h3>Add — INSERT:</h3>
+<pre><code>INSERT INTO Product (name, category, price)
+VALUES ('Milk', 'Drink', 45.00);
+</code></pre>
+
+    <h3>Change — UPDATE:</h3>
+<pre><code>UPDATE Product
+SET price = 38.00
+WHERE name = 'Coffee';
+/* ⚠️ NEVER forget WHERE — without it, EVERY row changes! */
+</code></pre>
+
+    <h3>Remove — DELETE:</h3>
+<pre><code>DELETE FROM Product
+WHERE name = 'OldItem';
+/* ⚠️ Note: no * — table name only */
+</code></pre>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 4 — Relate & Combine Tables 🔗</h2>
+    <span class="tagalog-sub">Pag-ugnayin ang mga talahanayan</span>
+    <p>Don't repeat data — use separate tables and link them!</p>
+    <span class="tagalog-note">Huwag ulit-ulitin — hiwalay na talahanayan, pinag-uugnay gamit ang susi</span>
+
+    <h3>Bad — Duplicating Data:</h3>
+    <table>
+      <tr><th>sale_id</th><th>name</th><th>category</th><th>price</th></tr>
+      <tr><td>1</td><td>Coffee</td><td>Drink</td><td>35</td></tr>
+      <tr><td>2</td><td>Coffee</td><td>Drink</td><td>35</td></tr>
+    </table>
+
+    <h3>Good — Separated & Linked ✅:</h3>
+    <p><strong>Table 1: Category</strong></p>
+    <table>
+      <tr><th>id</th><th>name</th></tr>
+      <tr><td>1</td><td>Drink</td></tr>
+      <tr><td>2</td><td>Food</td></tr>
+    </table>
+
+    <p><strong>Table 2: Product</strong></p>
+    <table>
+      <tr><th>id</th><th>name</th><th>category_id</th><th>price</th></tr>
+      <tr><td>1</td><td>Coffee</td><td>1</td><td>35</td></tr>
+      <tr><td>2</td><td>Milk</td><td>1</td><td>45</td></tr>
+      <tr><td>3</td><td>Bread</td><td>2</td><td>15</td></tr>
+    </table>
+
+    <h3>Bring Them Together — JOIN:</h3>
+<pre><code>SELECT Product.name, Category.name AS type, Product.price
+FROM Product
+JOIN Category ON Product.category_id = Category.id;
+</code></pre>
+    <p>Result: Coffee | Drink | 35 — clean, no duplicates! ✅
+      <span class="tagalog-note">Lalabas ang buong impormasyon nang hindi inuulit — maayos at madaling baguhin</span>
+    </p>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 5 — Set Up Your Database 💻</h2>
+    <span class="tagalog-sub">Ihanda ang database sa iyong kompyuter</span>
+    <p>We'll use <strong>SQLite</strong> — free, zero setup, single file, no server needed!</p>
+    <span class="tagalog-note">Pinakamadali — isang file lang, walang kailangang i-install na server</span>
+
+    <h3>Steps:</h3>
+    <ol>
+      <li>Download <strong>DB Browser for SQLite</strong> (free)</li>
+      <li>Click New Database → name it: <code>Shop.db</code></li>
+      <li>Go to the "Execute SQL" tab</li>
+      <li>Paste the code below → Run ✅</li>
+    </ol>
+<pre><code>-- Create tables
+CREATE TABLE Category (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL
+);
+
+CREATE TABLE Product (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    price REAL NOT NULL,
+    category_id INTEGER,
+    FOREIGN KEY (category_id) REFERENCES Category(id)
+);
+
+-- Insert sample data
+INSERT INTO Category (name) VALUES ('Drink'), ('Food');
+INSERT INTO Product (name, price, category_id) VALUES 
+('Coffee', 35.00, 1),
+('Milk', 45.00, 1),
+('Bread', 15.50, 2);
+</code></pre>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 6 — Connect with Java 🔌</h2>
+    <span class="tagalog-sub">Ikonekta ang database sa Java</span>
+    <p>How does your Java code talk to the database? Use <strong>JDBC — Java Database Connectivity</strong></p>
+<pre><code>import java.sql.*;
+
+public class DatabaseDemo {
+    public static void main(String[] args) {
+        // Database location — SQLite file
+        String url = "jdbc:sqlite:Shop.db";
+        
+        try {
+            // Connect
+            Connection conn = DriverManager.getConnection(url);
+            System.out.println("Connected! ✅");
+            
+            // Retrieve data
+            String sql = "SELECT * FROM Product";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            
+            // Display results
+            while (rs.next()) {
+                String name = rs.getString("name");
+                double price = rs.getDouble("price");
+                System.out.println(name + " — ₱" + price);
+            }
+            
+            // Close connection
+            conn.close();
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+}
+</code></pre>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 7 — Good Design Principles 📐</h2>
+    <span class="tagalog-sub">Panuntunan sa maayos na disenyo</span>
+
+    <h3>Normalization — Avoid Duplication:</h3>
+    <span class="tagalog-note">Huwag ulit-ulitin ang impormasyon</span>
+    <ul>
+      <li>✅ Separate tables for different kinds of information</li>
+      <li>✅ Use keys to link tables together</li>
+      <li>✅ If the same value repeats → move it to its own table</li>
+      <li>❌ Don't store multiple values in one column</li>
+    </ul>
+
+    <h3>Data Integrity — Keep It Accurate:</h3>
+    <span class="tagalog-note">Panatilihing tama at buo ang laman</span>
+    <ul>
+      <li>✅ <code>NOT NULL</code> — field cannot be empty</li>
+      <li>✅ <code>UNIQUE</code> — no duplicate values allowed</li>
+      <li>✅ <code>FOREIGN KEY</code> — cannot link to something that doesn't exist</li>
+    </ul>
+  </section>
+
+  <div class="box-success">
+    <h3>✅ Database Systems — COMPLETE!</h3>
+    <p>You can now store, find, and manage information reliably 🗄️✨</p>
+    <ul>
+      <li>✅ What databases are & why we use them</li>
+      <li>✅ Tables, rows, columns, keys</li>
+      <li>✅ SQL — SELECT, INSERT, UPDATE, DELETE</li>
+      <li>✅ JOIN — combine related tables</li>
+      <li>✅ Build databases with SQLite</li>
+      <li>✅ Connect Java apps via JDBC</li>
+      <li>✅ Normalization & design best practices</li>
+    </ul>
+    <span class="tagalog-note">Handa ka na — mula paggawa hanggang pagkonekta sa iyong sariling sistema ✅</span>
+    
+    <p style="margin-top:1rem"><strong>Final Module:</strong> <code>course-systems-analysis-design.html</code> — full project workflow: from client requirements to finished system 🏁</p>
+    <p>Say <strong>"next"</strong> when you're ready! 💜🚀</p>
+  </div>
+
+  <nav class="nav-buttons">
+    <a href="course-oop-advanced.html" class="nav-btn">← Previous</a>
+    <a href="index.html" class="nav-btn">🏠 Portal</a>
+    <a href="course-systems-analysis-design.html" class="nav-btn">Next →</a>
+  </nav>
+</main>
+
+<script>
+let isDark = localStorage.getItem('db-theme') === 'true';
+function applyTheme(){document.getElementById('themeBtn').textContent = isDark ? '☀️' : '🌙';}
+applyTheme();
+document.getElementById('themeBtn').addEventListener('click', () => {
+  isDark = !isDark; localStorage.setItem('db-theme', isDark); applyTheme();
+});
+let fs = parseInt(localStorage.getItem('db-fs')) || 16;
+function applyFontSize(){document.body.style.fontSize = fs + 'px';}
+applyFontSize();
+document.getElementById('fontUp').addEventListener('click', () => {
+  if(fs < 22){ fs += 2; applyFontSize(); localStorage.setItem('db-fs', fs); }
+});
+document.getElementById('fontDown').addEventListener('click', () => {
+  if(fs > 12){ fs -= 2; applyFontSize(); localStorage.setItem('db-fs', fs); }
+});
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('progress').style.width = (window.scrollY / h) * 100 + '%';
+});
+</script>
+</body>
+</html>

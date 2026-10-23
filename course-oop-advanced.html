@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🏗️ OOP Advanced — Core Skills</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#fffef9;--text:#1a1a1a;--accent:#10b981;--accent-light:#d1fae5;
+  --light:#f0f4f8;--border:#cbd5e1;--code-bg:#f6f8fa;
+  --success:#22c55e;--warn:#f59e0b;--danger:#ef4444;--arrow:#059669
+}
+@media(prefers-color-scheme:dark){
+  :root{--bg:#0f172a;--text:#e2e8f0;--accent:#34d399;--accent-light:#1e293b;
+  --light:#1e293b;--border:#475569;--code-bg:#1e293b}
+}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;padding:0}
+.progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--accent);width:0;z-index:999}
+.top-nav{position:sticky;top:0;background:var(--light);border-bottom:1px solid var(--border);padding:.8rem 2rem;display:flex;justify-content:space-between;align-items:center;z-index:99}
+.top-nav a{color:var(--accent);text-decoration:none;font-weight:bold}
+.top-nav a:hover{text-decoration:underline}
+.controls{display:flex;gap:.5rem}
+.ctrl-btn{padding:.4rem .8rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;cursor:pointer}
+.ctrl-btn:hover{background:var(--accent);color:#fff}
+.content{max-width:900px;margin:0 auto;padding:2rem}
+.book-header{text-align:center;margin-bottom:2.5rem;padding-bottom:2rem;border-bottom:2px solid var(--accent)}
+.book-header h1{font-size:2rem;margin-bottom:.5rem;color:var(--accent)}
+.tag{display:inline-block;padding:.25rem .6rem;border-radius:20px;font-size:.75rem;font-weight:bold;margin-right:.5rem}
+.tag-phase{background:var(--accent-light);color:#047857}
+.tag-found{background:#dcfce7;color:#166534}
+.chapter{margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px dashed var(--border)}
+.chapter h2{font-size:1.5rem;margin:1.8rem 0 1rem;color:var(--accent)}
+.chapter h3{font-size:1.15rem;margin:1.4rem 0 .7rem}
+.chapter p{margin-bottom:1rem}
+.chapter ul,.chapter ol{margin:1rem 0 1rem 2rem}
+.chapter li{margin:.6rem 0}
+table{width:100%;border-collapse:collapse;margin:1.2rem 0}
+th,td{padding:10px 14px;text-align:left;border:1px solid var(--border)}
+th{background:var(--accent-light);font-weight:bold}
+pre{background:var(--code-bg);border-radius:10px;padding:1.3rem;overflow-x:auto;margin:1.2rem 0;border:1px solid var(--border);font-size:.85rem;line-height:1.6}
+code{font-family:'Consolas','Monaco',monospace}
+:not(pre)>code{background:var(--code-bg);padding:.2rem .5rem;border-radius:4px}
+.box{border-radius:12px;padding:1.3rem;margin:1.5rem 0}
+.box-tip{background:#fef3c7;border-left:5px solid #f59e0b}
+.box-note{background:var(--accent-light);border-left:5px solid var(--accent)}
+.box-success{background:#f0fdf4;border-left:5px solid var(--success)}
+.box-warn{background:#fee2e2;border-left:5px solid #ef4444}
+.diagram{background:var(--light);border-radius:10px;padding:1.5rem;margin:1.2rem 0;text-align:center}
+.nav-buttons{display:flex;justify-content:space-between;margin:2.5rem 0;padding-top:1.5rem;border-top:2px solid var(--border)}
+.nav-btn{padding:.9rem 1.5rem;background:var(--accent);color:#fff;border:none;border-radius:10px;cursor:pointer;font-size:1rem;text-decoration:none;display:inline-block;text-align:center;font-weight:bold;transition:transform .2s}
+.nav-btn:hover{transform:translateY(-2px)}
+/* Tagalog subtitle style — consistent with previous page */
+.tagalog-sub{color:#9ca3af;font-size:.85rem;font-style:italic;margin-top:-.3rem;margin-bottom:1rem;display:block;line-height:1.5}
+.tagalog-note{color:#9ca3af;font-size:.8rem;font-style:italic;margin-top:.3rem;display:block}
+@media(max-width:768px){.top-nav{padding:.8rem 1rem;flex-wrap:wrap;gap:.5rem}.content{padding:1rem}}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progress"></div>
+<nav class="top-nav">
+  <a href="index.html">🏠 Portal</a>
+  <span style="font-weight:bold">🏗️ OOP Advanced — Phase 2: Core Skills</span>
+  <div class="controls">
+    <button class="ctrl-btn" id="themeBtn">🌙</button>
+    <button class="ctrl-btn" id="fontDown">A-</button>
+    <button class="ctrl-btn" id="fontUp">A+</button>
+  </div>
+</nav>
+<main class="content">
+  <header class="book-header">
+    <span class="tag tag-phase">Phase 2 — Core Skills</span>
+    <span class="tag tag-found">✅ #5 of 7 Remaining</span>
+    <h1>🏗️ Advanced Object-Oriented Programming</h1>
+    <p>From Classes to Complete Systems — Build Software That Grows ✅</p>
+    <span class="tagalog-sub">Mula klase hanggang sistema — bumuo ng programang lumalawak</span>
+  </header>
+
+  <section class="chapter">
+    <h2>📖 Chapter 1 — What Is OOP & Why It Matters</h2>
+    <span class="tagalog-sub">Ano ang OOP at bakit ito mahalaga?</span>
+    <p>In Object-Oriented Programming, your program is built from <strong>objects</strong> — just like real life: things have <em>attributes</em> and can perform <em>actions</em> 🧩</p>
+    <span class="tagalog-sub">Sa OOP, ang programa ay binubuo ng mga bagay — parang totoong buhay: may katangian at kakayahan</span>
+    <div class="diagram">
+      <p><strong>Class = Blueprint / Design</strong> → like an architectural drawing<br>
+      <strong>Object = Instance</strong> → the actual house built from that design</p>
+      <span class="tagalog-note">Klase = plano | Bagay = ang aktuwal na ginawa mula sa plano</span>
+    </div>
+    <h3>The Four Pillars of OOP:</h3>
+    <span class="tagalog-sub">Ang apat na haligi ng OOP — pundasyon ng malinis na programa</span>
+    <ul>
+      <li><strong>Encapsulation</strong> — Keep data safe; protect it behind controlled access
+        <span class="tagalog-note">Pagtatago — ilihim at protektahan ang impormasyon</span>
+      </li>
+      <li><strong>Inheritance</strong> — Reuse and extend; add new features without rewriting existing code
+        <span class="tagalog-note">Pagmamana — gamitin ang mayroon na, dagdagan nang bago</span>
+      </li>
+      <li><strong>Polymorphism</strong> — Many forms; same name, different behavior
+        <span class="tagalog-note">Maraming anyo — parehong tawag, ibang ginagawa</span>
+      </li>
+      <li><strong>Abstraction</strong> — Show only what's needed; hide complex inner details
+        <span class="tagalog-note">Pagpapayak — ipakita lang ang kailangan, itago ang masalimuot</span>
+      </li>
+    </ul>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 2 — Classes & Objects: The Foundation 🏠</h2>
+    <span class="tagalog-sub">Klase at Bagay — ang pinakapundasyon</span>
+    
+    <h3>Defining a Class:</h3>
+    <span class="tagalog-sub">Gumawa ng klase — ang iyong plano</span>
+<pre><code>// Class = Blueprint
+public class Person {
+    // Fields — data stored inside each object
+    String name;
+    int age;
+
+    // Constructor — runs automatically when creating a new object
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    // Method — what the object can do
+    public void introduceYourself() {
+        System.out.println("I am " + name + ", " + age + " years old.");
+    }
+}
+</code></pre>
+    <span class="tagalog-note">Katangian — datos | Konstruktor — awtomatikong tumatakbo | Paraan — kakayahan ng bagay</span>
+
+    <h3>Creating Objects:</h3>
+    <span class="tagalog-sub">Gumawa ng mga bagay mula sa klase</span>
+<pre><code>public class Main {
+    public static void main(String[] args) {
+        // Create two separate instances
+        Person person1 = new Person("Maria", 25);
+        Person person2 = new Person("Juan", 30);
+
+        person1.introduceYourself(); // I am Maria, 25 years old.
+        person2.introduceYourself(); // I am Juan, 30 years old.
+    }
+}
+</code></pre>
+    <div class="box-note">
+      💡 <strong>Constructor = the creation doorway</strong><br>
+      • Same name as the class<br>
+      • Has no return type (no <code>void</code>)<br>
+      • This is where you set initial values
+      <span class="tagalog-note">Pangalan katulad ng klase • Walang ibinabalik • Dito nagsisimula ang lahat</span>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 3 — Encapsulation: Safeguard Your Data 🔒</h2>
+    <span class="tagalog-sub">Encapsulation — pagtatago at pagprotekta sa datos</span>
+    <p>Don't let data be changed directly — keep it behind a <strong>controlled door</strong>; access only through <strong>approved methods</strong> ✅</p>
+    <span class="tagalog-note">Huwag hayaang basta-basta mabago — sa pamamagitan lang ng paraan makakapasok</span>
+<pre><code>public class Product {
+    // Private — hidden from outside access
+    private String name;
+    private double price;
+
+    // Constructor
+    public Product(String name, double price) {
+        this.name = name;
+        setPrice(price); // always validate through setter ✅
+    }
+
+    // Getter — safely read the value
+    public String getName() {
+        return name;
+    }
+
+    // Setter — update WITH validation ✅
+    public void setPrice(double price) {
+        if (price &gt;= 0) {
+            this.price = price;
+        } else {
+            System.out.println("Price cannot be negative! ⚠️");
+        }
+    }
+
+    public double getPrice() {
+        return price;
+    }
+}
+</code></pre>
+    <p>Using it:</p>
+<pre><code>Product bread = new Product("Bread", 15.50);
+System.out.println(bread.getName()); // Bread ✅
+bread.setPrice(-5.0); // Price cannot be negative ⚠️
+System.out.println(bread.getPrice()); // 15.50 — unchanged ✅
+</code></pre>
+    <table>
+      <tr><th>Modifier</th><th>Who Can Access</th></tr>
+      <tr>
+        <td><code>public</code></td>
+        <td>Everyone</td>
+      </tr>
+      <tr>
+        <td><code>private</code></td>
+        <td>Only inside this class ✅ — use this for fields!</td>
+      </tr>
+      <tr>
+        <td>(no modifier)</td>
+        <td>Within the same package</td>
+      </tr>
+    </table>
+    <span class="tagalog-note">Pampubliko — lahat | Pribado — sariling klase lang | Walang nakasulat — sa loob ng parehong pakete</span>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 4 — Inheritance: Build on What Exists 🌳</h2>
+    <span class="tagalog-sub">Inheritance — pagmamana; huwag ulitin, magpalawak</span>
+    <p>Don't copy-paste the same code — <strong>inherit</strong> it! Add only what's new ✨</p>
+    <span class="tagalog-note">Huwag muling isulat ang parehong code — magmana, tapos magdagdag ng bago</span>
+<pre><code>// Parent — general, shared traits
+public class Person {
+    protected String name;
+    protected int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public void greet() {
+        System.out.println("Hello, I am " + name);
+    }
+}
+
+// Child — inherits, adds its own
+public class Student extends Person {
+    private String course;
+
+    // Call parent constructor FIRST
+    public Student(String name, int age, String course) {
+        super(name, age); // important! ✅
+        this.course = course;
+    }
+
+    public void showCourse() {
+        System.out.println(name + " is studying " + course);
+    }
+}
+</code></pre>
+    <p>Using it:</p>
+<pre><code>Student ana = new Student("Ana", 20, "Computer Science");
+ana.greet();      // Hello, I am Ana ✅ — inherited!
+ana.showCourse(); // Ana is studying Computer Science ✅
+</code></pre>
+    <div class="box-tip">
+      💡 <strong>Key Keywords:</strong><br>
+      • <code>extends</code> → establishes inheritance<br>
+      • <code>super()</code> → calls parent's constructor<br>
+      • <code>protected</code> → visible to children even in other files
+      <span class="tagalog-note">extends = nagmamana | super = tawagin ang magulang | protected = nakikita ng anak</span>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 5 — Polymorphism: Many Forms 🔄</h2>
+    <span class="tagalog-sub">Polymorphism — magkakaibang gawi sa iisang tawag</span>
+    
+    <h3>Method Overriding — Change Inherited Behavior:</h3>
+    <span class="tagalog-sub">Palitan ang galaw ng namang paraan</span>
+<pre><code>public class Person {
+    public void speak() {
+        System.out.println("Hello!");
+    }
+}
+
+public class Student extends Person {
+    @Override // ← explicit reminder: we are changing behavior ✅
+    public void speak() {
+        System.out.println("Hi! I'm still learning.");
+    }
+}
+
+public class Teacher extends Person {
+    @Override
+    public void speak() {
+        System.out.println("Good day! Let's begin.");
+    }
+}
+</code></pre>
+    <p>See it in action:</p>
+<pre><code>Person[] people = {
+    new Person(),
+    new Student(),
+    new Teacher()
+};
+
+for (Person p : people) {
+    p.speak(); // each responds differently ✅
+}
+// Hello!
+// Hi! I'm still learning.
+// Good day! Let's begin.
+</code></pre>
+
+    <h3>Method Overloading — Same Name, Different Input:</h3>
+    <span class="tagalog-sub">Parehong pangalan, iba ang tinatanggap</span>
+<pre><code>public class Calculator {
+    // Same method name — different parameters
+    public void display(int number) {
+        System.out.println("Number: " + number);
+    }
+
+    public void display(String text) {
+        System.out.println("Message: " + text);
+    }
+
+    public void display(double amount) {
+        System.out.printf("Amount: %.2f%n", amount);
+    }
+}
+</code></pre>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 6 — Abstraction: Hide Complexity 🎭</h2>
+    <span class="tagalog-sub">Abstraction — itago ang masalimuot, ipakita ang kailangan lang</span>
+    
+    <h3>Abstract Class — Partial Blueprint:</h3>
+    <span class="tagalog-sub">Klase na mayroon at wala pang laman — dapat tapusin ng anak</span>
+<pre><code>public abstract class Vehicle {
+    // Has implementation — shared
+    public void startEngine() {
+        System.out.println("Engine started...");
+    }
+
+    // No implementation — child MUST provide ✅
+    public abstract void drive();
+}
+
+public class Car extends Vehicle {
+    @Override
+    public void drive() {
+        System.out.println("Driving a car — steering wheel &amp; four wheels.");
+    }
+}
+</code></pre>
+
+    <h3>Interface — Pure Contract:</h3>
+    <span class="tagalog-sub">Kasunduan — walang laman, lahat dapat gawin ng gumagamit</span>
+<pre><code>public interface Flyable {
+    void fly(); // any class using this MUST implement ✅
+}
+
+public class Airplane implements Flyable {
+    @Override
+    public void fly() {
+        System.out.println("Flying high in the sky ✈️");
+    }
+}
+</code></pre>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 7 — Complete Example: Store System 🛒</h2>
+    <span class="tagalog-sub">Halimbawa — ilapat ang lahat sa sistema ng tindahan</span>
+    <p>Putting it all together — a working foundation:</p>
+<pre><code>// Product — fully encapsulated
+public class Product {
+    private String name;
+    private double price;
+
+    public Product(String name, double price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    public String getName() { return name; }
+    public double getPrice() { return price; }
+}
+
+// Person — base class
+public class Person {
+    protected String name;
+    public Person(String name) { this.name = name; }
+    public String getName() { return name; }
+}
+
+// Customer — inherits from Person
+public class Customer extends Person {
+    private double money;
+
+    public Customer(String name, double money) {
+        super(name);
+        this.money = money;
+    }
+
+    public boolean buy(Product item) {
+        if (money &gt;= item.getPrice()) {
+            money -= item.getPrice();
+            System.out.println(name + " bought " + item.getName());
+            return true;
+        }
+        System.out.println(name + " doesn't have enough money");
+        return false;
+    }
+}
+</code></pre>
+    <p>Run the program:</p>
+<pre><code>public class Main {
+    public static void main(String[] args) {
+        Product coffee = new Product("Coffee", 35.0);
+        Customer lito = new Customer("Lito", 50.0);
+        
+        lito.buy(coffee); // Lito bought Coffee ✅
+    }
+}
+</code></pre>
+  </section>
+
+  <div class="box-success">
+    <h3>✅ OOP Advanced — COMPLETE!</h3>
+    <p>You can now build systems from start to finish 🏗️✨</p>
+    <span class="tagalog-note">Kaya mo nang bumuo ng sistema mula sa simula hanggang dulo!</span>
+    <ul>
+      <li>✅ Classes &amp; Objects — blueprint and instance</li>
+      <li>✅ Encapsulation — protect and validate data</li>
+      <li>✅ Inheritance — reuse and extend existing code</li>
+      <li>✅ Polymorphism — varied behavior through one interface</li>
+      <li>✅ Abstraction — simplify and hide complexity</li>
+      <li>✅ Complete example — applied to a store system</li>
+    </ul>
+    <span class="tagalog-note">Klase at Bagay • Pagtatago • Pagmamana • Maraming Anyo • Pagpapayak • Buong Halimbawa</span>
+    
+    <p style="margin-top:1rem"><strong>Next:</strong> <code>course-database-systems.html</code> — store, organize, and search information with databases 🗄️</p>
+    <span class="tagalog-note">Susunod — mag-imbak at maghanap gamit ang database</span>
+  </div>
+
+  <nav class="nav-buttons">
+    <a href="course-netbeans-basics.html" class="nav-btn">← Previous</a>
+    <a href="index.html" class="nav-btn">🏠 Portal</a>
+    <a href="course-database-systems.html" class="nav-btn">Next →</a>
+  </nav>
+</main>
+
+<script>
+let isDark = localStorage.getItem('oop-theme') === 'true';
+function applyTheme(){document.getElementById('themeBtn').textContent = isDark ? '☀️' : '🌙';}
+applyTheme();
+document.getElementById('themeBtn').addEventListener('click', () => {
+  isDark = !isDark; localStorage.setItem('oop-theme', isDark); applyTheme();
+});
+let fs = parseInt(localStorage.getItem('oop-fs')) || 16;
+function applyFontSize(){document.body.style.fontSize = fs + 'px';}
+applyFontSize();
+document.getElementById('fontUp').addEventListener('click', () => {
+  if(fs < 22){ fs += 2; applyFontSize(); localStorage.setItem('oop-fs', fs); }
+});
+document.getElementById('fontDown').addEventListener('click', () => {
+  if(fs > 12){ fs -= 2; applyFontSize(); localStorage.setItem('oop-fs', fs); }
+});
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('progress').style.width = (window.scrollY / h) * 100 + '%';
+});
+</script>
+</body>
+</html>

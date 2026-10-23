@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🧠 Logic & Problem Solving — Foundations</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#fffef9;--text:#1a1a1a;--accent:#6366f1;--accent-light:#eef2ff;
+  --light:#f0f4f8;--border:#cbd5e1;--code-bg:#f6f8fa;
+  --success:#22c55e;--warn:#f59e0b;--danger:#ef4444;--arrow:#4f46e5
+}
+@media(prefers-color-scheme:dark){
+  :root{--bg:#0f172a;--text:#e2e8f0;--accent:#818cf8;--accent-light:#1e293b;
+  --light:#1e293b;--border:#475569;--code-bg:#1e293b}
+}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;padding:0}
+.progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--accent);width:0;z-index:999}
+.top-nav{position:sticky;top:0;background:var(--light);border-bottom:1px solid var(--border);padding:.8rem 2rem;display:flex;justify-content:space-between;align-items:center;z-index:99}
+.top-nav a{color:var(--accent);text-decoration:none;font-weight:bold}
+.top-nav a:hover{text-decoration:underline}
+.controls{display:flex;gap:.5rem}
+.ctrl-btn{padding:.4rem .8rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;cursor:pointer}
+.ctrl-btn:hover{background:var(--accent);color:#fff}
+.content{max-width:900px;margin:0 auto;padding:2rem}
+.book-header{text-align:center;margin-bottom:2.5rem;padding-bottom:2rem;border-bottom:2px solid var(--accent)}
+.book-header h1{font-size:2rem;margin-bottom:.5rem;color:var(--accent)}
+.tag{display:inline-block;padding:.25rem .6rem;border-radius:20px;font-size:.75rem;font-weight:bold;margin-right:.5rem}
+.tag-phase{background:var(--accent-light);color:#4338ca}
+.tag-found{background:#dcfce7;color:#166534}
+.chapter{margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px dashed var(--border)}
+.chapter h2{font-size:1.5rem;margin:1.8rem 0 1rem;color:var(--accent)}
+.chapter h3{font-size:1.15rem;margin:1.4rem 0 .7rem}
+.chapter p{margin-bottom:1rem}
+.chapter ul,.chapter ol{margin:1rem 0 1rem 2rem}
+.chapter li{margin:.6rem 0}
+table{width:100%;border-collapse:collapse;margin:1.2rem 0}
+th,td{padding:10px 14px;text-align:left;border:1px solid var(--border)}
+th{background:var(--accent-light);font-weight:bold}
+pre{background:var(--code-bg);border-radius:10px;padding:1.3rem;overflow-x:auto;margin:1.2rem 0;border:1px solid var(--border);font-size:.85rem;line-height:1.6}
+code{font-family:'Consolas','Monaco',monospace}
+:not(pre)>code{background:var(--code-bg);padding:.2rem .5rem;border-radius:4px}
+.box{border-radius:12px;padding:1.3rem;margin:1.5rem 0}
+.box-tip{background:#fef3c7;border-left:5px solid #f59e0b}
+.box-note{background:var(--accent-light);border-left:5px solid var(--accent)}
+.box-success{background:#f0fdf4;border-left:5px solid var(--success)}
+.box-warn{background:#fee2e2;border-left:5px solid #ef4444}
+.example-card{background:var(--light);border-radius:10px;padding:1.5rem;margin:1.2rem 0;border-left:4px solid var(--accent)}
+.steps{counter-reset:step}
+.steps li{list-style:none;position:relative;padding-left:3rem;margin:1rem 0}
+.steps li:before{content:counter(step);counter-increment:step;width:28px;height:28px;background:var(--accent);color:#fff;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;position:absolute;left:0;font-weight:bold}
+/* Tagalog subtitle style — consistent */
+.tagalog-sub{color:#9ca3af;font-size:.85rem;font-style:italic;margin-top:-.3rem;margin-bottom:1rem;display:block;line-height:1.5}
+.tagalog-note{color:#9ca3af;font-size:.8rem;font-style:italic;margin-top:.3rem;display:block}
+.nav-buttons{display:flex;justify-content:space-between;margin:2.5rem 0;padding-top:1.5rem;border-top:2px solid var(--border)}
+.nav-btn{padding:.9rem 1.5rem;background:var(--accent);color:#fff;border:none;border-radius:10px;cursor:pointer;font-size:1rem;text-decoration:none;display:inline-block;text-align:center;font-weight:bold;transition:transform .2s}
+.nav-btn:hover{transform:translateY(-2px)}
+@media(max-width:768px){.top-nav{padding:.8rem 1rem;flex-wrap:wrap;gap:.5rem}.content{padding:1rem}}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progress"></div>
+<nav class="top-nav">
+  <a href="index.html">🏠 Portal</a>
+  <span style="font-weight:bold">🧠 Logic & Problem Solving — Phase 1: Foundations</span>
+  <div class="controls">
+    <button class="ctrl-btn" id="themeBtn">🌙</button>
+    <button class="ctrl-btn" id="fontDown">A-</button>
+    <button class="ctrl-btn" id="fontUp">A+</button>
+  </div>
+</nav>
+<main class="content">
+  <header class="book-header">
+    <span class="tag tag-phase">Phase 1 — Foundations</span>
+    <span class="tag tag-found">✅ #1 of 7 Remaining</span>
+    <h1>🧠 Logic & Problem Solving</h1>
+    <p>Think Like a Programmer — Before You Write Any Code ✅</p>
+    <span class="tagalog-sub">Mag-isip tulad ng programmer — bago ka magsulat ng anumang code</span>
+  </header>
+
+  <section class="chapter">
+    <h2>📖 Chapter 1 — Why Start Here?</h2>
+    <span class="tagalog-sub">Bakit ito ang una?</span>
+    <p>Programming is <strong>not just memorizing syntax</strong> — it is solving problems. Even if you know every language by heart, without clear thinking you won't build working solutions 💡</p>
+    <span class="tagalog-note">Hindi lang pag-alam sa salita — ito ay paglutas ng problema</span>
+    
+    <div class="box-note">
+      💡 <strong>Simple Analogy:</strong><br>
+      • Code = pencil and paper<br>
+      • Logic = your plan and thinking before writing<br>
+      • No plan → messy, repetitive, hard to finish
+      <span class="tagalog-note">Ang code ay kasangkapan; ang lohika ay ang plano — walang plano, magulo ang lahat</span>
+    </div>
+
+    <h3>The Universal 4-Step Problem-Solving Method:</h3>
+    <span class="tagalog-sub">Ang 4-hakbang na paraan sa lahat ng problema</span>
+    <ol class="steps">
+      <li><strong>Understand the Problem</strong> — What is given? What exactly is the answer needed?
+        <span class="tagalog-note">Unawain — ano ang ibibigay, ano ang dapat makuha</span>
+      </li>
+      <li><strong>Make a Plan</strong> — How do you get from start to finish? List each step clearly.
+        <span class="tagalog-note">Magplano — hakbang-hakbang kung paano makukuha ang sagot</span>
+      </li>
+      <li><strong>Write the Solution</strong> — Turn your plan into code.
+        <span class="tagalog-note">Isulat — gawing programa ang plano</span>
+      </li>
+      <li><strong>Test & Fix</strong> — Is it correct? Any missing cases? How can it be cleaner?
+        <span class="tagalog-note">Subukan at ayusin — tama ba? may pagkukulang ba?</span>
+      </li>
+    </ol>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 2 — Algorithms: Step-by-Step Plans</h2>
+    <span class="tagalog-sub">Algorithm — malinaw na hakbang-hakbang na utos</span>
+    <p><strong>Algorithm = clear, unambiguous, ordered instructions</strong> — just like following a recipe 📝</p>
+    <span class="tagalog-note">Parang resipe — bawat utos malinaw, sunod-sunod, walang kalituhan</span>
+    
+    <h3>Example: Making Tea</h3>
+    <div class="example-card">
+      <p><strong>❌ Not an Algorithm:</strong><br>
+      Boil some water, add tea, sugar... done.</p>
+      
+      <p style="margin-top:.8rem"><strong>✅ This IS an Algorithm:</strong></p>
+      <ol>
+        <li>Fill kettle with 2 cups of water</li>
+        <li>Place on stove, heat to medium</li>
+        <li>Wait until boiling (about 2–3 minutes)</li>
+        <li>Add 1 tea bag</li>
+        <li>Remove from heat after 3 minutes</li>
+        <li>Add 2 teaspoons sugar, stir until dissolved</li>
+        <li>Pour into cup — ready!</li>
+      </ol>
+      <span class="tagalog-note">Bawat hakbang malinaw — sinong sumunod, pareho ang magiging resulta</span>
+    </div>
+
+    <h3>In Programming Terms:</h3>
+    <span class="tagalog-sub">Sa paggawa ng programa — ganito ang anyo</span>
+    <p>Problem: Add two numbers together.</p>
+<pre><code>// ✅ Algorithm (plain words first):
+1. Receive first number → store in A
+2. Receive second number → store in B
+3. Sum = A + B
+4. Show the result
+
+// In JavaScript:
+function add(a, b) {
+  return a + b;
+}
+console.log(add(5, 3)); // 8 ✅
+</code></pre>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 3 — Variables: Containers for Information</h2>
+    <span class="tagalog-sub">Variable — lalagyan ng impormasyon</span>
+    <p><strong>Variable = a named storage box</strong> — has a name, holds a value, can be updated 📦</p>
+    <span class="tagalog-note">May pangalan, may laman — pwedeng palitan ang laman anumang oras</span>
+    
+    <table>
+      <tr><th>Concept</th><th>Explanation</th><th>Example</th></tr>
+      <tr>
+        <td>Name</td>
+        <td>What you call it
+          <span class="tagalog-note">Pangalan — paano tatawagin</span>
+        </td>
+        <td><code>price</code>, <code>itemCount</code></td>
+      </tr>
+      <tr>
+        <td>Type</td>
+        <td>What kind of data
+          <span class="tagalog-note">Uri — numero, teksto, totoo/mali</span>
+        </td>
+        <td>Number, Text, Boolean</td>
+      </tr>
+      <tr>
+        <td>Value</td>
+        <td>The actual information stored
+          <span class="tagalog-note">Laman — ang impormasyon sa loob</span>
+        </td>
+        <td>500, "Maria", true</td>
+      </tr>
+    </table>
+
+<pre><code>// Declare → create the container
+let price;
+
+// Assign → put something inside
+price = 120;
+
+// Update → replace with new value
+price = 150;
+
+// All in one line:
+let count = 10;
+const TAX_RATE = 0.12; // fixed — cannot change ✅
+</code></pre>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 4 — Conditions: Making Decisions ⚖️</h2>
+    <span class="tagalog-sub">Kondisyon — magdesisyon ang programa</span>
+    <p><strong>If... else if... else...</strong> — just like choices in daily life!</p>
+    <span class="tagalog-note">Kung ganito → gawin ito; kung hindi → gawin iyan</span>
+<pre><code>// Simple decision:
+let hour = 14;
+
+if (hour &lt; 12) {
+  console.log("Good morning! 🌅");
+} else if (hour &lt; 18) {
+  console.log("Good afternoon! ☀️");
+} else {
+  console.log("Good evening! 🌙");
+}
+</code></pre>
+
+    <h3>Comparison Operators:</h3>
+    <span class="tagalog-sub">Mga simbolo ng paghahambing</span>
+    <table>
+      <tr><th>Symbol</th><th>Meaning</th><th>Example</th></tr>
+      <tr>
+        <td><code>==</code></td>
+        <td>Equal value only
+          <span class="tagalog-note">Pantay ang halaga</span>
+        </td>
+        <td>5 == "5" → true</td>
+      </tr>
+      <tr>
+        <td><code>===</code></td>
+        <td>Equal value AND same type ✅ (prefer this!)
+          <span class="tagalog-note">Pantay ang halaga AT uri — gamitin ito palagi</span>
+        </td>
+        <td>5 === "5" → false</td>
+      </tr>
+      <tr>
+        <td><code>!=</code></td>
+        <td>Not equal
+          <span class="tagalog-note">Hindi pantay</span>
+        </td>
+        <td>5 != 3 → true</td>
+      </tr>
+      <tr>
+        <td><code>&lt;</code> / <code>&gt;</code></td>
+        <td>Less than / Greater than
+          <span class="tagalog-note">Mas mababa / Mas mataas</span>
+        </td>
+        <td>10 &gt; 5 → true</td>
+      </tr>
+      <tr>
+        <td><code>&lt;=</code> / <code>&gt;=</code></td>
+        <td>Less/greater than OR equal to
+          <span class="tagalog-note">Pantay o mas mababa/mataas</span>
+        </td>
+        <td>5 &lt;= 5 → true</td>
+      </tr>
+    </table>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 5 — Loops: Repeat Without Re-typing 🔁</h2>
+    <span class="tagalog-sub">Pag-uulit — hayaan ang computer ang magsawa</span>
+    <p>Never copy-paste code just to repeat something — let the computer handle it! 💪</p>
+    <span class="tagalog-note">Huwag ulit-ulitin ang code — hayaan ang programa ang gumawa</span>
+    
+    <h3>For Loop — When You Know the Count:</h3>
+    <span class="tagalog-note">Alam mo kung ilang beses uulitin</span>
+<pre><code>// Count from 1 to 5:
+for (let i = 1; i &lt;= 5; i++) {
+  console.log(i);
+}
+// Output: 1, 2, 3, 4, 5 ✅
+</code></pre>
+
+    <h3>While Loop — Until a Condition Changes:</h3>
+    <span class="tagalog-note">Uulit hanggang magbago ang kalagayan</span>
+<pre><code>let count = 1;
+while (count &lt;= 5) {
+  console.log(count);
+  count++; // ⚠️ NEVER forget this — infinite loop otherwise!
+}
+</code></pre>
+
+    <div class="box-warn">
+      ⚠️ <strong>Infinite Loop = stuck forever</strong><br>
+      Always make sure your loop has a way to stop — a counter that grows, or a condition that eventually becomes false.
+      <span class="tagalog-note">Siguraduhin laging may paraan para matapos — kung hindi, nakulong nang walang katapusan</span>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 6 — Real-World Example: Complete Workflow</h2>
+    <span class="tagalog-sub">Halimbawa sa tunay na buhay — hakbang-hakbang</span>
+    <p>Problem: <em>Calculate total payment including 12% VAT, with 10% discount if amount is over ₱1000.</em></p>
+    
+    <div class="example-card">
+      <p><strong>Step 1 — Understand:</strong></p>
+      <ul>
+        <li>Input: original price</li>
+        <li>If price &gt; ₱1000 → apply 10% discount first</li>
+        <li>Add 12% VAT to the result</li>
+        <li>Output: final amount to pay</li>
+      </ul>
+      <span class="tagalog-note">Presyo → higit 1000 bawasan ng 10% → dagdag 12% → kabuuan</span>
+
+      <p style="margin-top:.8rem"><strong>Step 2 — Plan:</strong></p>
+<pre><code>1. Get the original price
+2. If price &gt; 1000:
+   price = price × 0.90 (subtract 10%)
+3. total = price × 1.12 (add 12% VAT)
+4. Show total
+</code></pre>
+
+      <p style="margin-top:.8rem"><strong>Step 3 — Code:</strong></p>
+<pre><code>function computeTotal(price) {
+  // Apply discount first
+  if (price &gt; 1000) {
+    price = price * 0.90;
+  }
+  // Then add VAT
+  const total = price * 1.12;
+  return total.toFixed(2); // keep 2 decimal places ✅
+}
+
+console.log(computeTotal(800));  // 896.00 — no discount
+console.log(computeTotal(1500)); // 1512.00 — discount applied ✅
+</code></pre>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 7 — Debugging: Find & Fix Mistakes 🔍</h2>
+    <span class="tagalog-sub">Paghahanap ng mali — bahagi ng proseso, hindi kabiguan</span>
+    <p>Mistakes are normal and expected — they teach you! 💜</p>
+    
+    <h3>How to Debug Effectively:</h3>
+    <ol>
+      <li><strong>Read the error message</strong> — it tells you the line and often what went wrong
+        <span class="tagalog-note">Basahin ang mensahe — sinasabi kung saan at ano ang mali</span>
+      </li>
+      <li><strong>Add <code>console.log()</code></strong> — check what each variable holds at every step
+        <span class="tagalog-note">Ipakita ang laman ng bawat lalagyan — makikita kung saan lumihis</span>
+      </li>
+      <li><strong>Test with simple known values</strong> — use numbers where YOU already know the correct answer
+        <span class="tagalog-note">Subukan sa simpleng numero na alam mo ang sagot</span>
+      </li>
+      <li><strong>Read your code aloud</strong> — explain it like teaching someone else; gaps become obvious
+        <span class="tagalog-note">Basahin nang malakas — parang nagtuturo sa iba</span>
+      </li>
+    </ol>
+
+<pre><code>// Debug in action:
+function computeTotal(price) {
+  console.log('Started with price:', price); // ✅
+  
+  if (price &gt; 1000) {
+    price = price * 0.90;
+    console.log('Discount applied →', price); // ✅
+  }
+  
+  const total = price * 1.12;
+  console.log('Final total:', total); // ✅
+  return total;
+}
+</code></pre>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 8 — Practice: Try It Yourself ✍️</h2>
+    <span class="tagalog-sub">Pagsasanay — isulat mo mismo, ito ang pinakamahalaga</span>
+    
+    <h3>Problem 1 — Find the Largest Number:</h3>
+    <p>Write a function that accepts three numbers and returns the largest one.</p>
+    <details style="margin:.8rem 0">
+      <summary style="cursor:pointer; color:var(--accent); font-weight:bold">Click to show solution</summary>
+<pre><code>// Approach 1 — compare step by step
+function largest(a, b, c) {
+  if (a &gt;= b &amp;&amp; a &gt;= c) return a;
+  if (b &gt;= a &amp;&amp; b &gt;= c) return b;
+  return c;
+}
+
+// Approach 2 — use built-in helper (cleaner!)
+function largest(a, b, c) {
+  return Math.max(a, b, c);
+}
+</code></pre>
+    </details>
+
+    <h3>Problem 2 — Break Down into Denominations:</h3>
+    <p>Given an amount, show how many ₱100, ₱50, ₱20, ₱10, ₱5, and ₱1 make it up — use largest first.</p>
+    <details style="margin:.8rem 0">
+      <summary style="cursor:pointer; color:var(--accent); font-weight:bold">Click to show solution</summary>
+<pre><code>function countBills(amount) {
+  const bills = [100, 50, 20, 10, 5, 1];
+  const result = {};
+  
+  for (const bill of bills) {
+    result[bill] = Math.floor(amount / bill);
+    amount = amount % bill;
+  }
+  return result;
+}
+
+console.log(countBills(187));
+// { '100': 1, '50': 1, '20': 1, '10': 1, '5': 1, '1': 2 } ✅
+</code></pre>
+    </details>
+  </section>
+
+  <div class="box-success">
+    <h3>✅ Logic & Problem Solving — COMPLETE!</h3>
+    <p>You've mastered the foundation of ALL programming:</p>
+    <ul>
+      <li>✅ 4-step problem-solving framework</li>
+      <li>✅ Clear algorithms & planning before coding</li>
+      <li>✅ Variables — store and update information</li>
+      <li>✅ Conditions — make decisions in code</li>
+      <li>✅ Loops — repeat efficiently</li>
+      <li>✅ Debugging — find and fix issues systematically</li>
+      <li>✅ Practical examples & hands-on practice</li>
+    </ul>
+    <span class="tagalog-note">Lohika • Pagpaplano • Desisyon • Pag-uulit • Paghahanap ng Mali — pundasyon lahat ng ito</span>
+    
+    <p style="margin-top:1rem"><strong>Next:</strong> <code>course-computer-fundamentals.html</code> — How Computers Actually Work Inside 💻</p>
+    <span class="tagalog-note">Susunod — paano gumagana ang computer sa loob</span>
+  </div>
+
+  <nav class="nav-buttons">
+    <a href="index.html" class="nav-btn">← Back</a>
+    <a href="index.html" class="nav-btn">🏠 Portal</a>
+    <a href="course-computer-fundamentals.html" class="nav-btn">Next →</a>
+  </nav>
+</main>
+
+<script>
+let isDark = localStorage.getItem('logic-theme') === 'true';
+function applyTheme(){document.getElementById('themeBtn').textContent = isDark ? '☀️' : '🌙';}
+applyTheme();
+document.getElementById('themeBtn').addEventListener('click', () => {
+  isDark = !isDark; localStorage.setItem('logic-theme', isDark); applyTheme();
+});
+let fs = parseInt(localStorage.getItem('logic-fs')) || 16;
+function applyFontSize(){document.body.style.fontSize = fs + 'px';}
+applyFontSize();
+document.getElementById('fontUp').addEventListener('click', () => {
+  if(fs < 22){ fs += 2; applyFontSize(); localStorage.setItem('logic-fs', fs); }
+});
+document.getElementById('fontDown').addEventListener('click', () => {
+  if(fs > 12){ fs -= 2; applyFontSize(); localStorage.setItem('logic-fs', fs); }
+});
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('progress').style.width = (window.scrollY / h) * 100 + '%';
+});
+</script>
+</body>
+</html>

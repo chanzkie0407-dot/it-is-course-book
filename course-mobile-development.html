@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📱 Track A: Mobile App Development — Year 3 Elective</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#fffef9;--text:#1a1a1a;--accent:#3b82f6;--accent-light:#eff6ff;
+  --light:#f0f4f8;--border:#cbd5e1;--code-bg:#f6f8fa;
+  --success:#22c55e;--warn:#f59e0b;--danger:#ef4444;--arrow:#2563eb
+}
+@media(prefers-color-scheme:dark){
+  :root{--bg:#0f172a;--text:#e2e8f0;--accent:#60a5fa;--accent-light:#1e293b;
+  --light:#1e293b;--border:#475569;--code-bg:#1e293b}
+}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;padding:0}
+.progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--accent);width:0;z-index:999}
+.top-nav{position:sticky;top:0;background:var(--light);border-bottom:1px solid var(--border);padding:.8rem 2rem;display:flex;justify-content:space-between;align-items:center;z-index:99}
+.top-nav a{color:var(--accent);text-decoration:none;font-weight:bold}
+.top-nav a:hover{text-decoration:underline}
+.controls{display:flex;gap:.5rem}
+.ctrl-btn{padding:.4rem .8rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;cursor:pointer}
+.ctrl-btn:hover{background:var(--accent);color:#fff}
+.content{max-width:900px;margin:0 auto;padding:2rem}
+.book-header{text-align:center;margin-bottom:2.5rem;padding-bottom:2rem;border-bottom:2px solid var(--accent)}
+.book-header h1{font-size:2rem;margin-bottom:.5rem;color:var(--accent)}
+.tag{display:inline-block;padding:.25rem .6rem;border-radius:20px;font-size:.75rem;font-weight:bold;margin-right:.5rem}
+.tag-track{background:var(--accent-light);color:#1d4ed8}
+.tag-free{background:#dcfce7;color:#166534}
+.chapter{margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px dashed var(--border)}
+.chapter h2{font-size:1.5rem;margin:1.8rem 0 1rem;color:var(--accent)}
+.chapter h3{font-size:1.15rem;margin:1.4rem 0 .7rem}
+.chapter p{margin-bottom:1rem}
+.chapter ul,.chapter ol{margin:1rem 0 1rem 2rem}
+.chapter li{margin:.6rem 0}
+table{width:100%;border-collapse:collapse;margin:1.2rem 0}
+th,td{padding:10px 14px;text-align:left;border:1px solid var(--border)}
+th{background:var(--accent-light);font-weight:bold}
+pre{background:var(--code-bg);border-radius:10px;padding:1.3rem;overflow-x:auto;margin:1.2rem 0;border:1px solid var(--border);font-size:.85rem;line-height:1.6}
+code{font-family:'Consolas','Monaco',monospace}
+:not(pre)>code{background:var(--code-bg);padding:.2rem .5rem;border-radius:4px}
+.box{border-radius:12px;padding:1.3rem;margin:1.5rem 0}
+.box-tip{background:#fef3c7;border-left:5px solid #f59e0b}
+.box-note{background:var(--accent-light);border-left:5px solid var(--accent)}
+.box-success{background:#f0fdf4;border-left:5px solid var(--success)}
+.box-warn{background:#fee2e2;border-left:5px solid #ef4444}
+.file-tree{background:var(--light);border-radius:8px;padding:15px;margin:15px 0;font-family:monospace;line-height:1.8}
+/* Tagalog subtitle style — consistent */
+.tagalog-sub{color:#9ca3af;font-size:.85rem;font-style:italic;margin-top:-.3rem;margin-bottom:1rem;display:block;line-height:1.5}
+.tagalog-note{color:#9ca3af;font-size:.8rem;font-style:italic;margin-top:.3rem;display:block}
+.nav-buttons{display:flex;justify-content:space-between;margin:2.5rem 0;padding-top:1.5rem;border-top:2px solid var(--border)}
+.nav-btn{padding:.9rem 1.5rem;background:var(--accent);color:#fff;border:none;border-radius:10px;cursor:pointer;font-size:1rem;text-decoration:none;display:inline-block;text-align:center;font-weight:bold;transition:transform .2s}
+.nav-btn:hover{transform:translateY(-2px)}
+@media(max-width:768px){.top-nav{padding:.8rem 1rem;flex-wrap:wrap;gap:.5rem}.content{padding:1rem}}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progress"></div>
+<nav class="top-nav">
+  <a href="index.html">🏠 Portal</a>
+  <span style="font-weight:bold">📱 Mobile App Development — Track A</span>
+  <div class="controls">
+    <button class="ctrl-btn" id="themeBtn">🌙</button>
+    <button class="ctrl-btn" id="fontDown">A-</button>
+    <button class="ctrl-btn" id="fontUp">A+</button>
+  </div>
+</nav>
+<main class="content">
+  <header class="book-header">
+    <span class="tag tag-track">📱 Mobile Track</span>
+    <span class="tag tag-free">🆓 All Free Tools</span>
+    <h1>📱 Mobile App Development — React Native & Expo</h1>
+    <p>One Codebase → Android + iOS — Build Apps Without Paid Software</p>
+    <span class="tagalog-sub">Isang code → tumatakbo sa Android at iOS — walang bayad na kailanganin</span>
+  </header>
+
+  <section class="chapter">
+    <h2>📖 Chapter 1 — Introduction & Setup</h2>
+    <span class="tagalog-sub">Panimula at paghahanda</span>
+    <p><strong>Expo</strong> = tool that makes mobile development easy — no complex setup, one code runs on both Android & iOS ✅</p>
+    <span class="tagalog-note">Ang Expo ay nagpapadali ng paggawa ng app — hindi kailangan ng masalimuot na paghahanda</span>
+    
+    <h3>What You Need:</h3>
+    <span class="tagalog-sub">Ano ang kailangan mo?</span>
+    <ul>
+      <li>Laptop — Windows, macOS, or Linux ✅
+        <span class="tagalog-note">Laptop — kahit anong sistema</span>
+      </li>
+      <li>Phone — Android or iPhone (optional: install Expo Go app for free from store)
+        <span class="tagalog-note">Telepono — opsyonal; i-download ang libreng Expo Go app</span>
+      </li>
+      <li>Node.js — LTS version (you already have this from Backend Module!)
+        <span class="tagalog-note">Node.js — mayroon ka na mula sa nakaraang modyul</span>
+      </li>
+    </ul>
+    
+    <h3>Install & Start:</h3>
+    <span class="tagalog-sub">I-install at patakbuhin</span>
+<pre><code># Terminal / Command Prompt
+npm install -g create-expo-app
+
+# Create new project
+npx create-expo-app MyFirstApp
+cd MyFirstApp
+
+# Run it!
+npx expo start
+</code></pre>
+    <p>Scan the QR code using the Expo Go app on your phone → your app opens instantly! ✅</p>
+    <span class="tagalog-note">I-scan ang QR code gamit ang Expo Go sa iyong telepono — bubukas agad ang app</span>
+    
+    <div class="file-tree">
+MyFirstApp/<br>
+├── App.js ← your main code ✏️<br>
+├── app.json ← app settings & info<br>
+├── package.json ← dependencies & scripts<br>
+└── assets/ ← images, icons, sounds
+    </div>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 2 — Components: Build Your UI</h2>
+    <span class="tagalog-sub">Mga Bahagi — bumuo ng anyo ng app</span>
+    <p>Mobile apps use special built-in components — <strong>not regular HTML tags!</strong></p>
+    <span class="tagalog-note">Hindi HTML ang ginagamit — sariling mga bahagi ng React Native</span>
+<pre><code>import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View } from 'react-native';
+
+export default function App() {
+  return (
+    &lt;View style={styles.container}&gt;
+      &lt;Text style={styles.text}&gt;📱 Hello from your first app! ✅&lt;/Text&gt;
+      &lt;StatusBar style="auto" /&gt;
+    &lt;/View&gt;
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#eff6ff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  text: {
+    fontSize: 20,
+    color: '#1d4ed8',
+  }
+});
+</code></pre>
+
+    <h3>Common Components:</h3>
+    <span class="tagalog-sub">Mga madalas gamiting bahagi</span>
+    <table>
+      <tr><th>Component</th><th>Purpose</th></tr>
+      <tr>
+        <td><code>&lt;View&gt;</code></td>
+        <td>Container — like a box/divider for layout
+          <span class="tagalog-note">Lalagyan — parang kahon o panghati</span>
+        </td>
+      </tr>
+      <tr>
+        <td><code>&lt;Text&gt;</code></td>
+        <td>Display text — REQUIRED; plain text won't work directly!
+          <span class="tagalog-note">Teksto — kailangan ito; hindi pwedeng diretsahang isulat</span>
+        </td>
+      </tr>
+      <tr>
+        <td><code>&lt;Button&gt;</code></td>
+        <td>Tap/clickable button
+          <span class="tagalog-note">Pindutan — maaaring pindutin</span>
+        </td>
+      </tr>
+      <tr>
+        <td><code>&lt;TextInput&gt;</code></td>
+        <td>Type input — forms, login, messages
+          <span class="tagalog-note">Lugar para magsulat — porma o pag-login</span>
+        </td>
+      </tr>
+      <tr>
+        <td><code>&lt;Image&gt;</code></td>
+        <td>Show pictures or icons
+          <span class="tagalog-note">Larawan — magpakita ng litrato</span>
+        </td>
+      </tr>
+      <tr>
+        <td><code>&lt;ScrollView&gt;</code></td>
+        <td>Scrollable content when long
+          <span class="tagalog-note">Nagagulong pahina — kapag mahaba ang nilalaman</span>
+        </td>
+      </tr>
+    </table>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 3 — State: Make It Interactive</h2>
+    <span class="tagalog-sub">Estado — gawing tumutugon ang app</span>
+<pre><code>import { useState } from 'react';
+import { View, Text, Button, StyleSheet } from 'react-native';
+
+export default function App() {
+  // count = holds the data, setCount = updates it
+  const [count, setCount] = useState(0);
+
+  return (
+    &lt;View style={styles.container}&gt;
+      &lt;Text style={styles.num}&gt;{count}&lt;/Text&gt;
+      &lt;Button title="➕ Add" onPress={() =&gt; setCount(count + 1)} /&gt;
+      &lt;View style={{marginVertical: 10}} /&gt;
+      &lt;Button title="➖ Subtract" onPress={() =&gt; setCount(count - 1)} /&gt;
+    &lt;/View&gt;
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {flex: 1, alignItems: 'center', justifyContent: 'center', gap: 15},
+  num: {fontSize: 48, fontWeight: 'bold', color: '#2563eb'}
+});
+</code></pre>
+    <p>Press a button → value updates → screen refreshes automatically ✅</p>
+    <span class="tagalog-note">Pindutin ang pindutan → nagbabago ang numero → nagbabago rin ang nakikita sa screen</span>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 4 — Navigation: Move Between Screens</h2>
+    <span class="tagalog-sub">Paglalipat — pumunta sa iba't ibang pahina</span>
+    <p>First install the navigation library:</p>
+<pre><code>npm install @react-navigation/native @react-navigation/native-stack
+npx expo install react-native-screens react-native-safe-area-context
+</code></pre>
+
+    <h3>Two-Screen Setup Example:</h3>
+    <span class="tagalog-sub">Halimbawa — dalawang pahina</span>
+<pre><code>import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HomeScreen from './screens/HomeScreen';
+import DetailsScreen from './screens/DetailsScreen';
+
+const Stack = createNativeStackNavigator();
+
+export default function App() {
+  return (
+    &lt;NavigationContainer&gt;
+      &lt;Stack.Navigator initialRouteName="Home"&gt;
+        &lt;Stack.Screen name="Home" component={HomeScreen} /&gt;
+        &lt;Stack.Screen name="Details" component={DetailsScreen} /&gt;
+      &lt;/Stack.Navigator&gt;
+    &lt;/NavigationContainer&gt;
+  );
+}
+</code></pre>
+    <p>From HomeScreen, navigate to DetailsScreen:</p>
+<pre><code>&lt;Button 
+  title="View Details"
+  onPress={() =&gt; navigation.navigate('Details')}
+/&gt;
+</code></pre>
+    <span class="tagalog-note">Tumawag sa <code>navigate</code> para pumunta sa ibang pahina</span>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 5 — Connect to Your Backend API</h2>
+    <span class="tagalog-sub">Kumonekta sa iyong Backend API</span>
+<pre><code>import { useState, useEffect } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+
+export default function App() {
+  const [data, setData] = useState([]);
+
+  useEffect(() =&gt; {
+    // Use YOUR computer's IPv4 address — NOT 'localhost'
+    fetch('http://192.168.X.X:3000/api/todos')
+      .then(res =&gt; res.json())
+      .then(json =&gt; setData(json))
+      .catch(err =&gt; console.log('Error:', err));
+  }, []);
+
+  return (
+    &lt;View style={styles.container}&gt;
+      &lt;Text style={styles.title}&gt;📋 My Tasks&lt;/Text&gt;
+      {data.map((item, idx) =&gt; (
+        &lt;Text key={idx}&gt;• {item.task}&lt;/Text&gt;
+      ))}
+    &lt;/View&gt;
+  );
+}
+</code></pre>
+    <div class="box-tip">
+      💡 Use your <strong>IPv4 address</strong> (run <code>ipconfig</code> in Command Prompt) — phone and emulator cannot see 'localhost' properly ✅
+      <span class="tagalog-note">Gamitin ang IPv4 — hindi localhost — para makita ng telepono ang iyong server</span>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 6 — Local Storage: Works Offline</h2>
+    <span class="tagalog-sub">Pag-iimbak sa telepono — gumagana kahit walang internet</span>
+<pre><code>import AsyncStorage from '@react-native-async-storage/async-storage';
+
+// Save data to phone
+const saveTask = async (task) =&gt; {
+  await AsyncStorage.setItem('lastTask', task);
+};
+
+// Load data from phone
+const loadTask = async () =&gt; {
+  const value = await AsyncStorage.getItem('lastTask');
+  if (value !== null) setTask(value);
+};
+</code></pre>
+    <p>Data stays saved on your device — still there when you reopen the app ✅</p>
+    <span class="tagalog-note">Naiimbak sa telepono — hindi nawawala kahit isara ang app</span>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 7 — Portfolio Project: Personal Productivity App 📱</h2>
+    <span class="tagalog-sub">Proyekto — Personal na Talaan ng Gawain</span>
+    <p>Build a complete working app — this goes straight into your portfolio!</p>
+    <span class="tagalog-note">Buuin ang buong app — ilalagay mo ito sa iyong ipapakitang gawa</span>
+    
+    <h3>Features to Include:</h3>
+    <span class="tagalog-sub">Mga dapat magkaroon:</span>
+    <ol>
+      <li>✅ Home Screen — welcome message & navigation buttons
+        <span class="tagalog-note">Pangunahing pahina — pagbati at mga pindutan</span>
+      </li>
+      <li>✅ Task List — loads from your Node.js API, displays cleanly
+        <span class="tagalog-note">Talaan — nagpapakita mula sa iyong API</span>
+      </li>
+      <li>✅ Add Task — form sends POST request, updates list
+        <span class="tagalog-note">Magdagdag — pormang nagpapasa sa server</span>
+      </li>
+      <li>✅ Mark Complete — toggle task status
+        <span class="tagalog-note">Tandaan na tapos na — baguhin ang katayuan</span>
+      </li>
+      <li>✅ Delete Task — removes from database
+        <span class="tagalog-note">Burahin — alisin sa listahan</span>
+      </li>
+      <li>✅ Offline Backup — saves to AsyncStorage
+        <span class="tagalog-note">Ligtas kahit walang internet — naiimbak sa telepono</span>
+      </li>
+      <li>✅ Polished Design — consistent colors, spacing, readable text
+        <span class="tagalog-note">Maayos na anyo — malinis at madaling basahin</span>
+      </li>
+    </ol>
+
+    <h3>Build & Share:</h3>
+    <span class="tagalog-sub">Ihanda at ibahagi sa iba</span>
+<pre><code># Publish online — anyone can open via Expo Go
+npx expo publish
+
+# Or build installable Android file
+npx expo build:android
+</code></pre>
+    <p>Share the link — anyone can open your app instantly on their phone ✅</p>
+    <span class="tagalog-note">Ipadala ang link — agad na makikita ng iba gamit ang Expo Go</span>
+  </section>
+
+  <div class="box-success">
+    <h3>✅ Track A — Mobile App Development COMPLETE! 🎉</h3>
+    <p>You can now build real cross-platform apps! 📱✨</p>
+    <span class="tagalog-note">Kaya mo nang gumawa ng app para sa dalawang sistema!</span>
+    <ul>
+      <li>✅ Expo & React Native setup & workflow</li>
+      <li>✅ Components, styling, and dynamic State</li>
+      <li>✅ Multi-screen navigation</li>
+      <li>✅ Connect to Node.js / Express backend</li>
+      <li>✅ Local storage for offline use</li>
+      <li>✅ Publish & share your app with others</li>
+    </ul>
+    <span class="tagalog-note">Pagtatakbo sa telepono • Anyo at Galaw • Paglipat sa pahina • Koneksyon sa Server • Pag-iimbak • Pagbabahagi</span>
+    
+    <p style="margin-top:1rem"><strong>Next:</strong> Track B — AI & LLM Basics 🤖</p>
+    <span class="tagalog-note">Susunod — Paggamit ng Artipisyal na Katalinuhan</span>
+  </div>
+
+  <nav class="nav-buttons">
+    <a href="course-elective-tracks.html" class="nav-btn">← Back to Tracks</a>
+    <a href="index.html" class="nav-btn">🏠 Portal</a>
+    <a href="index.html" class="nav-btn">Next Track →</a>
+  </nav>
+</main>
+
+<script>
+let isDark = localStorage.getItem('mobile-theme') === 'true';
+function applyTheme(){document.getElementById('themeBtn').textContent = isDark ? '☀️' : '🌙';}
+applyTheme();
+document.getElementById('themeBtn').addEventListener('click', () => {
+  isDark = !isDark; localStorage.setItem('mobile-theme', isDark); applyTheme();
+});
+let fs = parseInt(localStorage.getItem('mobile-fs')) || 16;
+function applyFontSize(){document.body.style.fontSize = fs + 'px';}
+applyFontSize();
+document.getElementById('fontUp').addEventListener('click', () => {
+  if(fs < 22){ fs += 2; applyFontSize(); localStorage.setItem('mobile-fs', fs); }
+});
+document.getElementById('fontDown').addEventListener('click', () => {
+  if(fs > 12){ fs -= 2; applyFontSize(); localStorage.setItem('mobile-fs', fs); }
+});
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('progress').style.width = (window.scrollY / h) * 100 + '%';
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎮 Game Development — JavaScript & HTML5 Canvas</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#fffef9;--text:#1a1a1a;--accent:#10b981;--accent-light:#ecfdf5;
+  --light:#f0f4f8;--border:#cbd5e1;--code-bg:#f6f8fa;
+  --success:#22c55e;--warn:#f59e0b;--danger:#ef4444;--arrow:#059669
+}
+@media(prefers-color-scheme:dark){
+  :root{--bg:#0f172a;--text:#e2e8f0;--accent:#34d399;--accent-light:#1e293b;
+  --light:#1e293b;--border:#475569;--code-bg:#1e293b}
+}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;padding:0}
+.progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--accent);width:0;z-index:999}
+.top-nav{position:sticky;top:0;background:var(--light);border-bottom:1px solid var(--border);padding:.8rem 2rem;display:flex;justify-content:space-between;align-items:center;z-index:99}
+.top-nav a{color:var(--accent);text-decoration:none;font-weight:bold}
+.top-nav a:hover{text-decoration:underline}
+.controls{display:flex;gap:.5rem}
+.ctrl-btn{padding:.4rem .8rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;cursor:pointer}
+.ctrl-btn:hover{background:var(--accent);color:#fff}
+.content{max-width:900px;margin:0 auto;padding:2rem}
+.book-header{text-align:center;margin-bottom:2.5rem;padding-bottom:2rem;border-bottom:2px solid var(--accent)}
+.book-header h1{font-size:2rem;margin-bottom:.5rem;color:var(--accent)}
+.tag{display:inline-block;padding:.25rem .6rem;border-radius:20px;font-size:.75rem;font-weight:bold;margin-right:.5rem}
+.tag-track{background:var(--accent-light);color:#047857}
+.tag-free{background:#dcfce7;color:#166534}
+.chapter{margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px dashed var(--border)}
+.chapter h2{font-size:1.5rem;margin:1.8rem 0 1rem;color:var(--accent)}
+.chapter h3{font-size:1.15rem;margin:1.4rem 0 .7rem}
+.chapter p{margin-bottom:1rem}
+.chapter ul,.chapter ol{margin:1rem 0 1rem 2rem}
+.chapter li{margin:.6rem 0}
+table{width:100%;border-collapse:collapse;margin:1.2rem 0}
+th,td{padding:10px 14px;text-align:left;border:1px solid var(--border)}
+th{background:var(--accent-light);font-weight:bold}
+pre{background:var(--code-bg);border-radius:10px;padding:1.3rem;overflow-x:auto;margin:1.2rem 0;border:1px solid var(--border);font-size:.85rem;line-height:1.6}
+code{font-family:'Consolas','Monaco',monospace}
+:not(pre)>code{background:var(--code-bg);padding:.2rem .5rem;border-radius:4px}
+.box{border-radius:12px;padding:1.3rem;margin:1.5rem 0}
+.box-tip{background:#fef3c7;border-left:5px solid #f59e0b}
+.box-note{background:var(--accent-light);border-left:5px solid var(--accent)}
+.box-success{background:#f0fdf4;border-left:5px solid var(--success)}
+.box-warn{background:#fee2e2;border-left:5px solid #ef4444}
+canvas{border:3px solid var(--accent);border-radius:10px;background:#0f172a;display:block;margin:1rem auto;max-width:100%}
+.game-demo{text-align:center;margin:1.5rem 0}
+/* Tagalog subtitle style — consistent */
+.tagalog-sub{color:#9ca3af;font-size:.85rem;font-style:italic;margin-top:-.3rem;margin-bottom:1rem;display:block;line-height:1.5}
+.tagalog-note{color:#9ca3af;font-size:.8rem;font-style:italic;margin-top:.3rem;display:block}
+.nav-buttons{display:flex;justify-content:space-between;margin:2.5rem 0;padding-top:1.5rem;border-top:2px solid var(--border)}
+.nav-btn{padding:.9rem 1.5rem;background:var(--accent);color:#fff;border:none;border-radius:10px;cursor:pointer;font-size:1rem;text-decoration:none;display:inline-block;text-align:center;font-weight:bold;transition:transform .2s}
+.nav-btn:hover{transform:translateY(-2px)}
+@media(max-width:768px){.top-nav{padding:.8rem 1rem;flex-wrap:wrap;gap:.5rem}.content{padding:1rem}}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progress"></div>
+<nav class="top-nav">
+  <a href="index.html">🏠 Portal</a>
+  <span style="font-weight:bold">🎮 Game Development — Track C</span>
+  <div class="controls">
+    <button class="ctrl-btn" id="themeBtn">🌙</button>
+    <button class="ctrl-btn" id="fontDown">A-</button>
+    <button class="ctrl-btn" id="fontUp">A+</button>
+  </div>
+</nav>
+<main class="content">
+  <header class="book-header">
+    <span class="tag tag-track">🎮 Game Track</span>
+    <span class="tag tag-free">🆓 No Engines Needed</span>
+    <h1>🎮 Game Development — JavaScript & HTML5 Canvas</h1>
+    <p>Code Games That Run in Any Browser — No Downloads Required ✅</p>
+    <span class="tagalog-sub">Gumawa ng laro gamit lang ang browser — walang malaking programa na kailangang i-install</span>
+  </header>
+
+  <section class="chapter">
+    <h2>📖 Chapter 1 — Introduction & Setup</h2>
+    <span class="tagalog-sub">Panimula at Paghahanda</span>
+    <p>We build games using only <strong>HTML5 Canvas + JavaScript</strong> — free, lightweight, and runs instantly in any browser! ✅</p>
+    <span class="tagalog-note">Libre, walang malaking software — gumagana agad sa Chrome, Edge, Firefox</span>
+    
+    <h3>What Is Canvas?</h3>
+    <span class="tagalog-sub">Ano ang Canvas?</span>
+    <p>Think of it as a digital drawing board — you draw shapes, colors, and move everything with code, every moment.
+      <span class="tagalog-note">Parang pisara — gumuhit gamit ang code, galawin bawat sandali</span>
+    </p>
+
+    <h3>Basic Template:</h3>
+    <span class="tagalog-sub">Unang halimbawa — kopyahin at subukan</span>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+  &lt;canvas id="gameCanvas" width="800" height="600"&gt;&lt;/canvas&gt;
+  &lt;script&gt;
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d'); // drawing tool ✅
+    
+    // Draw a circle
+    ctx.beginPath();
+    ctx.arc(100, 100, 30, 0, Math.PI * 2); // x, y, radius, start, end
+    ctx.fillStyle = '#10b981';
+    ctx.fill();
+    ctx.closePath();
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+    <p>Save as <code>game.html</code> → Open in browser → You'll see a green circle! ✅
+      <span class="tagalog-note">I-save bilang game.html → buksan sa browser → may luntian na bilog</span>
+    </p>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 2 — The Game Loop ❗</h2>
+    <span class="tagalog-sub">Ang Pangkalahatang Pag-ikot — pinakamahalagang bahagi</span>
+    <p>This is the heart of every game — runs continuously, hundreds of times per second!</p>
+    <span class="tagalog-note">Tumatakbo nang paulit-ulit — daan-daang beses bawat segundo</span>
+<pre><code>function gameLoop() {
+  // 1. Clear screen
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // 2. Update positions & states
+  update();
+  // 3. Draw everything
+  draw();
+  // Repeat immediately ✅
+  requestAnimationFrame(gameLoop);
+}
+gameLoop(); // Start the game!
+</code></pre>
+
+    <h3>Example — Moving Ball:</h3>
+    <span class="tagalog-sub">Halimbawa — gumagalaw at tumatalbog na bola</span>
+<pre><code>let x = 50, y = 50;
+let speedX = 3, speedY = 2;
+
+function update() {
+  x += speedX;
+  y += speedY;
+  // Bounce off edges
+  if (x &lt;= 0 || x &gt;= canvas.width) speedX *= -1;
+  if (y &lt;= 0 || y &gt;= canvas.height) speedY *= -1;
+}
+
+function draw() {
+  ctx.beginPath();
+  ctx.arc(x, y, 25, 0, Math.PI * 2);
+  ctx.fillStyle = '#10b981';
+  ctx.fill();
+  ctx.closePath();
+}
+
+function gameLoop() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  update();
+  draw();
+  requestAnimationFrame(gameLoop);
+}
+gameLoop();
+</code></pre>
+    <p>Run it → The ball moves and bounces forever! 🎉
+      <span class="tagalog-note">Gagalaw at tatalbog sa gilid — patuloy hanggang isara ang pahina</span>
+    </p>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 3 — Player Input: Control the Game ⌨️</h2>
+    <span class="tagalog-sub">Kontrolin gamit ang keyboard</span>
+    <p>Capture keyboard keys so your character responds instantly!</p>
+<pre><code>// Track pressed keys
+const keys = {};
+
+// When key pressed
+document.addEventListener('keydown', e =&gt; {
+  keys[e.key] = true;
+});
+// When key released
+document.addEventListener('keyup', e =&gt; {
+  keys[e.key] = false;
+});
+
+// Player object
+let player = { x: 100, y: 100, size: 40, speed: 5 };
+
+function update() {
+  if (keys['ArrowLeft']) player.x -= player.speed;
+  if (keys['ArrowRight']) player.x += player.speed;
+  if (keys['ArrowUp']) player.y -= player.speed;
+  if (keys['ArrowDown']) player.y += player.speed;
+  
+  // Keep player inside screen
+  player.x = Math.max(0, Math.min(canvas.width - player.size, player.x));
+  player.y = Math.max(0, Math.min(canvas.height - player.size, player.y));
+}
+
+function draw() {
+  ctx.fillStyle = '#10b981';
+  ctx.fillRect(player.x, player.y, player.size, player.size);
+}
+</code></pre>
+    <p>Use arrow keys → Your character moves freely! ✅
+      <span class="tagalog-note">Pindutin ang arrow keys — makagalaw nang hindi lumalabas sa screen</span>
+    </p>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 4 — Collision Detection: Detect Contact 💥</h2>
+    <span class="tagalog-sub">Alamin kung nagdikit ang mga bagay</span>
+    <p>How do you know when two objects touch? Here's the standard formula:</p>
+<pre><code>// Rectangle vs Rectangle collision
+function rectCollision(a, b) {
+  return (
+    a.x &lt; b.x + b.width &amp;&amp;
+    a.x + a.width &gt; b.x &amp;&amp;
+    a.y &lt; b.y + b.height &amp;&amp;
+    a.y + a.height &gt; b.y
+  );
+}
+
+// Example — Collecting coins:
+const player = { x: 50, y: 50, w: 40, h: 40 };
+const coin = { x: 200, y: 150, w: 20, h: 20, collected: false };
+let score = 0;
+
+function update() {
+  if (!coin.collected &amp;&amp; rectCollision(
+    {x:player.x, y:player.y, width:player.w, height:player.h},
+    {x:coin.x, y:coin.y, width:coin.w, height:coin.h}
+  )) {
+    coin.collected = true;
+    score += 10;
+  }
+}
+
+function draw() {
+  if (!coin.collected) {
+    ctx.beginPath();
+    ctx.arc(coin.x + 10, coin.y + 10, 10, 0, Math.PI * 2);
+    ctx.fillStyle = '#f59e0b';
+    ctx.fill();
+  }
+}
+</code></pre>
+    <p>Touch the coin → Score increases & coin disappears! ✅
+      <span class="tagalog-note">Kapag nagdikit — nadadagdagan ang puntos, nawawala ang barya</span>
+    </p>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 5 — Game States: Start · Play · Game Over 📊</h2>
+    <span class="tagalog-sub">Iba't ibang pahina — hindi lang naglalaro</span>
+    <p>Separate screens for the beginning, during play, and when the game ends.</p>
+<pre><code>let gameState = 'start'; // 'start' | 'playing' | 'gameover'
+let score = 0;
+
+function drawStartScreen() {
+  ctx.fillStyle = '#fff';
+  ctx.font = '40px Arial';
+  ctx.textAlign = 'center';
+  ctx.fillText('🎮 MY ADVENTURE GAME', canvas.width/2, canvas.height/2 - 40);
+  ctx.font = '24px Arial';
+  ctx.fillText('Press SPACE to Start!', canvas.width/2, canvas.height/2 + 20);
+}
+
+function drawGameScreen() {
+  ctx.font = '20px Arial';
+  ctx.fillText('Score: ' + score, 700, 30);
+  // Draw player, enemies, coins here
+}
+
+function drawGameOverScreen() {
+  ctx.fillStyle = '#ef4444';
+  ctx.font = '40px Arial';
+  ctx.fillText('GAME OVER 💀', canvas.width/2, canvas.height/2 - 40);
+  ctx.fillStyle = '#fff';
+  ctx.font = '24px Arial';
+  ctx.fillText('Final Score: ' + score, canvas.width/2, canvas.height/2 + 10);
+  ctx.fillText('Press R to Restart', canvas.width/2, canvas.height/2 + 50);
+}
+
+// Route drawing based on current state
+function gameLoop() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  if (gameState === 'start') {
+    drawStartScreen();
+  } else if (gameState === 'playing') {
+    update();
+    drawGameScreen();
+  } else if (gameState === 'gameover') {
+    drawGameOverScreen();
+  }
+  requestAnimationFrame(gameLoop);
+}
+
+// Change state with keys
+document.addEventListener('keydown', e =&gt; {
+  if (e.key === ' ' &amp;&amp; gameState === 'start') gameState = 'playing';
+  if (e.key === 'r' &amp;&amp; gameState === 'gameover') {
+    gameState = 'playing';
+    score = 0;
+    // Reset player & enemies here
+  }
+});
+</code></pre>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 6 — Sprites & Animation: Bring It to Life 🖼️</h2>
+    <span class="tagalog-sub">Gumamit ng larawan — buhayin ang galaw</span>
+    <p>Replace simple shapes with actual character images!</p>
+<pre><code>// Load an image
+const playerImg = new Image();
+playerImg.src = 'player.png'; // place in same folder
+
+// Wait until loaded before using
+let loaded = 0;
+playerImg.onload = () =&gt; { loaded++; startGameIfReady(); };
+
+function draw() {
+  // drawImage(image, x, y, width, height)
+  ctx.drawImage(playerImg, player.x, player.y, 50, 50);
+}
+</code></pre>
+
+    <h3>Frame-by-Frame Animation:</h3>
+    <span class="tagalog-sub">Sunod-sunod na larawan — magmukhang naglalakad</span>
+<pre><code>let frame = 0;
+let frameTimer = 0;
+
+function update() {
+  frameTimer++;
+  if (frameTimer &gt;= 10) { // Change frame every 10 loops
+    frame = (frame + 1) % 4; // cycles: 0, 1, 2, 3 → back to 0
+    frameTimer = 0;
+  }
+}
+
+// From a single sprite sheet (one image with all poses):
+function draw() {
+  ctx.drawImage(
+    spriteSheet,
+    frame * 32, 0, 32, 48,  // Source: crop from spritesheet
+    player.x, player.y, 40, 60 // Destination: place on screen
+  );
+}
+</code></pre>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 7 — Final Project: Complete Browser Game 🎮</h2>
+    <span class="tagalog-sub">Buong proyekto — ilalagay sa portfolio</span>
+    
+    <h3>Must-Have Features:</h3>
+    <ol>
+      <li>✅ Start Screen — title & instructions</li>
+      <li>✅ Player — move with arrow keys</li>
+      <li>✅ Collectibles — coins/points to gather</li>
+      <li>✅ Enemies — moving obstacles to avoid</li>
+      <li>✅ Collision — detect pickups & dangerous contact</li>
+      <li>✅ Score System — live display & accumulation</li>
+      <li>✅ Game Over Screen — final score & restart option</li>
+      <li>✅ Progressive Difficulty — faster or more enemies over time</li>
+      <li>✅ Shareable — single HTML file → send & play anywhere ✅</li>
+    </ol>
+
+    <h3>Deployment:</h3>
+    <span class="tagalog-sub">Paano ibahagi</span>
+    <p>Upload your <code>.html</code> file to GitHub Pages OR just send the file directly — it opens instantly in any browser, zero installation needed! ✅
+      <span class="tagalog-note">Isang file lang — ipadala sa kaibigan, buksan agad</span>
+    </p>
+  </section>
+
+  <div class="box-success">
+    <h3>✅ Game Development — COMPLETE! 🎉</h3>
+    <p>You can now build real playable games that run everywhere ✨</p>
+    <ul>
+      <li>✅ HTML5 Canvas — draw & render with code</li>
+      <li>✅ Game Loop — the heartbeat of all games</li>
+      <li>✅ Keyboard Input — responsive controls</li>
+      <li>✅ Collision Detection — interactions & scoring</li>
+      <li>✅ Game States — organized screens & flow</li>
+      <li>✅ Sprites & Animation — visual polish</li>
+      <li>✅ Shareable Projects — one file, zero barriers</li>
+    </ul>
+    <span class="tagalog-note">Mula simula hanggang pagbabahagi — buong kasanayan sa paggawa ng laro ✅</span>
+    
+    <p style="margin-top:1rem"><strong>Next:</strong> Continue with your remaining tracks — just say <strong>"next"</strong> whenever you're ready! 💜🚀</p>
+  </div>
+
+  <nav class="nav-buttons">
+    <a href="course-ai-llm-basics.html" class="nav-btn">← Previous Track</a>
+    <a href="index.html" class="nav-btn">🏠 Portal</a>
+    <a href="index.html" class="nav-btn">Next Track →</a>
+  </nav>
+</main>
+
+<script>
+let isDark = localStorage.getItem('game-theme') === 'true';
+function applyTheme(){document.getElementById('themeBtn').textContent = isDark ? '☀️' : '🌙';}
+applyTheme();
+document.getElementById('themeBtn').addEventListener('click', () => {
+  isDark = !isDark; localStorage.setItem('game-theme', isDark); applyTheme();
+});
+let fs = parseInt(localStorage.getItem('game-fs')) || 16;
+function applyFontSize(){document.body.style.fontSize = fs + 'px';}
+applyFontSize();
+document.getElementById('fontUp').addEventListener('click', () => {
+  if(fs < 22){ fs += 2; applyFontSize(); localStorage.setItem('game-fs', fs); }
+});
+document.getElementById('fontDown').addEventListener('click', () => {
+  if(fs > 12){ fs -= 2; applyFontSize(); localStorage.setItem('game-fs', fs); }
+});
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('progress').style.width = (window.scrollY / h) * 100 + '%';
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🖥️ NetBeans Basics — Core Skills</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#fffef9;--text:#1a1a1a;--accent:#8b5cf6;--accent-light:#ede9fe;
+  --light:#f0f4f8;--border:#cbd5e1;--code-bg:#f6f8fa;
+  --success:#22c55e;--warn:#f59e0b;--danger:#ef4444;--arrow:#7c3aed
+}
+@media(prefers-color-scheme:dark){
+  :root{--bg:#0f172a;--text:#e2e8f0;--accent:#a78bfa;--accent-light:#1e293b;
+  --light:#1e293b;--border:#475569;--code-bg:#1e293b}
+}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;padding:0}
+.progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--accent);width:0;z-index:999}
+.top-nav{position:sticky;top:0;background:var(--light);border-bottom:1px solid var(--border);padding:.8rem 2rem;display:flex;justify-content:space-between;align-items:center;z-index:99}
+.top-nav a{color:var(--accent);text-decoration:none;font-weight:bold}
+.top-nav a:hover{text-decoration:underline}
+.controls{display:flex;gap:.5rem}
+.ctrl-btn{padding:.4rem .8rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;cursor:pointer}
+.ctrl-btn:hover{background:var(--accent);color:#fff}
+.content{max-width:900px;margin:0 auto;padding:2rem}
+.book-header{text-align:center;margin-bottom:2.5rem;padding-bottom:2rem;border-bottom:2px solid var(--accent)}
+.book-header h1{font-size:2rem;margin-bottom:.5rem;color:var(--accent)}
+.tag{display:inline-block;padding:.25rem .6rem;border-radius:20px;font-size:.75rem;font-weight:bold;margin-right:.5rem}
+.tag-phase{background:var(--accent-light);color:#6d28d9}
+.tag-found{background:#dcfce7;color:#166534}
+.chapter{margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px dashed var(--border)}
+.chapter h2{font-size:1.5rem;margin:1.8rem 0 1rem;color:var(--accent)}
+.chapter h3{font-size:1.15rem;margin:1.4rem 0 .7rem}
+.chapter p{margin-bottom:1rem}
+.chapter ul,.chapter ol{margin:1rem 0 1rem 2rem}
+.chapter li{margin:.6rem 0}
+table{width:100%;border-collapse:collapse;margin:1.2rem 0}
+th,td{padding:10px 14px;text-align:left;border:1px solid var(--border)}
+th{background:var(--accent-light);font-weight:bold}
+pre{background:var(--code-bg);border-radius:10px;padding:1.3rem;overflow-x:auto;margin:1.2rem 0;border:1px solid var(--border);font-size:.85rem;line-height:1.6}
+code{font-family:'Consolas','Monaco',monospace}
+:not(pre)>code{background:var(--code-bg);padding:.2rem .5rem;border-radius:4px}
+.box{border-radius:12px;padding:1.3rem;margin:1.5rem 0}
+.box-tip{background:#fef3c7;border-left:5px solid #f59e0b}
+.box-note{background:var(--accent-light);border-left:5px solid var(--accent)}
+.box-success{background:#f0fdf4;border-left:5px solid var(--success)}
+.box-warn{background:#fee2e2;border-left:5px solid #ef4444}
+.diagram{background:var(--light);border-radius:10px;padding:1.5rem;margin:1.2rem 0}
+kbd{background:#e5e7eb;border:1px solid #9ca3af;border-radius:4px;padding:.15rem .4rem;font-family:inherit;font-size:.9em}
+/* Tagalog subtitle style — consistent */
+.tagalog-sub{color:#9ca3af;font-size:.85rem;font-style:italic;margin-top:-.3rem;margin-bottom:1rem;display:block;line-height:1.5}
+.tagalog-note{color:#9ca3af;font-size:.8rem;font-style:italic;margin-top:.3rem;display:block}
+.nav-buttons{display:flex;justify-content:space-between;margin:2.5rem 0;padding-top:1.5rem;border-top:2px solid var(--border)}
+.nav-btn{padding:.9rem 1.5rem;background:var(--accent);color:#fff;border:none;border-radius:10px;cursor:pointer;font-size:1rem;text-decoration:none;display:inline-block;text-align:center;font-weight:bold;transition:transform .2s}
+.nav-btn:hover{transform:translateY(-2px)}
+@media(max-width:768px){.top-nav{padding:.8rem 1rem;flex-wrap:wrap;gap:.5rem}.content{padding:1rem}}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progress"></div>
+<nav class="top-nav">
+  <a href="index.html">🏠 Portal</a>
+  <span style="font-weight:bold">🖥️ NetBeans Basics — Phase 2: Core Skills</span>
+  <div class="controls">
+    <button class="ctrl-btn" id="themeBtn">🌙</button>
+    <button class="ctrl-btn" id="fontDown">A-</button>
+    <button class="ctrl-btn" id="fontUp">A+</button>
+  </div>
+</nav>
+<main class="content">
+  <header class="book-header">
+    <span class="tag tag-phase">Phase 2 — Core Skills</span>
+    <span class="tag tag-found">✅ #4 of 7 Remaining</span>
+    <h1>🖥️ NetBeans Basics</h1>
+    <p>Master the NetBeans IDE — From Setup to Running Your First Program ✅</p>
+    <span class="tagalog-sub">Maging mahusay sa NetBeans IDE — mula paggawa hanggang pagpapatakbo</span>
+  </header>
+
+  <section class="chapter">
+    <h2>📖 Chapter 1 — What Is NetBeans?</h2>
+    <span class="tagalog-sub">Ano ang NetBeans?</span>
+    <p>NetBeans is an <strong>IDE = Integrated Development Environment</strong> — everything you need in one place: writing code, running it, finding errors, and organizing projects 💻</p>
+    <span class="tagalog-sub">Ang lahat ng kailangan mo nasa iisang lugar — pagsusulat, pagpapatakbo, paghahanap ng mali</span>
+    <div class="box-note">
+      💡 <strong>Why use an IDE instead of Notepad?</strong><br>
+      • Code is color-coded → easy to see different parts<br>
+      • Automatic help → suggests and completes names<br>
+      • Instant warnings → red dots show you syntax errors right away<br>
+      • One button → run your program immediately<br>
+      • Organized view → all your files listed clearly on the side
+      <span class="tagalog-note">May kulay ang code • may tulong agad • may babala kung may mali • isang pindutan lang • maayos ang lahat</span>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 2 — Get to Know NetBeans Layout 👀</h2>
+    <span class="tagalog-sub">Kilalanin ang loob ng NetBeans</span>
+    <p>When you open NetBeans, here's what you'll see:</p>
+    <span class="tagalog-sub">Buksan ang NetBeans — ganito ang ayos nito:</span>
+    <div class="diagram">
+      <p><strong>Left — Projects Window 📁</strong><br>
+      All projects and files listed here — just like File Explorer. Click <code>+</code> to expand.</p>
+      <span class="tagalog-note">Kaliwa — lahat ng proyekto at file, parang folder</span>
+      
+      <p style="margin-top:1rem"><strong>Center — Editor Window ✍️</strong><br>
+      Where you write your code — color-highlighted, with line numbers.</p>
+      <span class="tagalog-note">Gitna — dito ka magsusulat, may numero sa gilid</span>
+      
+      <p style="margin-top:1rem"><strong>Bottom — Output / Console Window 📋</strong><br>
+      Where results appear — messages, errors, everything.</p>
+      <span class="tagalog-note">Ibaba — lalabas ang sagot o pagkakamali ng programa</span>
+      
+      <p style="margin-top:1rem"><strong>Bottom-Right — Navigator 📑</strong><br>
+      Quick list of all methods and variables — jump instantly to any part.</p>
+      <span class="tagalog-note">Ibaba-kanan — mabilis na tumalon sa paraan o katangian</span>
+      
+      <p style="margin-top:1rem"><strong>Top — Menu & Toolbar ⚙️</strong><br>
+      File, Edit, View, Run, Debug — plus quick buttons: ▶️ Run, 🛑 Stop, 🔨 Build</p>
+      <span class="tagalog-note">Itaas — mga utos at pindutan</span>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 3 — Create & Run a Project 🆕</h2>
+    <span class="tagalog-sub">Gumawa at patakbuhin ang proyekto</span>
+    
+    <h3>New Project:</h3>
+    <span class="tagalog-sub">Bagong proyekto — hakbang-hakbang</span>
+    <ol>
+      <li>File → <kbd>New Project</kbd> (or Ctrl+Shift+N)</li>
+      <li>Category: <kbd>Java</kbd> → Project: <kbd>Java Application</kbd> → Next</li>
+      <li>Project Name: <code>YourProjectName</code> → no spaces</li>
+      <li>Main Class: <code>yourprojectname.Main</code> → filled automatically</li>
+      <li>Finish ✅</li>
+    </ol>
+    <h3>Running Your Code:</h3>
+    <span class="tagalog-sub">Patakbuhin — alamin ang mga pindutan</span>
+    <ul>
+      <li>▶️ Green Arrow — Run Project <kbd>F6</kbd> → run the whole project</li>
+      <li>▶️ Smaller Arrow — Run File <kbd>Shift+F6</kbd> → run only the current file</li>
+      <li>🔨 Hammer — Build <kbd>F11</kbd> → prepare everything, check for errors</li>
+      <li>🛑 Red Square — Stop <kbd>Ctrl+F2</kbd> → halt execution</li>
+    </ul>
+    <div class="box-tip">
+      💡 <strong>Tip:</strong> Make sure the correct project is selected on the left — the active one appears in bold ✅
+      <span class="tagalog-note">Tingnan kung naka-bold ang tamang proyekto bago pindutin ang Run</span>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 4 — Editor Signals: What They Mean 🚦</h2>
+    <span class="tagalog-sub">Mga senyales sa editor — huwag balewalain!</span>
+    <p>NetBeans gives you instant feedback — learn what to look for!</p>
+    <table>
+      <tr><th>Signal</th><th>Meaning</th><th>Action</th></tr>
+      <tr>
+        <td>🔴 Red squiggle in gutter</td>
+        <td>Error on this line — will NOT run!</td>
+        <td>Read the message → fix immediately</td>
+      </tr>
+      <tr>
+        <td>⚠️ Yellow triangle</td>
+        <td>Warning — will run but could be better</td>
+        <td>Fix when you can</td>
+      </tr>
+      <tr>
+        <td>💡 Lightbulb in gutter</td>
+        <td>NetBeans has a suggestion</td>
+        <td>Click it — auto-fix available!</td>
+      </tr>
+      <tr>
+        <td>Red underline</td>
+        <td>Misspelled or missing name</td>
+        <td>Check spelling & capitalization</td>
+      </tr>
+      <tr>
+        <td>Greyed-out text</td>
+        <td>Unused or disabled code</td>
+        <td>Remove if unnecessary</td>
+      </tr>
+    </table>
+    <span class="tagalog-note">Pula = hindi tatakbo • Dilaw = babala • Bombilya = may mungkahi</span>
+
+<pre><code>// Example — something's wrong:
+System.out.println("Hello) 
+// ↑ red squiggle — missing quote and semicolon
+// Fixed:
+System.out.println("Hello"); 
+// ✅ red mark disappears
+</code></pre>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 5 — Useful Keyboard Shortcuts ⌨️</h2>
+    <span class="tagalog-sub">Mga kapaki-pakinabang na shortcut</span>
+    <p>Work faster by memorizing these — the most essential ones!</p>
+    <table>
+      <tr><th>Shortcut</th><th>Action</th></tr>
+      <tr>
+        <td><kbd>Ctrl</kbd> + <kbd>S</kbd></td>
+        <td>Save — do this BEFORE running!</td>
+      </tr>
+      <tr>
+        <td><kbd>Ctrl</kbd> + <kbd>Space</kbd></td>
+        <td>Code Completion — show suggestions</td>
+      </tr>
+      <tr>
+        <td><kbd>Ctrl</kbd> + <kbd>F</kbd></td>
+        <td>Find in current file</td>
+      </tr>
+      <tr>
+        <td><kbd>Ctrl</kbd> + <kbd>H</kbd></td>
+        <td>Find & Replace</td>
+      </tr>
+      <tr>
+        <td><kbd>Ctrl</kbd> + <kbd>/</kbd></td>
+        <td>Toggle Comment — select lines then press</td>
+      </tr>
+      <tr>
+        <td><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>I</kbd></td>
+        <td>Auto-Format — clean indent instantly!</td>
+      </tr>
+      <tr>
+        <td><kbd>F6</kbd></td>
+        <td>Run Project</td>
+      </tr>
+      <tr>
+        <td><kbd>F11</kbd></td>
+        <td>Build Project</td>
+      </tr>
+    </table>
+    <span class="tagalog-note">I-save palagi bago patakbuhin • Ayusin ang pagkakahanay • Maghanap nang mabilis</span>
+    <div class="box-tip">
+      💡 <strong>Most important shortcut:</strong> <kbd>Ctrl+S</kbd> then <kbd>F6</kbd> — never forget! ✅
+      <span class="tagalog-note">I-save muna bago patakbuhin — ugaliin ito!</span>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 6 — Debugging: Find Problems Step-by-Step 🔍</h2>
+    <span class="tagalog-sub">Debugging — hanapin ang mali nang dahan-dahan</span>
+    <p>If results are wrong and unclear — use the Debugger to watch your program run!</p>
+    <h3>How to Use It:</h3>
+    <span class="tagalog-sub">Paano gamitin ang debugger — hakbang-hakbang</span>
+    <ol>
+      <li>Click the <strong>gutter next to line number</strong> → red dot appears 🔴 = Breakpoint</li>
+      <li>Click <strong>Debug Project</strong> 🐞 (or <kbd>Ctrl+F5</kbd>)</li>
+      <li>Program pauses at that line — inspect every variable's value</li>
+      <li>Step Over ⏭️ <kbd>F8</kbd> → run next line, move forward slowly</li>
+      <li>Step Into ⬇️ <kbd>F7</kbd> → go inside a method to see its code</li>
+      <li>Stop 🛑 <kbd>Ctrl+F2</kbd> when finished</li>
+    </ol>
+<pre><code>public class Main {
+    public static void main(String[] args) {
+        int a = 5;
+        int b = 3;
+        int c = a + b; // ← set breakpoint here
+        System.out.println(c);
+    }
+}
+</code></pre>
+    <p>When paused — you'll see: <code>a=5</code>, <code>b=3</code> → crystal clear whether correct!</p>
+    <span class="tagalog-note">Makikita mo ang halaga ng bawat numero habang tumatakbo — madaling malaman kung tama</span>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 7 — Managing Projects & Files 📁</h2>
+    <span class="tagalog-sub">Pamamahala sa proyekto at file</span>
+    
+    <h3>Add a New Class/File:</h3>
+    <span class="tagalog-sub">Magdagdag ng bagong klase</span>
+    <ol>
+      <li>In Projects window → right-click your project name</li>
+      <li>New → Java Class</li>
+      <li>Name: <code>ClassName</code> → start with capital letter ✅</li>
+      <li>Finish</li>
+    </ol>
+    <h3>Rename Properly (Refactor):</h3>
+    <span class="tagalog-sub">Magbago ng pangalan — huwag manu-mano, gamitin ang Refactor</span>
+    <p>Don't just edit the name directly — do it the right way:</p>
+    <ol>
+      <li>Right-click the class name → Refactor → Rename</li>
+      <li>Type new name → Next → Do Refactor ✅</li>
+      <td>Updates everywhere automatically — nothing missed!</td>
+    </ol>
+    <h3>Remove a Project:</h3>
+    <span class="tagalog-sub">Tanggalin ang proyekto</span>
+    <p>Right-click project → Delete → choose whether to remove files from disk or just from list ✅</p>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 8 — Common Problems & Quick Fixes ⚠️</h2>
+    <span class="tagalog-sub">Mga karaniwang problema at solusyon</span>
+    
+    <table>
+      <tr><th>Problem</th><th>Possible Cause</th><th>Solution</th></tr>
+      <tr>
+        <td>"Main class not found"</td>
+        <td>Wrong project selected or missing main method</td>
+        <td>Select correct project (bolded), verify <code>main</code> exists</td>
+      </tr>
+      <tr>
+        <td>Other classes not recognized</td>
+        <td>Unsaved files or wrong names</td>
+        <td><kbd>Ctrl+S</kbd> → F11 (Build) → F6 (Run)</td>
+      </tr>
+      <tr>
+        <td>Red marks but code looks correct</td>
+        <td>Not saved or built recently</td>
+        <td>Save → right-click project → Clean and Build</td>
+      </tr>
+      <tr>
+        <td>Slow startup</td>
+        <td>Too many open projects</td>
+        <td>Close unused projects</td>
+      </tr>
+      <tr>
+        <td>"Access Denied" message</td>
+        <td>Previous run still active</td>
+        <td>Press 🛑 Stop before running again</td>
+      </tr>
+    </table>
+    <span class="tagalog-note">Hindi nakita ang klase → i-save at i-build • Mabagal → isara ang hindi ginagamit • Nakatigil → pindutin ang Stop</span>
+  </section>
+
+  <div class="box-success">
+    <h3>✅ NetBeans Basics — COMPLETE!</h3>
+    <p>You're now confident with your main tool 💻✨</p>
+    <span class="tagalog-note">Ngayon bihasa ka na sa iyong kasangkapan!</span>
+    <ul>
+      <li>✅ Recognize all parts of NetBeans layout</li>
+      <li>✅ Create, save, and run projects</li>
+      <li>✅ Understand editor markers & colors</li>
+      <li>✅ Work faster with keyboard shortcuts</li>
+      <li>✅ Debug step-by-step to find errors</li>
+      <li>✅ Manage files and rename safely</li>
+      <li>✅ Solve common problems</li>
+    </ul>
+    <span class="tagalog-note">Kilala ang lahat ng bahagi • Paggawa at pagpapatakbo • Mga shortcut • Debugger • Pamamahala sa proyekto</span>
+    
+    <p style="margin-top:1rem"><strong>Next:</strong> <code>course-oop-advanced.html</code> — Object-Oriented Programming: classes, objects, inheritance & more! 🧱</p>
+    <span class="tagalog-note">Susunod — OOP: klase, bagay, pagmamana, at iba pa!</span>
+  </div>
+
+  <nav class="nav-buttons">
+    <a href="course-java-fundamentals.html" class="nav-btn">← Previous</a>
+    <a href="index.html" class="nav-btn">🏠 Portal</a>
+    <a href="course-oop-advanced.html" class="nav-btn">Next →</a>
+  </nav>
+</main>
+
+<script>
+let isDark = localStorage.getItem('nb-theme') === 'true';
+function applyTheme(){document.getElementById('themeBtn').textContent = isDark ? '☀️' : '🌙';}
+applyTheme();
+document.getElementById('themeBtn').addEventListener('click', () => {
+  isDark = !isDark; localStorage.setItem('nb-theme', isDark); applyTheme();
+});
+let fs = parseInt(localStorage.getItem('nb-fs')) || 16;
+function applyFontSize(){document.body.style.fontSize = fs + 'px';}
+applyFontSize();
+document.getElementById('fontUp').addEventListener('click', () => {
+  if(fs < 22){ fs += 2; applyFontSize(); localStorage.setItem('nb-fs', fs); }
+});
+document.getElementById('fontDown').addEventListener('click', () => {
+  if(fs > 12){ fs -= 2; applyFontSize(); localStorage.setItem('nb-fs', fs); }
+});
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('progress').style.width = (window.scrollY / h) * 100 + '%';
+});
+</script>
+</body>
+</html>

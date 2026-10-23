@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🤖 Track B: AI & LLM Basics — Year 3 Elective</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#fffef9;--text:#1a1a1a;--accent:#8b5cf6;--accent-light:#faf5ff;
+  --light:#f0f4f8;--border:#cbd5e1;--code-bg:#f6f8fa;
+  --success:#22c55e;--warn:#f59e0b;--danger:#ef4444;--arrow:#7c3aed
+}
+@media(prefers-color-scheme:dark){
+  :root{--bg:#0f172a;--text:#e2e8f0;--accent:#a78bfa;--accent-light:#1e293b;
+  --light:#1e293b;--border:#475569;--code-bg:#1e293b}
+}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;padding:0}
+.progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--accent);width:0;z-index:999}
+.top-nav{position:sticky;top:0;background:var(--light);border-bottom:1px solid var(--border);padding:.8rem 2rem;display:flex;justify-content:space-between;align-items:center;z-index:99}
+.top-nav a{color:var(--accent);text-decoration:none;font-weight:bold}
+.top-nav a:hover{text-decoration:underline}
+.controls{display:flex;gap:.5rem}
+.ctrl-btn{padding:.4rem .8rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;cursor:pointer}
+.ctrl-btn:hover{background:var(--accent);color:#fff}
+.content{max-width:900px;margin:0 auto;padding:2rem}
+.book-header{text-align:center;margin-bottom:2.5rem;padding-bottom:2rem;border-bottom:2px solid var(--accent)}
+.book-header h1{font-size:2rem;margin-bottom:.5rem;color:var(--accent)}
+.tag{display:inline-block;padding:.25rem .6rem;border-radius:20px;font-size:.75rem;font-weight:bold;margin-right:.5rem}
+.tag-track{background:var(--accent-light);color:#6d28d9}
+.tag-free{background:#dcfce7;color:#166534}
+/* Tagalog subtitle style — consistent */
+.tagalog-sub{color:#9ca3af;font-size:.85rem;font-style:italic;margin-top:-.3rem;margin-bottom:1rem;display:block;line-height:1.5}
+.tagalog-note{color:#9ca3af;font-size:.8rem;font-style:italic;margin-top:.3rem;display:block}
+.chapter{margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px dashed var(--border)}
+.chapter h2{font-size:1.5rem;margin:1.8rem 0 1rem;color:var(--accent)}
+.chapter h3{font-size:1.15rem;margin:1.4rem 0 .7rem}
+.chapter p{margin-bottom:1rem}
+.chapter ul,.chapter ol{margin:1rem 0 1rem 2rem}
+.chapter li{margin:.6rem 0}
+table{width:100%;border-collapse:collapse;margin:1.2rem 0}
+th,td{padding:10px 14px;text-align:left;border:1px solid var(--border)}
+th{background:var(--accent-light);font-weight:bold}
+pre{background:var(--code-bg);border-radius:10px;padding:1.3rem;overflow-x:auto;margin:1.2rem 0;border:1px solid var(--border);font-size:.85rem;line-height:1.6}
+code{font-family:'Consolas','Monaco',monospace}
+:not(pre)>code{background:var(--code-bg);padding:.2rem .5rem;border-radius:4px}
+.box{border-radius:12px;padding:1.3rem;margin:1.5rem 0}
+.box-tip{background:#fef3c7;border-left:5px solid #f59e0b}
+.box-note{background:var(--accent-light);border-left:5px solid var(--accent)}
+.box-success{background:#f0fdf4;border-left:5px solid var(--success)}
+.box-warn{background:#fee2e2;border-left:5px solid #ef4444}
+.file-tree{background:var(--light);border-radius:8px;padding:15px;margin:15px 0;font-family:monospace;line-height:1.8}
+.nav-buttons{display:flex;justify-content:space-between;margin:2.5rem 0;padding-top:1.5rem;border-top:2px solid var(--border)}
+.nav-btn{padding:.9rem 1.5rem;background:var(--accent);color:#fff;border:none;border-radius:10px;cursor:pointer;font-size:1rem;text-decoration:none;display:inline-block;text-align:center;font-weight:bold;transition:transform .2s}
+.nav-btn:hover{transform:translateY(-2px)}
+@media(max-width:768px){.top-nav{padding:.8rem 1rem;flex-wrap:wrap;gap:.5rem}.content{padding:1rem}}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progress"></div>
+<nav class="top-nav">
+  <a href="index.html">🏠 Portal</a>
+  <span style="font-weight:bold">🤖 AI & LLM Basics — Track B</span>
+  <div class="controls">
+    <button class="ctrl-btn" id="themeBtn">🌙</button>
+    <button class="ctrl-btn" id="fontDown">A-</button>
+    <button class="ctrl-btn" id="fontUp">A+</button>
+  </div>
+</nav>
+<main class="content">
+  <header class="book-header">
+    <span class="tag tag-track">🤖 AI Track</span>
+    <span class="tag tag-free">🆓 Free APIs Included</span>
+    <h1>🤖 AI & LLM Basics — Build Smart Tools</h1>
+    <p>Understand, Connect, Create — No Complex Math Required ✅</p>
+    <span class="tagalog-sub">Intindihin, ikonekta, lumikha — hindi kailangan ng mahirap na matematika</span>
+  </header>
+
+  <section class="chapter">
+    <h2>📖 Chapter 1 — What Is LLM? Simple Explanation</h2>
+    <span class="tagalog-sub">Ano ang LLM?</span>
+    <p><strong>LLM = Large Language Model</strong> — computer system trained on huge amount of text. Learns patterns → predicts next word → writes, explains, answers ✅</p>
+    <span class="tagalog-note">Sistemang natuto sa bilyong pahina — nakukumpleto ang pangungusap, sumasagot, nagpapaliwanag</span>
+
+    <div class="box-note">
+      💡 <strong>Not magic — it's pattern matching! 🧠</strong><br>
+      Trained on billions of pages → completes sentences, explains, answers. It doesn't truly "understand" — but it's extremely good at following patterns!
+      <span class="tagalog-note mt-1 block">Hindi ito mahika — natuto lang ito sa napakaraming teksto at sinusunod ang nakitang ayos</span>
+    </div>
+
+    <h3>How It Works — 3 Steps:</h3>
+    <span class="tagalog-sub">Paano ito gumagana — 3 hakbang</span>
+    <ol>
+      <li><strong>Input/Prompt</strong> — your text: "Explain JavaScript simply"
+        <span class="tagalog-note">Ang iyong tanong o utos</span>
+      </li>
+      <li><strong>Processing</strong> — model calculates most likely next words
+        <span class="tagalog-note">Pinipili ang pinakaangkop na susunod na salita</span>
+      </li>
+      <li><strong>Output</strong> — generates response, word by word
+        <span class="tagalog-note">Lumalabas ang sagot, salita-sa-salita</span>
+      </li>
+    </ol>
+
+    <h3>Free Options — No Credit Card Needed ✅</h3>
+    <span class="tagalog-sub">Libreng pagpipilian — walang bayad</span>
+    <table>
+      <tr><th>Provider</th><th>Free Tier</th><th>Website</th></tr>
+      <tr><td><strong>Groq</strong> ⚡</td><td>Free rate limit — very fast</td><td>groq.com</td></tr>
+      <tr><td><strong>Hugging Face</strong> 🤗</td><td>Free inference credits</td><td>huggingface.co</td></tr>
+      <tr><td><strong>OpenAI</strong></td><td>Limited free trial for new accounts</td><td>platform.openai.com</td></tr>
+    </table>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 2 — Get Your Free API Key</h2>
+    <span class="tagalog-sub">Kunin ang iyong libreng susi</span>
+    <p>We'll use <strong>Groq</strong> — fast and free to start! ⚡</p>
+    <ol>
+      <li>Go to <code>console.groq.com</code> → Sign Up</li>
+      <li>Click "API Keys" → Create New Key → Copy it ✅</li>
+      <li>Keep it safe — never share with anyone!
+        <span class="tagalog-note">Itago sa ligtas na lugar — huwag ipamahagi</span>
+      </li>
+    </ol>
+
+    <div class="box-warn">
+      ⚠️ <strong>Important:</strong> Never commit your key to public code or GitHub! Use a <code>.env</code> file to protect it.
+      <span class="tagalog-note mt-1 block">Huwag isama sa ina-upload — ilagay sa .env lang</span>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 3 — Connect to AI from Node.js</h2>
+    <span class="tagalog-sub">Ikonekta ang AI sa iyong serber</span>
+    <p>In your backend project folder:</p>
+<pre><code># Install Groq SDK
+npm install groq-sdk
+
+# Install dotenv (protects your key)
+npm install dotenv
+</code></pre>
+
+    <h3>Create <code>.env</code> file:</h3>
+<pre><code>GROQ_API_KEY=your-key-here-from-groq
+PORT=3000
+</code></pre>
+
+    <h3>Your AI Route — server.js:</h3>
+<pre><code>require('dotenv').config();
+const express = require('express');
+const { Groq } = require('groq-sdk');
+const app = express();
+app.use(express.json());
+
+const groq = new Groq({
+  apiKey: process.env.GROQ_API_KEY
+});
+
+// AI Chat Endpoint
+app.post('/api/chat', async (req, res) => {
+  try {
+    const { message } = req.body;
+    const response = await groq.chat.completions.create({
+      model: 'llama-3-8b-8192', // fast & free model ✅
+      messages: [
+        { role: 'system', content: 'You are a helpful, friendly assistant. Explain simply.' },
+        { role: 'user', content: message }
+      ],
+      temperature: 0.7, // 0=strict, 1=creative
+      max_tokens: 1024
+    });
+    res.json({
+      reply: response.choices[0].message.content
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'AI connection failed' });
+  }
+});
+
+app.listen(3000, () => console.log('✅ Server running'));
+</code></pre>
+    <p>Run → send POST to <code>/api/chat</code> → you'll receive an AI reply! 🎉
+      <span class="tagalog-note">Patakbuhin → magpadala ng tanong → sasagot agad ang AI</span>
+    </p>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 4 — Prompt Engineering: Write Better Instructions</h2>
+    <span class="tagalog-sub">Paano sumulat ng magandang tanong</span>
+    <p>The quality of the answer depends on your question! ✍️</p>
+
+    <h3>Bad vs Good Prompt:</h3>
+    <table>
+      <tr><th>❌ Bad</th><th>✅ Good</th></tr>
+      <tr><td>"Explain photosynthesis"</td><td>"Explain photosynthesis simply for a 10-year-old. Use bullet points. Keep it under 5 sentences."</td></tr>
+      <tr><td>"Write code"</td><td>"Write a simple JavaScript function to calculate total price including 12% VAT. Add comments."</td></tr>
+    </table>
+
+    <h3>Golden Rules:</h3>
+    <ul>
+      <li>🎯 Be specific — say who it's for, how long, what format
+        <span class="tagalog-note">Tukuyin kung para kanino, gaano kahaba, anong ayos</span>
+      </li>
+      <li>📄 Give examples — "Format: [time] — [name]: [message]"</li>
+      <li>🔄 Iterate — if not right, add details or rephrase</li>
+      <li>🎭 Assign role — "Act as a helpful teacher..."</li>
+    </ul>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 5 — Frontend Chat Interface</h2>
+    <span class="tagalog-sub">Pahina kung saan makakausap ang AI</span>
+    <p>Make a simple page where you can type and see replies appear:</p>
+<pre><code>&lt;!-- public/chat.html --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body style="max-width:600px; margin:2rem auto; padding:0 1rem;"&gt;
+  &lt;h1&gt;🤖 AI Assistant&lt;/h1&gt;
+  &lt;div id="chatArea" style="height:400px; overflow-y:auto; border:1px solid #ddd; padding:1rem; margin-bottom:1rem; border-radius:8px;"&gt;&lt;/div&gt;
+  &lt;input type="text" id="userInput" placeholder="Ask anything..." 
+    style="width:70%; padding:.75rem; border-radius:6px; border:1px solid #ccc;"&gt;
+  &lt;button onclick="sendMessage()" 
+    style="padding:.75rem 1.5rem; background:#8b5cf6; color:white; border:none; border-radius:6px; cursor:pointer;"&gt;
+    Send ✅
+  &lt;/button&gt;
+  &lt;script&gt;
+    async function sendMessage() {
+      const input = document.getElementById('userInput');
+      const msg = input.value.trim();
+      if (!msg) return;
+      // Show your message
+      addMessage('You', msg);
+      input.value = '';
+      // Send to backend
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: msg })
+      });
+      const data = await res.json();
+      addMessage('AI', data.reply);
+    }
+    function addMessage(sender, text) {
+      const area = document.getElementById('chatArea');
+      area.innerHTML += `&lt;p&gt;&lt;strong&gt;${sender}:&lt;/strong&gt; ${text}&lt;/p&gt;`;
+      area.scrollTop = area.scrollHeight;
+    }
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+    <p>Open in browser → ask anything → instant reply! ✅
+      <span class="tagalog-note">Buksan sa browser — magtanong — sasagot agad</span>
+    </p>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 6 — RAG: Let AI Use YOUR Knowledge 📚</h2>
+    <span class="tagalog-sub">Gamitin ang sarili mong impormasyon</span>
+    <p><strong>RAG = Retrieval-Augmented Generation</strong> — let AI answer from YOUR notes/documents!</p>
+
+    <h3>How It Works:</h3>
+    <ol>
+      <li>Upload your docs → split into small pieces
+        <span class="tagalog-note">Hatiin ang teksto sa maliliit na bahagi</span>
+      </li>
+      <li>Convert to numbers = <strong>Embeddings</strong> — like a "fingerprint" of the text</li>
+      <li>When asked → find the most relevant piece from your docs
+        <span class="tagalog-note">Hanapin ang pinakaangkop na bahagi</span>
+      </li>
+      <li>Send to AI: "Answer using ONLY this info: [excerpt] + Question: [question]"</li>
+      <li>Answer comes from YOUR data! ✅</li>
+    </ol>
+
+    <h3>Simple Implementation:</h3>
+<pre><code>// Your stored knowledge
+const knowledgeBase = [
+  { topic: 'VAT', content: 'VAT in Philippines is 12%.' },
+  { topic: 'MinWage', content: 'Davao Region minimum wage: ~₱585/day as of 2026.' }
+];
+
+function findRelevantContext(query) {
+  return knowledgeBase.filter(item => 
+    item.topic.toLowerCase().includes(query.toLowerCase()) ||
+    item.content.toLowerCase().includes(query.toLowerCase())
+  ).map(item => item.content).join(' ');
+}
+
+// In your prompt:
+const context = findRelevantContext(userMessage);
+const finalPrompt = `Use only this info: ${context}. Question: ${userMessage}`;
+</code></pre>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 7 — Ethics & Responsible Use</h2>
+    <span class="tagalog-sub">Tamang paggamit — maging responsable</span>
+    <ul>
+      <li>🔒 <strong>Privacy</strong> — never send personal/sensitive data to public APIs
+        <span class="tagalog-note">Huwag magpadala ng pribadong impormasyon</span>
+      </li>
+      <li>✅ <strong>Verify</strong> — AI isn't always correct! Double-check important answers
+        <span class="tagalog-note">Hindi laging tama — suriin lalo na sa mahahalagang bagay</span>
+      </li>
+      <li>⚖️ <strong>Fairness</strong> — AI may carry biases from its training data</li>
+      <li>📝 <strong>Originality</strong> — use as help, not as unmodified work submitted as your own
+        <span class="tagalog-note">Gamitin bilang tulong — huwag ipasa nang walang pagbabago</span>
+      </li>
+    </ul>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 8 — Portfolio Project: AI Study Assistant 🎓</h2>
+    <span class="tagalog-sub">Proyekto — katulong sa pag-aaral</span>
+    <p>Build the complete system — this goes in your portfolio!</p>
+
+    <h3>Features:</h3>
+    <ol>
+      <li>✅ Chat Interface — ask about your lessons</li>
+      <li>✅ Knowledge Upload — add your notes → answers come from there</li>
+      <li>✅ Summarizer — long text → summary in 3 sentences</li>
+      <li>✅ Quiz Generator — "Make 5 questions from this text..."</li>
+      <li>✅ History — save past questions & answers</li>
+      <li>✅ Clean UI — simple, easy to use, works on phones</li>
+    </ol>
+  </section>
+
+  <div class="box-success">
+    <strong>✅ Track B — AI & LLM Basics COMPLETE! 🎉</strong><br>
+    ✅ LLM explained simply — no complex math<br>
+    ✅ Groq free API setup & key protection<br>
+    ✅ Connect AI to your Node.js backend<br>
+    ✅ Prompt Engineering — get better answers<br>
+    ✅ Chat interface — simple & working<br>
+    ✅ RAG basics — AI uses YOUR knowledge<br>
+    ✅ Ethics & responsible use<br>
+    ✅ AI Study Assistant — full portfolio project<br><br>
+    <span class="tagalog-note">Buo na ang iyong kaalaman sa AI — handa nang gamitin 💜</span><br>
+    <strong>Next: Track C — Game Development 🎮</strong><br>
+    Just say <strong>"next"</strong> when you're ready!
+  </div>
+
+  <nav class="nav-buttons">
+    <a href="course-mobile-development.html" class="nav-btn">← Previous Track</a>
+    <a href="index.html" class="nav-btn">🏠 Portal</a>
+    <a href="index.html" class="nav-btn">Next Track →</a>
+  </nav>
+</main>
+
+<script>
+let isDark = localStorage.getItem('ai-theme') === 'true';
+function applyTheme(){document.getElementById('themeBtn').textContent = isDark ? '☀️' : '🌙';}
+applyTheme();
+document.getElementById('themeBtn').addEventListener('click', () => {
+  isDark = !isDark; localStorage.setItem('ai-theme', isDark); applyTheme();
+});
+let fs = parseInt(localStorage.getItem('ai-fs')) || 16;
+function applyFontSize(){document.body.style.fontSize = fs + 'px';}
+applyFontSize();
+document.getElementById('fontUp').addEventListener('click', () => {
+  if(fs < 22){ fs += 2; applyFontSize(); localStorage.setItem('ai-fs', fs); }
+});
+document.getElementById('fontDown').addEventListener('click', () => {
+  if(fs > 12){ fs -= 2; applyFontSize(); localStorage.setItem('ai-fs', fs); }
+});
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('progress').style.width = (window.scrollY / h) * 100 + '%';
+});
+</script>
+</body>
+</html>

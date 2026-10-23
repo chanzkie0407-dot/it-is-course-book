@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>☕ Java Fundamentals — Foundations</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#fffef9;--text:#1a1a1a;--accent:#f97316;--accent-light:#ffedd5;
+  --light:#f0f4f8;--border:#cbd5e1;--code-bg:#f6f8fa;
+  --success:#22c55e;--warn:#f59e0b;--danger:#ef4444;--arrow:#ea580c
+}
+@media(prefers-color-scheme:dark){
+  :root{--bg:#0f172a;--text:#e2e8f0;--accent:#fdba74;--accent-light:#1e293b;
+  --light:#1e293b;--border:#475569;--code-bg:#1e293b}
+}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;padding:0}
+.progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--accent);width:0;z-index:999}
+.top-nav{position:sticky;top:0;background:var(--light);border-bottom:1px solid var(--border);padding:.8rem 2rem;display:flex;justify-content:space-between;align-items:center;z-index:99}
+.top-nav a{color:var(--accent);text-decoration:none;font-weight:bold}
+.top-nav a:hover{text-decoration:underline}
+.controls{display:flex;gap:.5rem}
+.ctrl-btn{padding:.4rem .8rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;cursor:pointer}
+.ctrl-btn:hover{background:var(--accent);color:#fff}
+.content{max-width:900px;margin:0 auto;padding:2rem}
+.book-header{text-align:center;margin-bottom:2.5rem;padding-bottom:2rem;border-bottom:2px solid var(--accent)}
+.book-header h1{font-size:2rem;margin-bottom:.5rem;color:var(--accent)}
+.tag{display:inline-block;padding:.25rem .6rem;border-radius:20px;font-size:.75rem;font-weight:bold;margin-right:.5rem}
+.tag-phase{background:var(--accent-light);color:#c2410c}
+.tag-found{background:#dcfce7;color:#166534}
+.chapter{margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px dashed var(--border)}
+.chapter h2{font-size:1.5rem;margin:1.8rem 0 1rem;color:var(--accent)}
+.chapter h3{font-size:1.15rem;margin:1.4rem 0 .7rem}
+.chapter p{margin-bottom:1rem}
+.chapter ul,.chapter ol{margin:1rem 0 1rem 2rem}
+.chapter li{margin:.6rem 0}
+table{width:100%;border-collapse:collapse;margin:1.2rem 0}
+th,td{padding:10px 14px;text-align:left;border:1px solid var(--border)}
+th{background:var(--accent-light);font-weight:bold}
+pre{background:var(--code-bg);border-radius:10px;padding:1.3rem;overflow-x:auto;margin:1.2rem 0;border:1px solid var(--border);font-size:.85rem;line-height:1.6}
+code{font-family:'Consolas','Monaco',monospace}
+:not(pre)>code{background:var(--code-bg);padding:.2rem .5rem;border-radius:4px}
+.box{border-radius:12px;padding:1.3rem;margin:1.5rem 0}
+.box-tip{background:#fef3c7;border-left:5px solid #f59e0b}
+.box-note{background:var(--accent-light);border-left:5px solid var(--accent)}
+.box-success{background:#f0fdf4;border-left:5px solid var(--success)}
+.box-warn{background:#fee2e2;border-left:5px solid #ef4444}
+.diagram{background:var(--light);border-radius:10px;padding:1.5rem;margin:1.2rem 0;text-align:center}
+/* Tagalog subtitle style — consistent */
+.tagalog-sub{color:#9ca3af;font-size:.85rem;font-style:italic;margin-top:-.3rem;margin-bottom:1rem;display:block;line-height:1.5}
+.tagalog-note{color:#9ca3af;font-size:.8rem;font-style:italic;margin-top:.3rem;display:block}
+.nav-buttons{display:flex;justify-content:space-between;margin:2.5rem 0;padding-top:1.5rem;border-top:2px solid var(--border)}
+.nav-btn{padding:.9rem 1.5rem;background:var(--accent);color:#fff;border:none;border-radius:10px;cursor:pointer;font-size:1rem;text-decoration:none;display:inline-block;text-align:center;font-weight:bold;transition:transform .2s}
+.nav-btn:hover{transform:translateY(-2px)}
+@media(max-width:768px){.top-nav{padding:.8rem 1rem;flex-wrap:wrap;gap:.5rem}.content{padding:1rem}}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progress"></div>
+<nav class="top-nav">
+  <a href="index.html">🏠 Portal</a>
+  <span style="font-weight:bold">☕ Java Fundamentals — Phase 2: Core Skills</span>
+  <div class="controls">
+    <button class="ctrl-btn" id="themeBtn">🌙</button>
+    <button class="ctrl-btn" id="fontDown">A-</button>
+    <button class="ctrl-btn" id="fontUp">A+</button>
+  </div>
+</nav>
+<main class="content">
+  <header class="book-header">
+    <span class="tag tag-phase">Phase 2 — Core Skills</span>
+    <span class="tag tag-found">✅ #3 of 7 Remaining</span>
+    <h1>☕ Java Fundamentals</h1>
+    <p>Start Java Programming — From Hello World to OOP ✅</p>
+    <span class="tagalog-sub">Simulan ang Java Programming — Mula Hello World hanggang OOP</span>
+  </header>
+
+  <section class="chapter">
+    <h2>📖 Chapter 1 — Why Java?</h2>
+    <span class="tagalog-sub">Bakit Java?</span>
+    <p>Java is one of the most widely used and enduring programming languages — and for very good reason 💪</p>
+    <span class="tagalog-note">Isa sa pinakasikat at matagalang ginagamit — may matibay na dahilan</span>
+    <ul>
+      <li><strong>Cross-Platform</strong> — "Write once, run anywhere" → Windows, Mac, Android, Linux ✅
+        <span class="tagalog-note">Isulat nang isang beses — tumakbo sa kahit anong sistema</span>
+      </li>
+      <li><strong>Object-Oriented</strong> — organized around reusable components; easier to grow and maintain
+        <span class="tagalog-note">Nakabatay sa mga bagay — mas madaling palawakin at panatilihin</span>
+      </li>
+      <li><strong>Stable & Widely Used</strong> — powers banking systems, enterprise apps, and Android apps
+        <span class="tagalog-note">Matatag — ginagamit sa bangko, malalaking negosyo, Android</span>
+      </li>
+      <li><strong>Strict & Clear Rules</strong> — catches mistakes early; builds strong programming habits
+        <span class="tagalog-note">Mahigpit ang panuntunan — nakikita agad ang mali, magandang pundasyon</span>
+      </li>
+    </ul>
+    
+    <div class="box-note">
+      💡 <strong>How It Works:</strong><br>
+      Source Code → Compiler → Bytecode → JVM (Java Virtual Machine) → Runs<br>
+      Works on ANY device with a JVM — no need to rewrite code! 🌍
+      <span class="tagalog-note">Hindi kailangang baguhin ang code — tumatakbo kung saan may JVM</span>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 2 — Set Up NetBeans IDE 💻</h2>
+    <span class="tagalog-sub">Ihanda ang NetBeans IDE — programa sa pagsusulat ng Java</span>
+    <p>We'll use NetBeans — the all-in-one tool to write, test, and run your Java code ✅</p>
+    
+    <h3>Creating Your First Project — Step by Step:</h3>
+    <span class="tagalog-sub">Hakbang sa paggawa ng bagong proyekto</span>
+    <ol>
+      <li>Open NetBeans</li>
+      <li>File → New Project → Java → Java Application → Next</li>
+      <li>Project Name: <code>MyFirstProject</code></li>
+      <li>Main Class: <code>myfirstproject.Main</code> — auto-generated ✅</li>
+      <li>Click Finish</li>
+    </ol>
+    
+    <p>You'll see this — your very first Java file:</p>
+<pre><code>package myfirstproject;
+public class Main {
+    public static void main(String[] args) {
+        // Write your code here ↓
+    }
+}
+</code></pre>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 3 — Hello World: Your First Program 👋</h2>
+    <span class="tagalog-sub">Ang unang programa — batiin ang mundo</span>
+    <p>Replace the empty <code>main</code> section to show a message:</p>
+<pre><code>package myfirstproject;
+public class Main {
+    public static void main(String[] args) {
+        // Print messages to the screen
+        System.out.println("Hello, Java! ☕");
+        System.out.println("This is my very first program!");
+    }
+}
+</code></pre>
+    <p>Click ▶️ Run Project → You'll see at the bottom:</p>
+<pre><code>Hello, Java! ☕
+This is my very first program!
+BUILD SUCCESSFUL (total time: 0 seconds)
+</code></pre>
+
+    <h3>Breaking It Down — What Each Part Means:</h3>
+    <span class="tagalog-sub">Ipaliwanag ang bawat bahagi</span>
+    <table>
+      <tr><th>Part</th><th>Meaning</th></tr>
+      <tr>
+        <td><code>package</code></td>
+        <td>Folder/group name where your code lives
+          <span class="tagalog-note">Pangalan ng folder/lugar ng code</span>
+        </td>
+      </tr>
+      <tr>
+        <td><code>public class Main</code></td>
+        <td>The main blueprint — in Java, everything lives inside a class
+          <span class="tagalog-note">Pangunahing uri — lahat ay nasa loob ng klase</span>
+        </td>
+      </tr>
+      <tr>
+        <td><code>public static void main(String[] args)</code></td>
+        <td>The starting point — where your program actually begins ✅
+          <span class="tagalog-note">Dito nagsisimula ang lahat</span>
+        </td>
+      </tr>
+      <tr>
+        <td><code>System.out.println()</code></td>
+        <td>Display text to the console/output
+          <span class="tagalog-note">Ipakita sa screen</span>
+        </td>
+      </tr>
+      <tr>
+        <td><code>;</code></td>
+        <td>End of command — NEVER forget this! ⚠️
+          <span class="tagalog-note">Tuldok sa dulo — huwag kalimutan</span>
+        </td>
+      </tr>
+    </table>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 4 — Variables: Data Containers 📦</h2>
+    <span class="tagalog-sub">Lalagyan ng impormasyon — kailangan sabihin ang uri</span>
+    <p>In Java, <strong>you must declare the type BEFORE storing values</strong> — it's strictly enforced!</p>
+    <span class="tagalog-note">Hindi katulad ng JavaScript — kailangan sabihin kung anong klase</span>
+    
+    <h3>Core Data Types:</h3>
+    <span class="tagalog-sub">Pangunahing uri ng datos</span>
+    <table>
+      <tr><th>Type</th><th>Meaning</th><th>Example</th></tr>
+      <tr>
+        <td><code>int</code></td>
+        <td>Whole number
+          <span class="tagalog-note">Buong numero</span>
+        </td>
+        <td>1, -5, 2026</td>
+      </tr>
+      <tr>
+        <td><code>double</code></td>
+        <td>Decimal number
+          <span class="tagalog-note">May tuldok na halaga</span>
+        </td>
+        <td>3.14, 125.50</td>
+      </tr>
+      <tr>
+        <td><code>char</code></td>
+        <td>Single character
+          <span class="tagalog-note">Isang titik lamang</span>
+        </td>
+        <td>'A', '5'</td>
+      </tr>
+      <tr>
+        <td><code>boolean</code></td>
+        <td>True or False
+          <span class="tagalog-note">Totoo o Mali</span>
+        </td>
+        <td>true / false</td>
+      </tr>
+      <tr>
+        <td><code>String</code></td>
+        <td>Text / sentence
+          <span class="tagalog-note">Maraming titik — teksto</span>
+        </td>
+        <td>"Hello, Java!"</td>
+      </tr>
+    </table>
+
+<pre><code>public class Main {
+    public static void main(String[] args) {
+        // Pattern: Type name = value;
+        String name = "Maria";
+        int age = 25;
+        double weight = 52.5;
+        boolean isStudent = true;
+
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age + " years");
+        
+        // Update value
+        age = 26;
+        System.out.println("New Age: " + age);
+    }
+}
+</code></pre>
+
+    <div class="box-warn">
+      ⚠️ <strong>Important Rules:</strong><br>
+      • Uppercase and lowercase are different: <code>age</code> ≠ <code>Age</code><br>
+      • <code>String</code> always starts with capital S — unlike the others!
+      <span class="tagalog-note">Magkaiba ang malaki at maliit na titik — <code>String</code> laging malaki ang S</span>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 5 — Operations: Doing Calculations ➕</h2>
+    <span class="tagalog-sub">Pagkalkula — matematika sa programa</span>
+<pre><code>public class Main {
+    public static void main(String[] args) {
+        int a = 10;
+        int b = 3;
+        
+        System.out.println("Addition: " + (a + b));      // 13
+        System.out.println("Subtraction: " + (a - b));   // 7
+        System.out.println("Multiply: " + (a * b));     // 30
+        System.out.println("Divide: " + (a / b));        // 3 — whole number only!
+        System.out.println("Remainder: " + (a % b));     // 1 — leftover after division
+        
+        // For decimal precision — use double
+        double x = 10.0;
+        double y = 3.0;
+        System.out.println("Exact division: " + (x / y)); // 3.333...
+    }
+}
+</code></pre>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 6 — Conditions: Making Decisions ⚖️</h2>
+    <span class="tagalog-sub">Kondisyon — magdesisyon ang programa</span>
+<pre><code>public class Main {
+    public static void main(String[] args) {
+        int score = 85;
+        
+        if (score &gt;= 90) {
+            System.out.println("Excellent! ✅");
+        } else if (score &gt;= 75) {
+            System.out.println("Passed! ✅");
+        } else {
+            System.out.println("Needs more practice.");
+        }
+
+        // Switch — when checking specific fixed values
+        int day = 5;
+        switch (day) {
+            case 1: System.out.println("Monday"); break;
+            case 2: System.out.println("Tuesday"); break;
+            case 3: System.out.println("Wednesday"); break;
+            case 4: System.out.println("Thursday"); break;
+            case 5: System.out.println("Friday"); break;
+            default: System.out.println("Weekend");
+        }
+    }
+}
+</code></pre>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 7 — Loops: Repeat Without Re-typing 🔁</h2>
+    <span class="tagalog-sub">Pag-uulit — hayaan ang computer ang magsawa</span>
+<pre><code>public class Main {
+    public static void main(String[] args) {
+        // For Loop — when you know the exact count
+        System.out.println("Counting 1 to 5:");
+        for (int i = 1; i &lt;= 5; i++) {
+            System.out.println("Number: " + i);
+        }
+
+        // While Loop — continues until condition becomes false
+        int count = 5;
+        System.out.println("\nCounting down:");
+        while (count &gt;= 1) {
+            System.out.println(count);
+            count--;
+        }
+        System.out.println("Go! 🚀");
+    }
+}
+</code></pre>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 8 — Methods: Reusable Code Blocks 🔄</h2>
+    <span class="tagalog-sub">Paraan — pangkat ng utos na may pangalan, tawagin anumang oras</span>
+    <p>A <strong>Method</strong> = named block of code — call it whenever you need it ✅</p>
+<pre><code>public class Main {
+    // Custom method — outside of main
+    public static void greet(String name) {
+        System.out.println("Good day, " + name + "!");
+    }
+    
+    public static int add(int a, int b) {
+        return a + b; // send result back
+    }
+
+    public static void main(String[] args) {
+        greet("Ana"); // call → Good day, Ana!
+        int sum = add(5, 3);
+        System.out.println("Total: " + sum); // 8
+    }
+}
+</code></pre>
+
+    <h3>Method Structure Explained:</h3>
+    <span class="tagalog-sub">Bawat bahagi ng paraan — ano ang ibig sabihin</span>
+<pre><code>public static int add(int a, int b) { ... }
+│      │      │          │          └── Code that runs
+│      │      │          └── Parameters: what you receive
+│      │      └── Return type: int = number, void = nothing back
+│      └── static = use without creating an object
+└── public = accessible everywhere
+</code></pre>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 9 — Practice: Try It Yourself ✍️</h2>
+    <span class="tagalog-sub">Pagsasanay — isulat mo mismo</span>
+    
+    <h3>Task 1 — Sum and Average:</h3>
+    <p>Write a program that calculates the total and average of three numbers.</p>
+    <details style="margin:.8rem 0">
+      <summary style="cursor:pointer; color:var(--accent); font-weight:bold">Click to show solution</summary>
+<pre><code>public class Main {
+    public static void main(String[] args) {
+        int num1 = 85;
+        int num2 = 90;
+        int num3 = 78;
+        
+        int total = num1 + num2 + num3;
+        double average = total / 3.0;
+        
+        System.out.println("Total: " + total);
+        System.out.println("Average: " + average);
+    }
+}
+</code></pre>
+    </details>
+
+    <h3>Task 2 — Greeting List:</h3>
+    <p>Use a loop to greet five different names.</p>
+    <details style="margin:.8rem 0">
+      <summary style="cursor:pointer; color:var(--accent); font-weight:bold">Click to show solution</summary>
+<pre><code>public class Main {
+    public static void main(String[] args) {
+        String[] names = {"Ana", "Juan", "Maria", "Pedro", "Liza"};
+        
+        for (int i = 0; i &lt; names.length; i++) {
+            System.out.println("Hello, " + names[i] + "!");
+        }
+    }
+}
+</code></pre>
+    </details>
+  </section>
+
+  <div class="box-success">
+    <h3>✅ Java Fundamentals — COMPLETE!</h3>
+    <p>You've mastered the core foundation of Java ☕✨</p>
+    <ul>
+      <li>✅ Why Java & how it works cross-platform</li>
+      <li>✅ NetBeans — create & run projects</li>
+      <li>✅ Hello World — structure of a Java program</li>
+      <li>✅ Variables — declare types correctly</li>
+      <li>✅ Operators — math & calculations</li>
+      <li>✅ Conditions — if / else / switch decisions</li>
+      <li>✅ Loops — for & while repetition</li>
+      <li>✅ Methods — organize & reuse your code</li>
+    </ul>
+    <span class="tagalog-note">Lahat ng pundasyon — mula pagsasaayos hanggang paggawa ng sariling paraan ✅</span>
+    
+    <p style="margin-top:1rem"><strong>Next:</strong> <code>course-netbeans-basics.html</code> — Master the NetBeans IDE 💻</p>
+    <span class="tagalog-note">Susunod — mas malalim na paggamit ng NetBeans</span>
+  </div>
+
+  <nav class="nav-buttons">
+    <a href="course-computer-fundamentals.html" class="nav-btn">← Previous</a>
+    <a href="index.html" class="nav-btn">🏠 Portal</a>
+    <a href="course-netbeans-basics.html" class="nav-btn">Next →</a>
+  </nav>
+</main>
+
+<script>
+let isDark = localStorage.getItem('java-theme') === 'true';
+function applyTheme(){document.getElementById('themeBtn').textContent = isDark ? '☀️' : '🌙';}
+applyTheme();
+document.getElementById('themeBtn').addEventListener('click', () => {
+  isDark = !isDark; localStorage.setItem('java-theme', isDark); applyTheme();
+});
+let fs = parseInt(localStorage.getItem('java-fs')) || 16;
+function applyFontSize(){document.body.style.fontSize = fs + 'px';}
+applyFontSize();
+document.getElementById('fontUp').addEventListener('click', () => {
+  if(fs < 22){ fs += 2; applyFontSize(); localStorage.setItem('java-fs', fs); }
+});
+document.getElementById('fontDown').addEventListener('click', () => {
+  if(fs > 12){ fs -= 2; applyFontSize(); localStorage.setItem('java-fs', fs); }
+});
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('progress').style.width = (window.scrollY / h) * 100 + '%';
+});
+</script>
+</body>
+</html>

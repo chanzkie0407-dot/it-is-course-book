@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔄 Git & GitHub — Full Course</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#fffef9;--text:#1a1a1a;--accent:#a855f7;--accent-light:#faf5ff;
+  --light:#f0f4f8;--border:#cbd5e1;--code-bg:#f6f8fa;
+  --success:#10b981;--warn:#f59e0b;--danger:#ef4444;--arrow:#9333ea
+}
+@media(prefers-color-scheme:dark){
+  :root{--bg:#0f172a;--text:#e2e8f0;--accent:#c084fc;--accent-light:#1e293b;
+  --light:#1e293b;--border:#475569;--code-bg:#1e293b}
+}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;padding:0}
+.progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--accent);width:0;z-index:999}
+.top-nav{position:sticky;top:0;background:var(--light);border-bottom:1px solid var(--border);padding:.8rem 2rem;display:flex;justify-content:space-between;align-items:center;z-index:99}
+.top-nav a{color:var(--accent);text-decoration:none;font-weight:bold}
+.top-nav a:hover{text-decoration:underline}
+.controls{display:flex;gap:.5rem}
+.ctrl-btn{padding:.4rem .8rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;cursor:pointer}
+.ctrl-btn:hover{background:var(--accent);color:#fff}
+.content{max-width:900px;margin:0 auto;padding:2rem}
+.book-header{text-align:center;margin-bottom:2.5rem;padding-bottom:2rem;border-bottom:2px solid var(--accent)}
+.book-header h1{font-size:2rem;margin-bottom:.5rem;color:var(--accent)}
+.tag{display:inline-block;padding:.25rem .6rem;border-radius:20px;font-size:.75rem;font-weight:bold;margin-right:.5rem}
+.tag-beginner{background:#ede9fe;color:#5b21b6}
+.tag-advanced{background:#fef3c7;color:#92400e}
+.chapter{margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px dashed var(--border)}
+.chapter h2{font-size:1.5rem;margin:1.8rem 0 1rem;color:var(--accent)}
+.chapter h3{font-size:1.15rem;margin:1.4rem 0 .7rem}
+.chapter p{margin-bottom:1rem}
+.chapter ul,.chapter ol{margin:1rem 0 1rem 2rem}
+.chapter li{margin:.6rem 0}
+pre{background:var(--code-bg);border-radius:10px;padding:1.3rem;overflow-x:auto;margin:1.2rem 0;border:1px solid var(--border);font-size:.85rem;line-height:1.6}
+code{font-family:'Consolas','Monaco','Courier New',monospace}
+:not(pre)>code{background:var(--code-bg);padding:.2rem .5rem;border-radius:4px}
+.box{border-radius:12px;padding:1.3rem;margin:1.5rem 0}
+.box-tip{background:#ecfdf5;border-left:5px solid #10b981}
+.box-note{background:var(--accent-light);border-left:5px solid var(--accent)}
+.box-warn{background:#fffbeb;border-left:5px solid var(--warn)}
+.box-success{background:#f0fdf4;border-left:5px solid var(--success)}
+.arrow{color:var(--arrow);font-weight:bold;margin:0 .3rem}
+.cmd-line{color:#10b981;font-weight:bold}
+/* Tagalog subtitle style — consistent */
+.tagalog-sub{color:#9ca3af;font-size:.85rem;font-style:italic;margin-top:-.3rem;margin-bottom:1rem;display:block;line-height:1.5}
+.tagalog-note{color:#9ca3af;font-size:.8rem;font-style:italic;margin-top:.3rem;display:block}
+.nav-buttons{display:flex;justify-content:space-between;margin:2.5rem 0;padding-top:1.5rem;border-top:2px solid var(--border)}
+.nav-btn{padding:.9rem 1.5rem;background:var(--accent);color:#fff;border:none;border-radius:10px;cursor:pointer;font-size:1rem;text-decoration:none;display:inline-block;text-align:center;font-weight:bold;transition:transform .2s}
+.nav-btn:hover{transform:translateY(-2px)}
+@media(max-width:768px){.top-nav{padding:.8rem 1rem;flex-wrap:wrap;gap:.5rem}.content{padding:1rem}}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progress"></div>
+<nav class="top-nav">
+  <a href="index.html">🏠 Portal</a>
+  <span style="font-weight:bold">🔄 Git & GitHub — Developer Workflow</span>
+  <div class="controls">
+    <button class="ctrl-btn" id="themeBtn">🌙</button>
+    <button class="ctrl-btn" id="fontDown">A-</button>
+    <button class="ctrl-btn" id="fontUp">A+</button>
+  </div>
+</nav>
+<main class="content">
+  <header class="book-header">
+    <h1>🔄 Git & GitHub — Developer Workflow</h1>
+    <p>Save Versions, Undo Mistakes, Share Code — Every Pro Uses This Daily</p>
+    <span class="tagalog-sub">Mag-imbak ng bersyon, bawiin ang pagkakamali, ibahagi ang code — ginagamit ito araw-araw</span>
+    <p style="margin-top:.8rem">
+      <span class="tag tag-beginner">🟢 Start Here</span>
+      <span class="tag tag-advanced">🔵 Industry Standard</span>
+    </p>
+  </header>
+
+  <section class="chapter">
+    <h2>📖 Chapter 1 — What Are Git & GitHub?</h2>
+    <span class="tagalog-sub">Ano ang Git at GitHub?</span>
+    
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin:1.5rem 0">
+      <div class="box-note">
+        <strong>💻 Git — On Your Computer</strong><br>
+        • Tracks every change you make<br>
+        • Saves snapshots of your work<br>
+        • Lets you go back in time<br>
+        • Works offline ✅
+        <span class="tagalog-note">Nasa sariling computer — gumagana kahit walang internet</span>
+      </div>
+      <div class="box-note">
+        <strong>🌐 GitHub — On the Internet</strong><br>
+        • Stores your Git projects online<br>
+        • Share with anyone instantly<br>
+        • Collaborate with others safely<br>
+        • Build your developer portfolio ✅
+        <span class="tagalog-note">Nasa internet — ibahagi, makipagtulungan, ipakita sa iba</span>
+      </div>
+    </div>
+
+    <h3>Simple Analogy</h3>
+    <span class="tagalog-sub">Parang dokumento — ganito ang paghahambing</span>
+    <ul>
+      <li>Save <span class="arrow">→</span> <strong>Commit</strong> = save a named version
+        <span class="tagalog-note">I-save na may pangalan</span>
+      </li>
+      <li>Save to cloud <span class="arrow">→</span> <strong>Push</strong> = send to GitHub
+        <span class="tagalog-note">Ipadala sa internet</span>
+      </li>
+      <li>Download from cloud <span class="arrow">→</span> <strong>Pull</strong> = get latest version
+        <span class="tagalog-note">Kunin ang pinakabago mula sa internet</span>
+      </li>
+      <li>Try something risky <span class="arrow">→</span> <strong>Branch</strong> = work on a copy, original stays safe
+        <span class="tagalog-note">Kopyahin — subukan nang walang panganib sa orihinal</span>
+      </li>
+    </ul>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 2 — Install & Setup</h2>
+    <span class="tagalog-sub">I-install at ihanda</span>
+    
+    <h3>Step 1: Install Git</h3>
+    <span class="tagalog-sub">Hakbang 1 — I-install</span>
+    <ol>
+      <li>Go to <code>git-scm.com/downloads</code></li>
+      <li>Download for Windows/macOS/Linux</li>
+      <li>Install → Next → Next → Finish (default settings ✅)</li>
+      <li>Check: Press <code>Win + R</code> → type <code>cmd</code> → Enter</li>
+      <li>Type: <code>git --version</code> → see version number ✅</li>
+    </ol>
+
+    <h3>Step 2: Tell Git Who You Are</h3>
+    <span class="tagalog-sub">Hakbang 2 — Sabihin ang iyong pangalan at email</span>
+<pre><code class="cmd-line">git config --global user.name "Your Full Name"
+git config --global user.email "your@email.com"
+</code></pre>
+    <p>Use the SAME email as your GitHub account! ✅
+      <span class="tagalog-note">Gamitin ang parehong email sa iyong GitHub account</span>
+    </p>
+
+    <h3>Check Your Settings</h3>
+<pre><code class="cmd-line">git config --global --list
+</code></pre>
+    <p>Shows your name & email — correct? Good to go! 🎉</p>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 3 — Your First Repository</h2>
+    <span class="tagalog-sub">Ang iyong unang imbakan ng proyekto</span>
+    <p>A <strong>Repo</strong> = a project folder tracked by Git.
+      <span class="tagalog-note">Repo = folder na binabantayan ng Git</span>
+    </p>
+
+    <h3>Method A — Start Fresh (Local)</h3>
+    <span class="tagalog-sub">Paraan A — Magsimula sa sariling computer</span>
+    <ol>
+      <li>Make folder: <code>MyProject</code> on Desktop</li>
+      <li>Right-click → Open in Terminal / Git Bash</li>
+      <li>Type these commands:</li>
+    </ol>
+<pre><code class="cmd-line"># Turn folder into Git repo
+git init
+
+# Check what's happening
+git status
+
+# Select ALL files to save
+git add .
+
+# Save with a note
+git commit -m "Initial commit: My first project"
+
+# See history
+git log --oneline
+</code></pre>
+
+    <div class="box-tip">
+      💡 <strong>Golden Rule</strong>: Write CLEAR messages! Instead of "update", write "Add header section" — future YOU will thank you! ✅
+      <span class="tagalog-note">Isulat ang malinaw na mensahe — hindi "update", kundi "Anong Binago"</span>
+    </div>
+
+    <h3>Method B — From GitHub (Clone Existing)</h3>
+    <span class="tagalog-sub">Paraan B — Kopyahin mula sa GitHub</span>
+    <ol>
+      <li>GitHub → New Repository → Name → Create</li>
+      <li>Copy URL: <code>https://github.com/YourName/YourRepo.git</code></li>
+      <li>On your computer:</li>
+    </ol>
+<pre><code class="cmd-line"># Download the whole project
+git clone https://github.com/YourName/YourRepo.git
+
+# Enter the folder
+cd YourRepo
+</code></pre>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 4 — The Daily Workflow</h2>
+    <span class="tagalog-sub">Araw-araw na gawain — ugaliin ito!</span>
+    <p>Every time you finish changes, follow this — it becomes a habit! 🔄</p>
+<pre><code class="cmd-line"># 1. Check what changed
+git status
+
+# 2. Select files to save
+git add index.html
+# Or ALL changed files:
+git add .
+
+# 3. Save with note
+git commit -m "Add contact form"
+
+# 4. Send to GitHub
+git push
+</code></pre>
+
+    <h3>Before Starting Work — Get Latest</h3>
+    <span class="tagalog-sub">Bago magsimula — kunin ang pinakabago</span>
+<pre><code class="cmd-line"># Download what others added
+git pull
+</code></pre>
+
+    <div class="box-success">
+      ✅ <strong>Daily Routine</strong><br>
+      Pull ← Work ← Add ← Commit ← Push<br>
+      Never lose your work again! 💾
+      <span class="tagalog-note">Kunin → Magtrabaho → Ihanda → I-save → Ipadala — araw-araw na ugali</span>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 5 — Branching: Work Safely</h2>
+    <span class="tagalog-sub">Pagsasangay — subukan nang walang panganib</span>
+    <p>Make a copy to experiment — original stays untouched! 🛡️</p>
+<pre><code class="cmd-line"># See current branch
+git branch
+
+# Create new branch
+git branch new-feature
+
+# Switch to it
+git checkout new-feature
+
+# Shortcut — create AND switch in one step:
+git checkout -b new-feature
+
+# ... edit files safely ...
+
+# Save changes as usual
+git add .
+git commit -m "Add dark mode toggle"
+
+# Go back to main
+git checkout main
+
+# Merge the new work into main
+git merge new-feature
+
+# Send combined version to GitHub
+git push
+</code></pre>
+
+    <div class="box-note">
+      <strong>💡 Why Branch?</strong><br>
+      • Test risky ideas without breaking working code<br>
+      • Multiple tasks at once without mixing<br>
+      • Collaborate without interfering<br>
+      • Every professional team uses branches! ✅
+      <span class="tagalog-note">Subukan nang walang panganib — lahat ng propesyonal ay ginagamit ito</span>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 6 — Fixes & Common Scenarios</h2>
+    <span class="tagalog-sub">Pag-aayos — bawiin ang pagkakamali</span>
+    
+    <h3>Undo Changes — Different Situations:</h3>
+    <span class="tagalog-sub">Paano bawiin — depende sa kalagayan</span>
+<pre><code class="cmd-line"># Not staged yet → discard changes
+git checkout -- index.html
+
+# Staged but NOT committed → unselect
+git reset HEAD index.html
+
+# Committed but NOT pushed → undo the commit
+git reset --soft HEAD~1
+
+# See everything done (history)
+git reflog
+</code></pre>
+
+    <h3>Ignore Files — Don't Track These!</h3>
+    <span class="tagalog-sub">Huwag isama — ilagay sa .gitignore</span>
+    <p>Create file named <code>.gitignore</code> in your project folder:</p>
+<pre><code># Inside .gitignore
+*.log          # Log files
+node_modules/  # Dependencies folder
+.DS_Store      # Mac system files
+*.class        # Java compiled files
+.settings/     # IDE settings
+</code></pre>
+    <span class="tagalog-note">Ilagay ang mga pangalan ng folder/file na hindi dapat ipadala sa GitHub</span>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 7 — Build Your Portfolio</h2>
+    <span class="tagalog-sub">Ipakita ang gawa — maging resume mo ang GitHub</span>
+    <p>Your GitHub profile = your public portfolio — recruiters look here first! 👀</p>
+    
+    <h3>How to Make It Great:</h3>
+    <ol>
+      <li>Repo named <code>username.github.io</code> → free website ✅</li>
+      <li>Every project needs <strong>README.md</strong> — explain what it is & how to use it:</li>
+    </ol>
+<pre><code># Project Name
+Short description of what this does.
+
+## What I Learned
+- Concept 1
+- Concept 2
+
+## How to Run
+1. Clone this repo
+2. Open index.html
+3. Done! ✅
+
+## Screenshots
+(Add picture showing it works)
+</code></pre>
+    <ol start="3">
+      <li>Commit often — shows consistent activity 📈</li>
+      <li>Pin your best projects on your profile</li>
+    </ol>
+  </section>
+
+  <div class="box-success">
+    <h3>🎉 Git & GitHub — COMPLETE! 🎓</h3>
+    <p>You now use the same tools as every professional developer ✨</p>
+    <ul>
+      <li>✅ Install & configure Git</li>
+      <li>✅ Initialize repos & clone projects</li>
+      <li>✅ Daily workflow: Add → Commit → Push → Pull</li>
+      <li>✅ Branch safely without breaking code</li>
+      <li>✅ Undo & fix mistakes confidently</li>
+      <li>✅ .gitignore & portfolio-ready README files</li>
+    </ul>
+    <span class="tagalog-note">I-save, ibahagi, makipagtulungan — lahat ng kasanayan ng propesyonal</span>
+    
+    <p style="margin-top:1rem"><strong>Next:</strong> Continue with your remaining course modules — you're all set! 💜🚀</p>
+  </div>
+
+  <nav class="nav-buttons">
+    <a href="course-web-dev-basics.html" class="nav-btn">← Back</a>
+    <a href="index.html" class="nav-btn">🏠 Portal</a>
+  </nav>
+</main>
+
+<script>
+let isDark = localStorage.getItem('git-theme') === 'true';
+function applyTheme(){document.getElementById('themeBtn').textContent = isDark ? '☀️' : '🌙';}
+applyTheme();
+document.getElementById('themeBtn').addEventListener('click', () => {
+  isDark = !isDark; localStorage.setItem('git-theme', isDark); applyTheme();
+});
+let fs = parseInt(localStorage.getItem('git-fs')) || 16;
+function applyFontSize(){document.body.style.fontSize = fs + 'px';}
+applyFontSize();
+document.getElementById('fontUp').addEventListener('click', () => {
+  if(fs < 22){ fs += 2; applyFontSize(); localStorage.setItem('git-fs', fs); }
+});
+document.getElementById('fontDown').addEventListener('click', () => {
+  if(fs > 12){ fs -= 2; applyFontSize(); localStorage.setItem('git-fs', fs); }
+});
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('progress').style.width = (window.scrollY / h) * 100 + '%';
+});
+</script>
+</body>
+</html>

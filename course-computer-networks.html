@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌐 Module 8: Computer Networks & Internet — Year 2</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#fffef9;--text:#1a1a1a;--accent:#f59e0b;--accent-light:#fffbeb;
+  --light:#f0f4f8;--border:#cbd5e1;--code-bg:#f6f8fa;
+  --success:#22c55e;--warn:#f59e0b;--danger:#ef4444;--arrow:#d97706
+}
+@media(prefers-color-scheme:dark){
+  :root{--bg:#0f172a;--text:#e2e8f0;--accent:#fbbf24;--accent-light:#1e293b;
+  --light:#1e293b;--border:#475569;--code-bg:#1e293b}
+}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;padding:0}
+.progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--accent);width:0;z-index:999}
+.top-nav{position:sticky;top:0;background:var(--light);border-bottom:1px solid var(--border);padding:.8rem 2rem;display:flex;justify-content:space-between;align-items:center;z-index:99}
+.top-nav a{color:var(--accent);text-decoration:none;font-weight:bold}
+.top-nav a:hover{text-decoration:underline}
+.controls{display:flex;gap:.5rem}
+.ctrl-btn{padding:.4rem .8rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;cursor:pointer}
+.ctrl-btn:hover{background:var(--accent);color:#1a1a1a}
+.content{max-width:900px;margin:0 auto;padding:2rem}
+.book-header{text-align:center;margin-bottom:2.5rem;padding-bottom:2rem;border-bottom:2px solid var(--accent)}
+.book-header h1{font-size:2rem;margin-bottom:.5rem;color:var(--accent)}
+.tag{display:inline-block;padding:.25rem .6rem;border-radius:20px;font-size:.75rem;font-weight:bold;margin-right:.5rem}
+.tag-year{background:var(--accent-light);color:#92400e}
+.tag-beginner{background:#bae6fd;color:#075985}
+/* Tagalog subtitle style — consistent */
+.tagalog-sub{color:#9ca3af;font-size:.85rem;font-style:italic;margin-top:-.3rem;margin-bottom:1rem;display:block;line-height:1.5}
+.tagalog-note{color:#9ca3af;font-size:.8rem;font-style:italic;margin-top:.3rem;display:block}
+.chapter{margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px dashed var(--border)}
+.chapter h2{font-size:1.5rem;margin:1.8rem 0 1rem;color:var(--accent)}
+.chapter h3{font-size:1.15rem;margin:1.4rem 0 .7rem}
+.chapter p{margin-bottom:1rem}
+.chapter ul,.chapter ol{margin:1rem 0 1rem 2rem}
+.chapter li{margin:.6rem 0}
+table{width:100%;border-collapse:collapse;margin:1.2rem 0}
+th,td{padding:10px 14px;text-align:left;border:1px solid var(--border)}
+th{background:var(--accent-light);font-weight:bold}
+pre{background:var(--code-bg);border-radius:10px;padding:1.3rem;overflow-x:auto;margin:1.2rem 0;border:1px solid var(--border);font-size:.85rem;line-height:1.6}
+code{font-family:'Consolas','Monaco',monospace}
+:not(pre)>code{background:var(--code-bg);padding:.2rem .5rem;border-radius:4px}
+.box{border-radius:12px;padding:1.3rem;margin:1.5rem 0}
+.box-tip{background:#ecfdf5;border-left:5px solid #10b981}
+.box-note{background:var(--accent-light);border-left:5px solid var(--accent)}
+.box-warn{background:#fffbeb;border-left:5px solid var(--warn)}
+.box-success{background:#f0fdf4;border-left:5px solid var(--success)}
+.arrow{color:var(--arrow);font-weight:bold;margin:0 .3rem}
+.diagram{background:var(--light);border-radius:10px;padding:20px;text-align:center;margin:20px 0}
+.nav-buttons{display:flex;justify-content:space-between;margin:2.5rem 0;padding-top:1.5rem;border-top:2px solid var(--border)}
+.nav-btn{padding:.9rem 1.5rem;background:var(--accent);color:#1a1a1a;border:none;border-radius:10px;cursor:pointer;font-size:1rem;text-decoration:none;display:inline-block;text-align:center;font-weight:bold;transition:transform .2s}
+.nav-btn:hover{transform:translateY(-2px)}
+@media(max-width:768px){.top-nav{padding:.8rem 1rem;flex-wrap:wrap;gap:.5rem}.content{padding:1rem}}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progress"></div>
+<nav class="top-nav">
+  <a href="index.html">🏠 Portal</a>
+  <span style="font-weight:bold">🌐 Module 8: Computer Networks & Internet</span>
+  <div class="controls">
+    <button class="ctrl-btn" id="themeBtn">🌙</button>
+    <button class="ctrl-btn" id="fontDown">A-</button>
+    <button class="ctrl-btn" id="fontUp">A+</button>
+  </div>
+</nav>
+<main class="content">
+  <header class="book-header">
+    <span class="tag tag-year">🟡 Year 2</span>
+    <span class="tag tag-beginner">📡 Core Concept</span>
+    <h1>🌐 Computer Networks & the Internet</h1>
+    <p>How Devices Talk — From Your Room to the Whole World</p>
+    <span class="tagalog-sub">Paano nag-uusap ang mga kagamitan — mula sa iyong kwarto hanggang sa buong mundo</span>
+  </header>
+
+  <section class="chapter">
+    <h2>📖 Chapter 1 — What Is a Network?</h2>
+    <span class="tagalog-sub">Ano ang Network?</span>
+    <p>A <strong>network</strong> = two or more computers connected together to share resources — files, printers, messages, internet.</p>
+    <span class="tagalog-note">Dalawa o higit pang kompyuter na magkakakonekta — nagpapalitan ng impormasyon at kagamitan</span>
+
+    <h3>By Size — 3 Main Types</h3>
+    <span class="tagalog-sub">Ayon sa sakop — tatlong uri</span>
+    <table>
+      <tr><th>Name</th><th>Full Name</th><th>Coverage</th><th>Example</th></tr>
+      <tr><td><strong>LAN</strong></td><td>Local Area Network</td><td>One building/room</td><td>Home Wi-Fi, school lab</td></tr>
+      <tr><td><strong>MAN</strong></td><td>Metropolitan Area Network</td><td>One city</td><td>City government network</td></tr>
+      <tr><td><strong>WAN</strong></td><td>Wide Area Network</td><td>Countries/continents</td><td>The Internet 🌍</td></tr>
+    </table>
+    <span class="tagalog-note">LAN = bahay/paaralan • MAN = buong lungsod • WAN = buong mundo</span>
+
+    <div class="diagram">
+      <p>📱 💻 🖨️ ← LAN (Home/Office)</p>
+      <p style="margin:8px 0">↓ Internet ↓</p>
+      <p>🗄️ Server — Another Country — Your Phone</p>
+    </div>
+
+    <h3>Connection Methods</h3>
+    <span class="tagalog-sub">Paraan ng pagkakakonekta</span>
+    <ul>
+      <li><strong>Wired (Ethernet)</strong> — cable, faster, stable, less interference
+        <span class="tagalog-note">Gumagamit ng kawad — mas mabilis at matatag</span>
+      </li>
+      <li><strong>Wireless (Wi-Fi / Bluetooth)</strong> — convenient, mobile, slightly slower
+        <span class="tagalog-note">Walang kawad — maginhawa, medyo mas mabagal</span>
+      </li>
+    </ul>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 2 — How the Internet Works</h2>
+    <span class="tagalog-sub">Paano gumagana ang Internet</span>
+    <p>The Internet = massive global network of networks. No single owner — thousands of companies & organizations manage it together.</p>
+    <span class="tagalog-note">Napakalaking pagkakakonekta — walang nagmamay-ari, pinamamahalaan ng maraming kumpanya</span>
+
+    <h3>Client-Server Model</h3>
+    <span class="tagalog-sub">Paano nag-uusap — Kliyente at Serber</span>
+    <p>Every time you visit a website, this happens:</p>
+    <ol>
+      <li>Your device = <strong>Client</strong> → asks for data
+        <span class="tagalog-note">Ang iyong kompyuter — humihingi ng impormasyon</span>
+      </li>
+      <li>Remote computer = <strong>Server</strong> → has the data → sends it back
+        <span class="tagalog-note">Malayong kompyuter — may impormasyon at nagpapadala pabalik</span>
+      </li>
+      <li>Data travels through cables, satellites, fiber optics — across cities or oceans</li>
+      <li>Your browser receives it → displays the page ✅</li>
+    </ol>
+
+    <div class="box-tip">
+      💡 <strong>Simple Analogy: Ordering Food 🍔</strong><br>
+      You = Client<br>
+      Restaurant = Server<br>
+      Phone line = Internet<br>
+      Menu = Website page<br>
+      Your request → Kitchen prepares → Delivery brings it to you ✅
+      <span class="tagalog-note mt-1 block">Parang pag-order — ikaw ang humihingi, sila ang naghahanda at nagpapadala</span>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 3 — IP Addresses & DNS</h2>
+    <span class="tagalog-sub">IP Address at DNS — paano naghahanap</span>
+
+    <h3>IP Address — "Where You Live" 🏠</h3>
+    <p>Every device connected to internet has a unique number = <strong>IP Address</strong>.</p>
+    <span class="tagalog-note">Natatanging numero — parang tirahan ng kompyuter sa internet</span>
+<pre><code>Example: 142.250.185.142  → Google's IP</code></pre>
+    <ul>
+      <li><strong>IPv4</strong> — 4 groups of numbers (e.g., 192.168.1.1) — most common</li>
+      <li><strong>IPv6</strong> — longer, letters + numbers — more addresses for everyone</li>
+      <li><strong>Private IP</strong> — inside your home only (192.168.x.x, 10.x.x.x)
+        <span class="tagalog-note">Sa loob lang ng bahay — hindi nakikita sa labas</span>
+      </li>
+      <li><strong>Public IP</strong> — visible to the whole internet
+        <span class="tagalog-note">Nakikita ng lahat sa internet</span>
+      </li>
+    </ul>
+
+    <h3>DNS — "Phonebook of the Internet" 📖</h3>
+    <p>Computers use numbers — humans use names. <strong>DNS</strong> translates them!</p>
+    <span class="tagalog-note">Taga-salin — pangalan → numero ng IP</span>
+<pre><code>You type: google.com
+↓ DNS looks it up
+IP Address: 142.250.185.142
+↓ Connect to that IP
+Page loads! ✅</code></pre>
+    <p>Without DNS, you'd have to type numbers every time — hard to remember! 😅</p>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 4 — Protocols: The Rules of Conversation</h2>
+    <span class="tagalog-sub">Protokolo — panuntunan sa pag-uusap</span>
+    <p>Computers follow standards so they understand each other = <strong>Protocols</strong>.</p>
+    <span class="tagalog-note">Parehong wika at paraan — nauunawaan ng magkakaibang kagamitan</span>
+
+    <h3>Key Protocols You Should Know</h3>
+    <span class="tagalog-sub">Mahahalagang Protokolo</span>
+    <table>
+      <tr><th>Protocol</th><th>Full Name</th><th>Purpose</th></tr>
+      <tr><td><strong>TCP/IP</strong></td><td>Transmission Control Protocol / Internet Protocol</td><td>Basic rules — how data is split, sent, and reassembled</td></tr>
+      <tr><td><strong>HTTP / HTTPS</strong></td><td>Hypertext Transfer Protocol</td><td>Web pages — HTTPS = secure (lock icon 🔒)</td></tr>
+      <tr><td><strong>FTP</strong></td><td>File Transfer Protocol</td><td>Send/receive files between computers</td></tr>
+      <tr><td><strong>SMTP / IMAP</strong></td><td>Email Protocols</td><td>Send and receive email</td></tr>
+    </table>
+
+    <h3>How Data Travels — Packet Switching</h3>
+    <span class="tagalog-sub">Paano naglalakbay ang impormasyon — hinahati sa maliliit na bahagi</span>
+<pre><code>Big file → cut into small pieces = PACKETS
+Each packet takes its own path to destination
+Arrive in any order → put back together → you see the file ✅</code></pre>
+    <p>If one path is busy, packets take another — internet keeps working! ✅</p>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 5 — URLs & Ports</h2>
+    <span class="tagalog-sub">URL at Port — bahagi ng tirahan sa internet</span>
+
+    <h3>Anatomy of a Web Address</h3>
+<pre><code>  https://  example.com  :  443  /  page.html  ?  id=123
+     ↓          ↓          ↓        ↓            ↓
+  Protocol    Domain      Port     Path      Parameters
+  (rules)    (who)       (door)  (where)   (extra info)</code></pre>
+
+    <h3>Common Ports</h3>
+    <span class="tagalog-sub">Madalas ginagamit na Port — parang pinto</span>
+    <ul>
+      <li>Port 80 → HTTP (regular web)</li>
+      <li>Port 443 → HTTPS (secure web) 🔒</li>
+      <li>Port 21 → FTP (file transfer)</li>
+      <li>Port 25 → Email sending</li>
+    </ul>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 6 — Network Devices</h2>
+    <span class="tagalog-sub">Mga kagamitan sa Network</span>
+    <ul>
+      <li><strong>Modem</strong> — translates internet signal from provider to your home
+        <span class="tagalog-note">Tagapagsalin — mula sa linya patungo sa bahay</span>
+      </li>
+      <li><strong>Router</strong> — shares internet to all devices; manages traffic; firewall
+        <span class="tagalog-note">Tagapamahala — naghahati sa koneksyon sa lahat ng kagamitan</span>
+      </li>
+      <li><strong>Switch</strong> — connects wired devices in one building</li>
+      <li><strong>Access Point</strong> — adds Wi-Fi to a wired network</li>
+      <li><strong>Repeater/Extender</strong> — boosts signal to reach far areas
+        <span class="tagalog-note">Pampalakas — umaabot sa malalayong bahagi</span>
+      </li>
+    </ul>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 7 — Network Security Basics</h2>
+    <span class="tagalog-sub">Seguridad — protektahan ang iyong koneksyon</span>
+
+    <h3>Common Threats ⚠️</h3>
+    <span class="tagalog-sub">Mga panganib</span>
+    <ul>
+      <li><strong>Malware</strong> — harmful software: virus, worm, trojan, ransomware
+        <span class="tagalog-note">Nakakapinsalang programa — sumisira o nagnanakaw</span>
+      </li>
+      <li><strong>Phishing</strong> — fake emails/sites stealing passwords/info
+        <span class="tagalog-note">Pekeng mensahe — kunwari ay mapagkakatiwalaan</span>
+      </li>
+      <li><strong>Man-in-the-Middle</strong> — public Wi-Fi eavesdropping</li>
+      <li><strong>DDoS</strong> — flood traffic → website crashes</li>
+    </ul>
+
+    <h3>Protection ✅</h3>
+    <span class="tagalog-sub">Paano mag-ingat</span>
+    <ul>
+      <li>🔒 <strong>Encryption</strong> — scramble data so only intended receiver understands it
+        <span class="tagalog-note">Palihim na wika — tanging tatanggap lang ang makakaunawa</span>
+      </li>
+      <li>🔥 <strong>Firewall</strong> — filter incoming/outgoing traffic — block suspicious connections
+        <span class="tagalog-note">Pader — humaharang sa mga kahina-hinalang koneksyon</span>
+      </li>
+      <li>🛡️ <strong>Authentication</strong> — passwords, 2FA — verify who you are</li>
+      <li>🏠 <strong>Secure Wi-Fi</strong> — WPA2/WPA3 only; change default router password!</li>
+      <li>📱 <strong>Be Careful on Public Wi-Fi</strong> — don't do banking without VPN</li>
+    </ul>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 8 — Hands-On: Check Your Connection</h2>
+    <span class="tagalog-sub">Subukan sa sariling kompyuter</span>
+
+    <h3>Useful Commands (Windows)</h3>
+    <p>Press Win+R → type <code>cmd</code> → Enter</p>
+    <span class="tagalog-note">Ipasok sa utos ng kompyuter</span>
+<pre><code># See your IP address
+ipconfig
+# Test connection to Google
+ping google.com
+# See path data takes
+tracert google.com</code></pre>
+    <div class="box-success">
+      ✅ <strong>What You'll See:</strong><br>
+      • IP Address — your home network address<br>
+      • Ping — time in milliseconds (ms) → lower = faster ⚡<br>
+      • Tracert — each "hop" = one device your data passes through
+      <span class="tagalog-note mt-1 block">Mas mababang ms = mas mabilis na koneksyon</span>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 9 — Summary Quiz 📝</h2>
+    <span class="tagalog-sub">Subukan ang iyong natutunan</span>
+    <ol>
+      <li>Which is bigger: LAN or WAN?</li>
+      <li>What does DNS do? Why is it important?</li>
+      <li>What's the difference between HTTP and HTTPS?</li>
+      <li>What is an IP Address? — Private vs Public?</li>
+      <li>Name 3 ways to protect your network & data.</li>
+    </ol>
+    <div class="box-success" style="margin-top:1rem">
+      💡 Answers:<br>
+      1. WAN (Internet spans the world)<br>
+      2. Translates names → IPs; easy to remember<br>
+      3. HTTPS = encrypted & secure 🔒<br>
+      4. Unique device ID; Private = inside home only; Public = visible to internet<br>
+      5. Firewall, strong Wi-Fi password, HTTPS, 2FA, avoid public Wi-Fi for sensitive work
+    </div>
+  </section>
+
+  <div class="box-success">
+    <strong>🎉 Module Complete — Year 2 Fully Ready! 🎓</strong><br>
+    ✅ Network types: LAN, MAN, WAN<br>
+    ✅ Client-Server & Internet flow<br>
+    ✅ IP, DNS, Protocols (TCP/IP, HTTP)<br>
+    ✅ URLs, Ports, Devices, Security<br>
+    ✅ Hands-on commands: ipconfig, ping<br><br>
+    <strong>Year 2 Status: 4/4 Modules ✅ FULLY COMPLETE!</strong><br>
+    OOP • Databases • Web Dev • Networks — All Ready!<br><br>
+    <span class="tagalog-note">Tapos na ang Ikalawang Taon — handa ka na sa susunod!</span><br>
+    <span style="font-weight:bold">Type "next" when ready for Year 3 →</span>
+  </div>
+
+  <nav class="nav-buttons">
+    <a href="index.html" class="nav-btn">🏠 Portal</a>
+    <a href="course-web-dev-basics.html" class="nav-btn">← Previous</a>
+    <a href="index.html" class="nav-btn">Year 3 →</a>
+  </nav>
+</main>
+
+<script>
+let isDark = localStorage.getItem('net-theme') === 'true';
+function applyTheme(){document.getElementById('themeBtn').textContent = isDark ? '☀️' : '🌙';}
+applyTheme();
+document.getElementById('themeBtn').addEventListener('click', () => {
+  isDark = !isDark; localStorage.setItem('net-theme', isDark); applyTheme();
+});
+let fs = parseInt(localStorage.getItem('net-fs')) || 16;
+function applyFontSize(){document.body.style.fontSize = fs + 'px';}
+applyFontSize();
+document.getElementById('fontUp').addEventListener('click', () => {
+  if(fs < 22){ fs += 2; applyFontSize(); localStorage.setItem('net-fs', fs); }
+});
+document.getElementById('fontDown').addEventListener('click', () => {
+  if(fs > 12){ fs -= 2; applyFontSize(); localStorage.setItem('net-fs', fs); }
+});
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('progress').style.width = (window.scrollY / h) * 100 + '%';
+});
+</script>
+</body>
+</html>

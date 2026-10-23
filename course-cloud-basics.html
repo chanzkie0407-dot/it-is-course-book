@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>☁️ Track D: Cloud & Dev Basics — Year 3 Elective</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#fffef9;--text:#1a1a1a;--accent:#f59e0b;--accent-light:#fffbeb;
+  --light:#f0f4f8;--border:#cbd5e1;--code-bg:#f6f8fa;
+  --success:#22c55e;--warn:#f59e0b;--danger:#ef4444;--arrow:#d97706
+}
+@media(prefers-color-scheme:dark){
+  :root{--bg:#0f172a;--text:#e2e8f0;--accent:#fbbf24;--accent-light:#1e293b;
+  --light:#1e293b;--border:#475569;--code-bg:#1e293b}
+}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;padding:0}
+.progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--accent);width:0;z-index:999}
+.top-nav{position:sticky;top:0;background:var(--light);border-bottom:1px solid var(--border);padding:.8rem 2rem;display:flex;justify-content:space-between;align-items:center;z-index:99}
+.top-nav a{color:var(--accent);text-decoration:none;font-weight:bold}
+.top-nav a:hover{text-decoration:underline}
+.controls{display:flex;gap:.5rem}
+.ctrl-btn{padding:.4rem .8rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;cursor:pointer}
+.ctrl-btn:hover{background:var(--accent);color:#fff}
+.content{max-width:900px;margin:0 auto;padding:2rem}
+.book-header{text-align:center;margin-bottom:2.5rem;padding-bottom:2rem;border-bottom:2px solid var(--accent)}
+.book-header h1{font-size:2rem;margin-bottom:.5rem;color:var(--accent)}
+.tag{display:inline-block;padding:.25rem .6rem;border-radius:20px;font-size:.75rem;font-weight:bold;margin-right:.5rem}
+.tag-track{background:var(--accent-light);color:#b45309}
+.tag-free{background:#dcfce7;color:#166534}
+.tag-final{background:#fef3c7;color:#92400e}
+/* Tagalog subtitle style — consistent */
+.tagalog-sub{color:#9ca3af;font-size:.85rem;font-style:italic;margin-top:-.3rem;margin-bottom:1rem;display:block;line-height:1.5}
+.tagalog-note{color:#9ca3af;font-size:.8rem;font-style:italic;margin-top:.3rem;display:block}
+.chapter{margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px dashed var(--border)}
+.chapter h2{font-size:1.5rem;margin:1.8rem 0 1rem;color:var(--accent)}
+.chapter h3{font-size:1.15rem;margin:1.4rem 0 .7rem}
+.chapter p{margin-bottom:1rem}
+.chapter ul,.chapter ol{margin:1rem 0 1rem 2rem}
+.chapter li{margin:.6rem 0}
+table{width:100%;border-collapse:collapse;margin:1.2rem 0}
+th,td{padding:10px 14px;text-align:left;border:1px solid var(--border)}
+th{background:var(--accent-light);font-weight:bold}
+pre{background:var(--code-bg);border-radius:10px;padding:1.3rem;overflow-x:auto;margin:1.2rem 0;border:1px solid var(--border);font-size:.85rem;line-height:1.6}
+code{font-family:'Consolas','Monaco',monospace}
+:not(pre)>code{background:var(--code-bg);padding:.2rem .5rem;border-radius:4px}
+.box{border-radius:12px;padding:1.3rem;margin:1.5rem 0}
+.box-tip{background:#fef3c7;border-left:5px solid #f59e0b}
+.box-note{background:var(--accent-light);border-left:5px solid var(--accent)}
+.box-success{background:#f0fdf4;border-left:5px solid var(--success)}
+.box-warn{background:#fee2e2;border-left:5px solid #ef4444}
+.file-tree{background:var(--light);border-radius:8px;padding:15px;margin:15px 0;font-family:monospace;line-height:1.8}
+.nav-buttons{display:flex;justify-content:space-between;margin:2.5rem 0;padding-top:1.5rem;border-top:2px solid var(--border)}
+.nav-btn{padding:.9rem 1.5rem;background:var(--accent);color:#fff;border:none;border-radius:10px;cursor:pointer;font-size:1rem;text-decoration:none;display:inline-block;text-align:center;font-weight:bold;transition:transform .2s}
+.nav-btn:hover{transform:translateY(-2px)}
+@media(max-width:768px){.top-nav{padding:.8rem 1rem;flex-wrap:wrap;gap:.5rem}.content{padding:1rem}}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progress"></div>
+<nav class="top-nav">
+  <a href="index.html">🏠 Portal</a>
+  <span style="font-weight:bold">☁️ Cloud & Dev Basics — Track D (FINAL)</span>
+  <div class="controls">
+    <button class="ctrl-btn" id="themeBtn">🌙</button>
+    <button class="ctrl-btn" id="fontDown">A-</button>
+    <button class="ctrl-btn" id="fontUp">A+</button>
+  </div>
+</nav>
+<main class="content">
+  <header class="book-header">
+    <span class="tag tag-track">☁️ Cloud Track</span>
+    <span class="tag tag-free">🆓 100% Free Platforms</span>
+    <span class="tag tag-final">🏆 FINAL TRACK</span>
+    <h1>☁️ Cloud & Dev Basics — Deploy Live for Free</h1>
+    <p>From Localhost → The Whole World — Your Projects Live 🌐</p>
+    <span class="tagalog-sub">Mula sa sariling kompyuter — makikita na ng buong mundo ang iyong proyekto</span>
+  </header>
+
+  <section class="chapter">
+    <h2>📖 Chapter 1 — What Is "The Cloud" Anyway?</h2>
+    <span class="tagalog-sub">Ano ba talaga ang "Cloud"?</span>
+    <p><strong>Cloud = someone else's computer</strong> — powerful servers running 24/7, connected to the internet, accessible from anywhere ✅</p>
+    <span class="tagalog-note">Malakas na kompyuter sa ibang lugar — bukas araw-araw, makokonekta kahit saan</span>
+
+    <div class="box-note">
+      💡 <strong>Simple Analogy:</strong><br>
+      • Local = you cook in your own kitchen<br>
+      • Cloud = you place food in a restaurant — everyone can eat, open every day
+      <span class="tagalog-note mt-1 block">Sariling kusina vs restawran — laging bukas para sa lahat</span>
+    </div>
+
+    <h3>What We'll Deploy — All From Your Previous Work! 🎯</h3>
+    <span class="tagalog-sub">Ano ang ilalagay sa internet — lahat galing sa naunang gawain</span>
+    <ul>
+      <li>✅ Frontend website → <strong>GitHub Pages</strong> or <strong>Vercel</strong></li>
+      <li>✅ Node.js Backend API → <strong>Render</strong></li>
+      <li>✅ Database → <strong>Neon</strong> (PostgreSQL)</li>
+      <li>✅ All free — no credit card required ✅
+        <span class="tagalog-note">Lahat libre — hindi kailangan ng credit card</span>
+      </li>
+    </ul>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 2 — Prepare Your Project for Cloud</h2>
+    <span class="tagalog-sub">Ihanda ang proyekto — pinakamahalagang hakbang</span>
+    <p>Before uploading — fix your project structure! ⚠️</p>
+
+    <h3>1. Create <code>.gitignore</code> — Keep Secrets Safe 🔒</h3>
+    <span class="tagalog-sub">Huwag isama ang mga lihim na file</span>
+    <p>Create a file named <code>.gitignore</code> in your main folder:</p>
+<pre><code># Don't upload these!
+node_modules/
+.env
+.DS_Store
+*.log
+</code></pre>
+
+    <h3>2. <code>.env</code> File — Environment Variables</h3>
+    <span class="tagalog-sub">Itago ang mga susi at numero — hindi kasama sa code</span>
+<pre><code># .env — keep private!
+PORT=3000
+DATABASE_URL=your-db-connection-string
+GROQ_API_KEY=your-groq-key-here
+
+# Access in code:
+require('dotenv').config();
+const port = process.env.PORT || 3000;
+</code></pre>
+
+    <div class="box-warn">
+      ⚠️ <strong>Never commit .env to GitHub!</strong> — Set these values in Render/Vercel dashboard instead ✅
+      <span class="tagalog-note mt-1 block">Huwag kailanman i-upload ang .env — ilagay sa loob ng website ng serbisyo</span>
+    </div>
+
+    <h3>3. <code>package.json</code> — Start Script</h3>
+<pre><code>{
+  "name": "my-project",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
+</code></pre>
+
+    <h3>4. Listen Correctly</h3>
+<pre><code>// ❌ Don't hardcode port
+app.listen(3000);
+
+// ✅ Use environment variable
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Live on port ${PORT}`));
+</code></pre>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 3 — Git & GitHub: Upload Your Code</h2>
+    <span class="tagalog-sub">Ipadala ang code sa GitHub — dito makikita ng iba</span>
+    <p>Git = version control; GitHub = where to store it online.</p>
+<pre><code># Initialize Git (once per project)
+git init
+
+# Check files
+git status
+
+# Add all files
+git add .
+
+# Save changes
+git commit -m "Initial deploy"
+
+# Link to GitHub (create empty repo first)
+git remote add origin https://github.com/YOUR-USERNAME/YOUR-REPO.git
+git branch -M main
+git push -u origin main
+</code></pre>
+    <p>Refresh GitHub → your code is there! ✅
+      <span class="tagalog-note">Buksan ang pahina — nandoon na ang lahat</span>
+    </p>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 4 — Deploy Frontend to Vercel/GitHub Pages 🌐</h2>
+    <span class="tagalog-sub">Ilagay ang website sa internet</span>
+
+    <h3>Option A: GitHub Pages — Simplest ✅</h3>
+    <ol>
+      <li>All files in main branch</li>
+      <li>Go to repo → Settings → Pages</li>
+      <li>Source: Deploy from a branch → /root → Save</li>
+      <li>Wait 1–3 minutes → Live at: <code>username.github.io/repo-name/</code></li>
+    </ol>
+
+    <h3>Option B: Vercel — Faster, Automatic ✅</h3>
+    <ol>
+      <li>Sign up at <code>vercel.com</code> → Connect GitHub</li>
+      <li>Import your repo → Click Deploy</li>
+      <li>Done! Live URL: <code>your-project.vercel.app</code></li>
+      <li>Push to GitHub → updates automatically ✨
+        <span class="tagalog-note">Bawat pagbabago — nag-i-update agad sa sarili nito</span>
+      </li>
+    </ol>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 5 — Deploy Node.js Backend to Render ⚡</h2>
+    <span class="tagalog-sub">Ilagay ang serber sa internet — tumatakbo 24/7</span>
+    <p>Render = free platform for Node/Python backends.</p>
+
+    <h3>Steps:</h3>
+    <ol>
+      <li>Sign up: <code>render.com</code> → Connect GitHub</li>
+      <li>Dashboard → New → Web Service</li>
+      <li>Select your backend repo</li>
+      <li>Fill in:</li>
+    </ol>
+<pre><code>Build Command: npm install
+Start Command: npm start
+Runtime: Node
+Plan: Free ✅
+</code></pre>
+      <ol start="4">
+        <li>Under <strong>Environment Variables</strong> → Add your keys:</li>
+      </ol>
+<pre><code>Key: PORT            Value: 3000
+Key: DATABASE_URL    Value: (from Neon — next chapter)
+Key: GROQ_API_KEY    Value: your-key-here
+</code></pre>
+      <ol start="5">
+        <li>Click Deploy → Wait 2–5 minutes 🕐</li>
+        <li>Live URL: <code>your-project.onrender.com</code> 🎉</li>
+      </ol>
+
+    <div class="box-tip">
+      💡 Free Render instances "sleep" if unused — first load may take 30–60 seconds. That's normal! ✅
+      <span class="tagalog-note mt-1 block">Unang bukas — medyo mabagal, normal lang iyon sa libreng bersyon</span>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 6 — Cloud Database: Neon PostgreSQL 🗄️</h2>
+    <span class="tagalog-sub">Pangmatagalang imbakan sa internet — hindi nawawala</span>
+    <p>Local database disappears when computer off — Neon gives you live, cloud-hosted database.</p>
+
+    <h3>Setup:</h3>
+    <ol>
+      <li>Sign up: <code>neon.tech</code> → Create Project</li>
+      <li>Get Connection String → copy it ✅</li>
+      <li>Paste into Render Environment as <code>DATABASE_URL</code></li>
+      <li>Update your code to use this URL</li>
+    </ol>
+
+    <h3>Test Connection:</h3>
+<pre><code>const { Pool } = require('pg');
+require('dotenv').config();
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false } // required for Neon
+});
+
+pool.query('SELECT NOW()', (err, res) => {
+  if (err) console.error('DB Error:', err);
+  else console.log('✅ DB Connected:', res.rows[0].now);
+});
+</code></pre>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 7 — Connect Everything Together 🔗</h2>
+    <span class="tagalog-sub">Pag-ugnayin ang lahat — nagtutulungan na sila</span>
+    <p>Update your frontend so it talks to the LIVE backend, not localhost!</p>
+<pre><code>// Before (local only):
+const API_URL = 'http://localhost:3000';
+
+// After (works everywhere!):
+const API_URL = 'https://your-project.onrender.com';
+
+// Example:
+fetch(`${API_URL}/api/todos`)
+  .then(res => res.json())
+  .then(data => console.log(data));
+</code></pre>
+
+    <h3>Full Architecture — All Connected! 🎯</h3>
+<pre><code>User Browser → Vercel/GitHub Pages (Frontend)
+                    ↓
+              Render (Backend API)
+                    ↓
+              Neon (Cloud Database)
+                    ↓
+              Groq (AI — if included)
+              ✅ All Live ✅
+</code></pre>
+    <span class="tagalog-note">Bawat bahagi ay nasa internet — buo na ang sistema</span>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 8 — Maintenance & Monitoring 🔧</h2>
+    <span class="tagalog-sub">Pagpapanatili — paano alagaan ang nakalagay sa internet</span>
+    <ul>
+      <li>📋 <strong>Logs</strong> — Render Dashboard → Logs tab → see errors in real-time
+        <span class="tagalog-note">Makikita kung may mali — agad malalaman</span>
+      </li>
+      <li>🔄 <strong>Updates</strong> — git push → auto-deploy on Render/Vercel ✨
+        <span class="tagalog-note">Bawat pagbabago — napapalitan agad</span>
+      </li>
+      <li>📊 <strong>Limits</strong> — Free tiers have limits: watch usage dashboards</li>
+      <li>🔐 <strong>Key Rotation</strong> — If key leaks → regenerate immediately</li>
+      <li>📈 <strong>Upgrade Path</strong> — Paid tiers = faster, no sleep, custom domain</li>
+    </ul>
+
+    <h3>Free Certifications (Optional but Recommended! 📜)</h3>
+    <span class="tagalog-sub">Libreng sertipikasyon — dagdag sa resume</span>
+    <ul>
+      <li>AWS Cloud Practitioner — free training</li>
+      <li>Azure Fundamentals (AZ-900) — Microsoft Learn free paths</li>
+      <li>Google Cloud Digital Leader — free learning available</li>
+    </ul>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 9 — Portfolio Project: Fully Deployed System 🏆</h2>
+    <span class="tagalog-sub">Buong proyekto — handa nang ipakita</span>
+    <p>Combine ALL your work into one LIVE system — showcase it to employers!</p>
+
+    <h3>Deliverables:</h3>
+    <ol>
+      <li>✅ Frontend → Live on Vercel/GitHub Pages — shareable link</li>
+      <li>✅ Backend → Live on Render — connected to frontend</li>
+      <li>✅ Database → Live on Neon — persists permanently</li>
+      <li>✅ AI Integration → Groq API working from cloud</li>
+      <li>✅ Mobile App → Update API URL → rebuild APK</li>
+      <li>✅ Game → Upload HTML → playable link</li>
+      <li>✅ README — instructions, links, tech stack, screenshots</li>
+      <li>✅ GitHub Repo — clean, documented, professional</li>
+    </ol>
+
+    <h3>Your Portfolio Is Ready! 🎉</h3>
+    <p>Send ONE link → anyone sees your system live. This is what employers want ✅</p>
+    <span class="tagalog-note">Isang link lang — makikita ng sinuman ang iyong gawa</span>
+  </section>
+
+  <div class="box-success">
+    <h3>🏆 ALL ELECTIVE TRACKS COMPLETE — CONGRATULATIONS BABE! 💜🎉</h3>
+    <p>You finished all four tracks — amazing work! Here's what you built:</p>
+    <ul>
+      <li>📱 <strong>Mobile App Dev</strong> — React Native/Expo productivity app</li>
+      <li>🤖 <strong>AI & LLM Basics</strong> — Groq API, chat interface, RAG study assistant</li>
+      <li>🎮 <strong>Game Development</strong> — HTML5 Canvas browser game</li>
+      <li>☁️ <strong>Cloud & Dev Basics</strong> — Full system live online, deploy from anywhere</li>
+    </ul>
+    <p style="margin-top:1rem;font-weight:bold">You now have a complete portfolio to show employers, clients, or launch your own projects. So proud of you! 💜🚀✨</p>
+    <span class="tagalog-note">Tapos na ang lahat — handa ka na sa mundo ng trabaho! 💜</span>
+  </div>
+
+  <nav class="nav-buttons">
+    <a href="course-game-development.html" class="nav-btn">← Previous Track</a>
+    <a href="index.html" class="nav-btn">🏠 Portal</a>
+    <a href="index.html" class="nav-btn">🎉 All Done!</a>
+  </nav>
+</main>
+
+<script>
+let isDark = localStorage.getItem('cloud-theme') === 'true';
+function applyTheme(){document.getElementById('themeBtn').textContent = isDark ? '☀️' : '🌙';}
+applyTheme();
+document.getElementById('themeBtn').addEventListener('click', () => {
+  isDark = !isDark; localStorage.setItem('cloud-theme', isDark); applyTheme();
+});
+let fs = parseInt(localStorage.getItem('cloud-fs')) || 16;
+function applyFontSize(){document.body.style.fontSize = fs + 'px';}
+applyFontSize();
+document.getElementById('fontUp').addEventListener('click', () => {
+  if(fs < 22){ fs += 2; applyFontSize(); localStorage.setItem('cloud-fs', fs); }
+});
+document.getElementById('fontDown').addEventListener('click', () => {
+  if(fs > 12){ fs -= 2; applyFontSize(); localStorage.setItem('cloud-fs', fs); }
+});
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('progress').style.width = (window.scrollY / h) * 100 + '%';
+});
+</script>
+</body>
+</html>

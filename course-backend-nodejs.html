@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⚙️ Module 10: Backend Dev (Node.js & Express) — Year 3</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#fffef9;--text:#1a1a1a;--accent:#8b5cf6;--accent-light:#faf5ff;
+  --light:#f0f4f8;--border:#cbd5e1;--code-bg:#f6f8fa;
+  --success:#22c55e;--warn:#f59e0b;--danger:#ef4444;--arrow:#7c3aed
+}
+@media(prefers-color-scheme:dark){
+  :root{--bg:#0f172a;--text:#e2e8f0;--accent:#a78bfa;--accent-light:#1e293b;
+  --light:#1e293b;--border:#475569;--code-bg:#1e293b}
+}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;padding:0}
+.progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--accent);width:0;z-index:999}
+.top-nav{position:sticky;top:0;background:var(--light);border-bottom:1px solid var(--border);padding:.8rem 2rem;display:flex;justify-content:space-between;align-items:center;z-index:99}
+.top-nav a{color:var(--accent);text-decoration:none;font-weight:bold}
+.top-nav a:hover{text-decoration:underline}
+.controls{display:flex;gap:.5rem}
+.ctrl-btn{padding:.4rem .8rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;cursor:pointer}
+.ctrl-btn:hover{background:var(--accent);color:#fff}
+.content{max-width:900px;margin:0 auto;padding:2rem}
+.book-header{text-align:center;margin-bottom:2.5rem;padding-bottom:2rem;border-bottom:2px solid var(--accent)}
+.book-header h1{font-size:2rem;margin-bottom:.5rem;color:var(--accent)}
+.tag{display:inline-block;padding:.25rem .6rem;border-radius:20px;font-size:.75rem;font-weight:bold;margin-right:.5rem}
+.tag-year{background:var(--accent-light);color:#5b21b6}
+.tag-skill{background:#ddd6fe;color:#4c1d95}
+/* Tagalog subtitle style — consistent */
+.tagalog-sub{color:#9ca3af;font-size:.85rem;font-style:italic;margin-top:-.3rem;margin-bottom:1rem;display:block;line-height:1.5}
+.tagalog-note{color:#9ca3af;font-size:.8rem;font-style:italic;margin-top:.3rem;display:block}
+.chapter{margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px dashed var(--border)}
+.chapter h2{font-size:1.5rem;margin:1.8rem 0 1rem;color:var(--accent)}
+.chapter h3{font-size:1.15rem;margin:1.4rem 0 .7rem}
+.chapter p{margin-bottom:1rem}
+.chapter ul,.chapter ol{margin:1rem 0 1rem 2rem}
+.chapter li{margin:.6rem 0}
+table{width:100%;border-collapse:collapse;margin:1.2rem 0}
+th,td{padding:10px 14px;text-align:left;border:1px solid var(--border)}
+th{background:var(--accent-light);font-weight:bold}
+pre{background:var(--code-bg);border-radius:10px;padding:1.3rem;overflow-x:auto;margin:1.2rem 0;border:1px solid var(--border);font-size:.85rem;line-height:1.6}
+code{font-family:'Consolas','Monaco',monospace}
+:not(pre)>code{background:var(--code-bg);padding:.2rem .5rem;border-radius:4px}
+.box{border-radius:12px;padding:1.3rem;margin:1.5rem 0}
+.box-tip{background:#fef3c7;border-left:5px solid #f59e0b}
+.box-note{background:var(--accent-light);border-left:5px solid var(--accent)}
+.box-success{background:#f0fdf4;border-left:5px solid var(--success)}
+.box-warn{background:#fee2e2;border-left:5px solid #ef4444}
+.arrow{color:var(--arrow);font-weight:bold;margin:0 .3rem}
+.file-tree{background:var(--light);border-radius:8px;padding:15px;margin:15px 0;font-family:monospace;line-height:1.8}
+.nav-buttons{display:flex;justify-content:space-between;margin:2.5rem 0;padding-top:1.5rem;border-top:2px solid var(--border)}
+.nav-btn{padding:.9rem 1.5rem;background:var(--accent);color:#fff;border:none;border-radius:10px;cursor:pointer;font-size:1rem;text-decoration:none;display:inline-block;text-align:center;font-weight:bold;transition:transform .2s}
+.nav-btn:hover{transform:translateY(-2px)}
+@media(max-width:768px){.top-nav{padding:.8rem 1rem;flex-wrap:wrap;gap:.5rem}.content{padding:1rem}}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progress"></div>
+<nav class="top-nav">
+  <a href="index.html">🏠 Portal</a>
+  <span style="font-weight:bold">⚙️ Module 10: Backend Dev (Node.js & Express)</span>
+  <div class="controls">
+    <button class="ctrl-btn" id="themeBtn">🌙</button>
+    <button class="ctrl-btn" id="fontDown">A-</button>
+    <button class="ctrl-btn" id="fontUp">A+</button>
+  </div>
+</nav>
+<main class="content">
+  <header class="book-header">
+    <span class="tag tag-year">🟠 Year 3</span>
+    <span class="tag tag-skill">💻 Full-Stack Skill</span>
+    <h1>⚙️ Backend Development — Node.js & Express</h1>
+    <p>Build Your Own Server — Connect Frontend to Database</p>
+    <span class="tagalog-sub">Gumawa ng sariling serber — pag-ugnayin ang harapang pahina at imbakan</span>
+  </header>
+
+  <section class="chapter">
+    <h2>📖 Chapter 1 — What Is Backend?</h2>
+    <span class="tagalog-sub">Ano ang Backend?</span>
+    <p><strong>Frontend</strong> = what user sees & clicks (HTML/CSS/JS)<br>
+    <strong>Backend</strong> = what happens behind the scenes — stores data, checks rules, connects to database</p>
+    <span class="tagalog-note">Harap — nakikita ng tao • Likod — gumagawa ng trabahong hindi nakikita</span>
+
+    <div class="box-note">
+      💡 <strong>Simple Analogy: Restaurant 🍽️</strong><br>
+      Frontend = Dining area — what customers see<br>
+      Backend = Kitchen — cooks, stores, manages orders<br>
+      Database = Pantry — keeps ingredients & records<br>
+      API = Waiter — carries orders between front & back
+      <span class="tagalog-note mt-1 block">Harap = kainan • Likod = kusina • Imbakan = lalagyan • API = tagahatid ng utos</span>
+    </div>
+
+    <h3>Why Node.js? 🟢</h3>
+    <span class="tagalog-sub">Bakit Node.js?</span>
+    <ul>
+      <li>Same language — JavaScript! — front & back in one language ✅
+        <span class="tagalog-note">Parehong wika — hindi kailangang matuto ng bago</span>
+      </li>
+      <li>Fast — built on Chrome's V8 engine</li>
+      <li>Huge ecosystem — npm = thousands of ready-made tools</li>
+      <li>Express — lightweight & popular framework for web servers</li>
+    </ul>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 2 — Setup Your Environment</h2>
+    <span class="tagalog-sub">Ihanda ang kompyuter</span>
+
+    <h3>1. Install Node.js</h3>
+    <p>Go to <code>nodejs.org</code> → download LTS version → install → next next finish ✅</p>
+    <p>Check it works — open terminal/Command Prompt:</p>
+<pre><code>node -v
+# Should show: v20.x.x or similar ✅
+
+npm -v
+# Should show version number ✅
+</code></pre>
+
+    <h3>2. Make Your Project Folder</h3>
+<pre><code>mkdir my-first-server
+cd my-first-server
+npm init -y
+# Creates package.json — your project settings & list of tools
+</code></pre>
+
+    <h3>3. Install Express</h3>
+<pre><code>npm install express
+# Express is now in node_modules/ ✅
+</code></pre>
+
+    <div class="file-tree">
+      my-first-server/<br>
+      ├── node_modules/ ← installed tools<br>
+      ├── package.json ← project info<br>
+      ├── package-lock.json ← exact versions<br>
+      └── server.js ← your code file ✅
+    </div>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 3 — Your First Server</h2>
+    <span class="tagalog-sub">Ang iyong unang serber</span>
+
+    <h3>Write server.js</h3>
+<pre><code>// 1. Import Express
+const express = require('express');
+const app = express();
+
+// 2. Port — where your server listens
+const PORT = 3000;
+
+// 3. A simple route — home page
+app.get('/', (req, res) => {
+  res.send('🎉 Hello from your own server!');
+});
+
+// 4. Start listening
+app.listen(PORT, () => {
+  console.log(`✅ Server running at http://localhost:${PORT}`);
+});
+</code></pre>
+
+    <h3>Run It! 🚀</h3>
+<pre><code>node server.js
+# Open browser → http://localhost:3000
+# Shows: 🎉 Hello from your own server! ✅
+</code></pre>
+
+    <div class="box-tip">
+      💡 <strong>Press Ctrl+C to stop server</strong> in terminal<br>
+      Change code → stop → run again to see updates
+      <span class="tagalog-note mt-1 block">Baguhin ang code → itigil → patakbuhin ulit</span>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 4 — Routes & HTTP Methods</h2>
+    <span class="tagalog-sub">Daanan at uri ng utos</span>
+    <p>Routes = paths your server responds to. HTTP Method = type of action.</p>
+    <table>
+      <tr><th>Method</th><th>Action</th><th>Common Use</th></tr>
+      <tr><td><strong>GET</strong></td><td>Read</td><td>View page, fetch data</td></tr>
+      <tr><td><strong>POST</strong></td><td>Create</td><td>Submit form, add new record</td></tr>
+      <tr><td><strong>PUT</strong></td><td>Update</td><td>Change existing data</td></tr>
+      <tr><td><strong>DELETE</strong></td><td>Delete</td><td>Remove record</td></tr>
+    </table>
+
+    <h3>More Routes Example</h3>
+<pre><code>// About page
+app.get('/about', (req, res) => {
+  res.send('📋 This is my first backend server!');
+});
+
+// Dynamic route — with parameter
+app.get('/user/:name', (req, res) => {
+  const name = req.params.name;
+  res.send(`👋 Hello, ${name}!`);
+});
+
+// Try: http://localhost:3000/user/Juan
+// Shows: 👋 Hello, Juan! ✅
+</code></pre>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 5 — JSON & APIs</h2>
+    <span class="tagalog-sub">JSON — wika ng pagpapalitan</span>
+    <p>APIs send/receive data in <strong>JSON</strong> format — easy for both humans and computers to read.</p>
+<pre><code>// Send JSON data
+app.get('/api/products', (req, res) => {
+  const products = [
+    { id: 1, name: 'Laptop', price: 35000 },
+    { id: 2, name: 'Mouse', price: 850 },
+    { id: 3, name: 'Keyboard', price: 1200 }
+  ];
+  res.json(products);
+});
+</code></pre>
+    <p>Visit <code>/api/products</code> → clean data ready for your frontend! ✅</p>
+
+    <h3>Receive Data — POST Request</h3>
+    <span class="tagalog-sub">Tumanggap ng impormasyon</span>
+    <p>First, tell Express to read form/JSON data:</p>
+<pre><code>// Add at top of server.js
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Receive data
+app.post('/api/greet', (req, res) => {
+  const name = req.body.name || 'Guest';
+  res.json({ message: `Hello, ${name}! ✅` });
+});
+</code></pre>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 6 — Connect to Database (MySQL)</h2>
+    <span class="tagalog-sub">Ikonekta sa imbakan</span>
+
+    <h3>Install MySQL Driver</h3>
+<pre><code>npm install mysql2
+</code></pre>
+
+    <h3>Connect Your Server</h3>
+<pre><code>const mysql = require('mysql2/promise');
+
+// Create connection
+const db = mysql.createPool({
+  host: 'localhost',
+  user: 'root',          // your MySQL username
+  password: 'your-pass', // your MySQL password
+  database: 'my_database'
+});
+
+// Test route — get users
+app.get('/api/users', async (req, res) => {
+  try {
+    const [rows] = await db.query('SELECT * FROM users');
+    res.json(rows);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+</code></pre>
+
+    <div class="box-success">
+      ✅ <strong>Full Flow:</strong><br>
+      Browser → Express Route → MySQL Query → JSON Response → Browser Displays Data
+      <span class="tagalog-note mt-1 block">Buong pagdaloy — mula pindot hanggang sagot</span>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 7 — Serve Static Files (Frontend)</h2>
+    <span class="tagalog-sub">Ihain ang pahina mula sa serber</span>
+    <p>Let your server serve your HTML/CSS/JS files:</p>
+<pre><code>// Add after imports
+app.use(express.static('public'));
+
+// public/ folder structure:
+// public/
+//   ├── index.html
+//   ├── style.css
+//   └── script.js
+
+// Now http://localhost:3000/index.html loads your page ✅
+</code></pre>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 8 — Middleware: What It Is</h2>
+    <span class="tagalog-sub">Middleware — tagapamagitan</span>
+    <p><strong>Middleware</strong> = code that runs before your route — check, log, or modify requests.</p>
+<pre><code>// Log every request
+app.use((req, res, next) => {
+  console.log(`${new Date()} → ${req.method} ${req.url}`);
+  next(); // pass to next step
+});
+
+// Example output:
+// 2026-10-23 → GET /api/products ✅
+</code></pre>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 9 — Error Handling & Best Practices</h2>
+    <span class="tagalog-sub">Paglutas ng problema at maayos na ayos</span>
+
+    <h3>Common Errors & Fixes</h3>
+    <table>
+      <tr><th>Problem</th><th>Fix</th></tr>
+      <tr><td>Cannot find module 'express'</td><td>Run <code>npm install express</code> in correct folder</td></tr>
+      <tr><td>Port 3000 in use</td><td>Change PORT number or close other server</td></tr>
+      <tr><td>CORS error (frontend → backend)</td><td>Install: <code>npm install cors</code> → <code>app.use(cors())</code></td></tr>
+      <tr><td>Database connection fails</td><td>Check MySQL running, username/password, database name</td></tr>
+    </table>
+
+    <h3>Project Structure — Clean & Professional ✅</h3>
+    <span class="tagalog-sub">Maayos na pagkakabuo ng proyekto</span>
+    <div class="file-tree">
+    my-project/<br>
+    ├── public/ ← frontend files<br>
+    │   ├── index.html<br>
+    │   └── js/app.js<br>
+    ├── routes/ ← organize routes<br>
+    │   ├── users.js<br>
+    │   └── products.js<br>
+    ├── config/ ← database setup<br>
+    │   └── db.js<br>
+    ├── server.js ← main file<br>
+    └── package.json
+    </div>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 10 — Mini Project: Simple API 🎯</h2>
+    <span class="tagalog-sub">Sariling proyekto — listahan ng gawain</span>
+    <p>Build a complete Todo List Backend with these features:</p>
+    <ol>
+      <li>GET <code>/api/todos</code> — list all tasks</li>
+      <li>POST <code>/api/todos</code> — add new task</li>
+      <li>PUT <code>/api/todos/:id</code> — mark complete/incomplete</li>
+      <li>DELETE <code>/api/todos/:id</code> — remove task</li>
+      <li>Connect to MySQL database table</li>
+    </ol>
+  </section>
+
+  <div class="box-success">
+    <strong>🎉 Module Complete! ✅</strong><br>
+    ✅ Node.js & Express setup<br>
+    ✅ Routes, HTTP Methods, JSON APIs<br>
+    ✅ Connect to MySQL Database<br>
+    ✅ Serve frontend files from your server<br>
+    ✅ Error handling & clean project structure<br><br>
+    <span class="tagalog-note">Alam mo na ang pagbuo ng serber — buo na ang iyong kakayahan sa Full-Stack ✅</span><br>
+    <strong>Next:</strong> Systems Analysis & Design →<br>
+    <span style="font-weight:bold">Type "next" when ready ✨</span>
+  </div>
+
+  <nav class="nav-buttons">
+    <a href="course-git-github.html" class="nav-btn">← Previous</a>
+    <a href="index.html" class="nav-btn">🏠 Portal</a>
+    <a href="index.html" class="nav-btn">Next →</a>
+  </nav>
+</main>
+
+<script>
+let isDark = localStorage.getItem('node-theme') === 'true';
+function applyTheme(){document.getElementById('themeBtn').textContent = isDark ? '☀️' : '🌙';}
+applyTheme();
+document.getElementById('themeBtn').addEventListener('click', () => {
+  isDark = !isDark; localStorage.setItem('node-theme', isDark); applyTheme();
+});
+let fs = parseInt(localStorage.getItem('node-fs')) || 16;
+function applyFontSize(){document.body.style.fontSize = fs + 'px';}
+applyFontSize();
+document.getElementById('fontUp').addEventListener('click', () => {
+  if(fs < 22){ fs += 2; applyFontSize(); localStorage.setItem('node-fs', fs); }
+});
+document.getElementById('fontDown').addEventListener('click', () => {
+  if(fs > 12){ fs -= 2; applyFontSize(); localStorage.setItem('node-fs', fs); }
+});
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('progress').style.width = (window.scrollY / h) * 100 + '%';
+});
+</script>
+</body>
+</html>

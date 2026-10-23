@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎯 Elective — Choose Your Track — Year 3</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#fffef9;--text:#1a1a1a;--accent:#ec4899;--accent-light:#fdf2f8;
+  --light:#f0f4f8;--border:#cbd5e1;--code-bg:#f6f8fa;
+  --success:#22c55e;--warn:#f59e0b;--danger:#ef4444;--arrow:#db2777;
+  --mobile:#3b82f6;--ai:#8b5cf6;--game:#10b981;--cloud:#f59e0b
+}
+@media(prefers-color-scheme:dark){
+  :root{--bg:#0f172a;--text:#e2e8f0;--accent:#f472b6;--accent-light:#1e293b;
+  --light:#1e293b;--border:#475569;--code-bg:#1e293b}
+}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;padding:0}
+.progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--accent);width:0;z-index:999}
+.top-nav{position:sticky;top:0;background:var(--light);border-bottom:1px solid var(--border);padding:.8rem 2rem;display:flex;justify-content:space-between;align-items:center;z-index:99}
+.top-nav a{color:var(--accent);text-decoration:none;font-weight:bold}
+.top-nav a:hover{text-decoration:underline}
+.controls{display:flex;gap:.5rem}
+.ctrl-btn{padding:.4rem .8rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;cursor:pointer}
+.ctrl-btn:hover{background:var(--accent);color:#fff}
+.content{max-width:900px;margin:0 auto;padding:2rem}
+.book-header{text-align:center;margin-bottom:2.5rem;padding-bottom:2rem;border-bottom:2px solid var(--accent)}
+.book-header h1{font-size:2rem;margin-bottom:.5rem;color:var(--accent)}
+.tag{display:inline-block;padding:.25rem .6rem;border-radius:20px;font-size:.75rem;font-weight:bold;margin-right:.5rem}
+.tag-year{background:var(--accent-light);color:#be185d}
+.tag-choice{background:#ddd6fe;color:#5b21b6}
+.chapter{margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px dashed var(--border)}
+.chapter h2{font-size:1.5rem;margin:1.8rem 0 1rem;color:var(--accent)}
+.chapter h3{font-size:1.15rem;margin:1.4rem 0 .7rem}
+.chapter p{margin-bottom:1rem}
+.chapter ul,.chapter ol{margin:1rem 0 1rem 2rem}
+.chapter li{margin:.6rem 0}
+table{width:100%;border-collapse:collapse;margin:1.2rem 0}
+th,td{padding:10px 14px;text-align:left;border:1px solid var(--border)}
+th{background:var(--accent-light);font-weight:bold}
+pre{background:var(--code-bg);border-radius:10px;padding:1.3rem;overflow-x:auto;margin:1.2rem 0;border:1px solid var(--border);font-size:.85rem;line-height:1.6}
+code{font-family:'Consolas','Monaco',monospace}
+:not(pre)>code{background:var(--code-bg);padding:.2rem .5rem;border-radius:4px}
+.box{border-radius:12px;padding:1.3rem;margin:1.5rem 0}
+.box-tip{background:#fef3c7;border-left:5px solid #f59e0b}
+.box-note{background:var(--accent-light);border-left:5px solid var(--accent)}
+.box-success{background:#f0fdf4;border-left:5px solid var(--success)}
+.track-card{border-radius:14px;padding:20px;margin:16px 0;transition:transform .2s,box-shadow .2s;border-left:5px solid transparent}
+.track-card:hover{transform:translateX(6px);box-shadow:0 4px 12px rgba(0,0,0,.1)}
+.track-mobile{border-left-color:var(--mobile);background:linear-gradient(to right,#eff6ff,#fff)}
+.track-ai{border-left-color:var(--ai);background:linear-gradient(to right,#faf5ff,#fff)}
+.track-game{border-left-color:var(--game);background:linear-gradient(to right,#ecfdf5,#fff)}
+.track-cloud{border-left-color:var(--cloud);background:linear-gradient(to right,#fffbeb,#fff)}
+/* Tagalog subtitle style — consistent */
+.tagalog-sub{color:#9ca3af;font-size:.85rem;font-style:italic;margin-top:-.3rem;margin-bottom:1rem;display:block;line-height:1.5}
+.tagalog-note{color:#9ca3af;font-size:.8rem;font-style:italic;margin-top:.3rem;display:block}
+.nav-buttons{display:flex;justify-content:space-between;margin:2.5rem 0;padding-top:1.5rem;border-top:2px solid var(--border)}
+.nav-btn{padding:.9rem 1.5rem;background:var(--accent);color:#fff;border:none;border-radius:10px;cursor:pointer;font-size:1rem;text-decoration:none;display:inline-block;text-align:center;font-weight:bold;transition:transform .2s}
+.nav-btn:hover{transform:translateY(-2px)}
+@media(max-width:768px){.top-nav{padding:.8rem 1rem;flex-wrap:wrap;gap:.5rem}.content{padding:1rem}}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progress"></div>
+<nav class="top-nav">
+  <a href="index.html">🏠 Portal</a>
+  <span style="font-weight:bold">🎯 Elective — Choose Your Track</span>
+  <div class="controls">
+    <button class="ctrl-btn" id="themeBtn">🌙</button>
+    <button class="ctrl-btn" id="fontDown">A-</button>
+    <button class="ctrl-btn" id="fontUp">A+</button>
+  </div>
+</nav>
+<main class="content">
+  <header class="book-header">
+    <span class="tag tag-year">🟠 Year 3</span>
+    <span class="tag tag-choice">🔓 Specialization</span>
+    <h1>🎯 Elective — Choose Your Track</h1>
+    <p>Pick One Path — Deepen Your Skills — Build Portfolio Projects</p>
+    <span class="tagalog-sub">Pumili ng isang larangan — palalimin ang kaalaman — gumawa ng proyektong maipagmamalaki</span>
+  </header>
+
+  <section class="chapter">
+    <h2>📖 Introduction — What's an Elective?</h2>
+    <span class="tagalog-sub">Ano ang pagpili ng larangan?</span>
+    <p>You've built a strong foundation — now pick an area to specialize in! Choose the track that matches your interests and career goals. Each track includes a complete portfolio project you can show employers.</p>
+    <span class="tagalog-note">Matatag na ang iyong pundasyon — pumili na ng espesyalisasyon! Bawat isa ay may buong proyektong maipapakita mo sa mga naghahanap ng empleyado</span>
+
+    <div class="box-note">
+      💡 <strong>How to Choose? Ask Yourself:</strong><br>
+      • Make apps people carry everywhere? → 📱 Mobile Dev<br>
+      • Fascinated by smart systems & automation? → 🤖 AI Basics<br>
+      • Love interactive worlds & fun experiences? → 🎮 Game Dev<br>
+      • Deploy & manage live systems? → ☁️ Cloud Basics
+      <span class="tagalog-note mt-1 block">Alin ang pinakagusto mo? — sundin ang iyong interes!</span>
+    </div>
+  </section>
+
+  <!-- 📱 Track A: Mobile Development -->
+  <section class="track-card track-mobile">
+    <h3>📱 Track A: Mobile App Development</h3>
+    <p style="font-weight:500">Build apps for Android & iOS — one codebase, runs everywhere!</p>
+    <span class="tagalog-sub">Gumawa ng app para sa Android at iOS — isang code, gumagana sa lahat</span>
+
+    <h4>What You'll Learn:</h4>
+    <span class="tagalog-sub">Ano ang pag-aaralan</span>
+    <ul>
+      <li>React Native / Expo setup — free, no paid tools ✅</li>
+      <li>Components & UI — buttons, lists, forms, navigation</li>
+      <li>Responsive design — fits any phone screen</li>
+      <li>Device features — camera, storage, location access</li>
+      <li>Connect to your existing Node.js backend API</li>
+      <li>Publish — build APK / Play Store submission guide</li>
+    </ul>
+
+    <h4>📂 Portfolio Project: Personal Productivity App</h4>
+    <span class="tagalog-sub">Proyekto — sariling app na nakakatulong sa gawain</span>
+    <ul>
+      <li>Login screen → connects to your backend</li>
+      <li>Task list — add, mark complete, delete items</li>
+      <li>Local storage → works even offline ✅</li>
+      <li>Push notifications → gentle reminders</li>
+      <li>Clean, professional UI — ready to show</li>
+    </ul>
+
+    <h4>Best For:</h4>
+    <p>Mobile Developer • Freelance App Builder • Startup Founder</p>
+  </section>
+
+  <!-- 🤖 Track B: AI Basics -->
+  <section class="track-card track-ai">
+    <h3>🤖 Track B: AI & LLM Basics</h3>
+    <p style="font-weight:500">Understand how AI works & build smart tools using free APIs!</p>
+    <span class="tagalog-sub">Alamin kung paano gumagana ang AI — gumawa ng sariling kagamitan gamit ang libreng serbisyo</span>
+
+    <h4>What You'll Learn:</h4>
+    <span class="tagalog-sub">Ano ang pag-aaralan</span>
+    <ul>
+      <li>How LLMs work — simple explanation, no complex math ✅</li>
+      <li>Free APIs — OpenAI, Hugging Face, Groq</li>
+      <li>Chat interface — connected to your Node.js backend</li>
+      <li>Prompt engineering — write clear instructions</li>
+      <li>Embeddings & RAG — AI learns from YOUR notes & documents</li>
+      <li>Ethics — fairness, privacy, responsible use</li>
+    </ul>
+
+    <h4>📂 Portfolio Project: AI Study Assistant</h4>
+    <span class="tagalog-sub">Proyekto — katulong sa pag-aaral</span>
+    <ul>
+      <li>Upload notes → AI summarizes & explains simply</li>
+      <li>Quiz generator — turns lessons into practice questions</li>
+      <li>Study buddy chat — ask about your lessons anytime</li>
+      <li>Integrates with your existing website</li>
+      <li>Free API usage — zero cost ✅</li>
+    </ul>
+
+    <h4>Best For:</h4>
+    <p>AI Developer • Data Analyst • Researcher • Future AI Specialist</p>
+  </section>
+
+  <!-- 🎮 Track C: Game Development -->
+  <section class="track-card track-game">
+    <h3>🎮 Track C: Game Development</h3>
+    <p style="font-weight:500">Create browser games — no downloads, share instantly!</p>
+    <span class="tagalog-sub">Gumawa ng laro sa browser — walang kailangang i-install, ipadala agad</span>
+
+    <h4>What You'll Learn:</h4>
+    <span class="tagalog-sub">Ano ang pag-aaralan</span>
+    <ul>
+      <li>HTML5 Canvas — draw shapes & animate</li>
+      <li>Game Loop — update → render → repeat</li>
+      <li>Player input — keyboard & mouse control</li>
+      <li>Collision detection — hit walls, collect items</li>
+      <li>Sprites & animation — bring characters to life</li>
+      <li>Score system & states — start → play → game over</li>
+    </ul>
+
+    <h4>📂 Portfolio Project: Complete Browser Game</h4>
+    <span class="tagalog-sub">Proyekto — buong laro na maibabahagi</span>
+    <ul>
+      <li>Player — move, jump, interact</li>
+      <li>Enemies/obstacles — avoid or defeat</li>
+      <li>Collectibles — points, power-ups</li>
+      <li>Multiple levels — growing difficulty</li>
+      <li>Leaderboard — save scores to your database</li>
+      <li>One playable link — share with anyone ✅</li>
+    </ul>
+
+    <h4>Best For:</h4>
+    <p>Game Developer • Creative Coder • EdTech Creator • Indie Dev</p>
+  </section>
+
+  <!-- ☁️ Track D: Cloud Basics -->
+  <section class="track-card track-cloud">
+    <h3>☁️ Track D: Cloud & Dev Basics</h3>
+    <p style="font-weight:500">Deploy your projects live — accessible to everyone!</p>
+    <span class="tagalog-sub">Ilagay ang proyekto sa internet — makikita ng buong mundo</span>
+
+    <h4>What You'll Learn:</h4>
+    <span class="tagalog-sub">Ano ang pag-aaralan</span>
+    <ul>
+      <li>Cloud explained — servers, storage, online services</li>
+      <li>Free platforms — Render, Vercel, GitHub Pages, Neon DB</li>
+      <li>Deploy Node.js backend — live public URL</li>
+      <li>Deploy frontend — custom domain basics</li>
+      <li>Environment variables — keep passwords safe</li>
+      <li>Monitoring — logs, updates, uptime</li>
+      <li>Cert prep — AWS Cloud Practitioner, Azure Fundamentals</li>
+    </ul>
+
+    <h4>📂 Portfolio Project: Fully Deployed Live System</h4>
+    <span class="tagalog-sub">Proyekto — buong sistema na nakabukas sa internet</span>
+    <ul>
+      <li>Frontend → live on Vercel/GitHub Pages</li>
+      <li>Backend → live on Render</li>
+      <li>Database → live on Neon/PlanetScale</li>
+      <li>Everything connected — works online 24/7 🌐</li>
+      <li>Shareable link — show anyone, anywhere ✅</li>
+      <li>Step-by-step guide — reuse for every future project</li>
+    </ul>
+
+    <h4>Best For:</h4>
+    <p>DevOps Engineer • Cloud Architect • Backend Developer • SysAdmin</p>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 How to Proceed</h2>
+    <span class="tagalog-sub">Ano ang gagawin susunod</span>
+    <ol>
+      <li>Read all 4 tracks carefully</li>
+      <li>Choose ONE that excites you most — trust your gut! 💜</li>
+      <li>Reply with the track name: <strong>"Mobile"</strong> • <strong>"AI"</strong> • <strong>"Game"</strong> • <strong>"Cloud"</strong></li>
+      <li>I'll create your full step-by-step module — code included, ready to build!</li>
+    </ol>
+
+    <div class="box-tip">
+      💡 Not a final choice — other tracks can be added later as optional modules!
+      <span class="tagalog-note">Hindi panghabambuhay — maaari kang bumalik at aralin ang iba sa hinaharap</span>
+    </div>
+  </section>
+
+  <div class="box-success">
+    <strong>✅ Ready — Your Path Awaits!</strong><br>
+    📱 Mobile App • 🤖 AI • 🎮 Game • ☁️ Cloud<br><br>
+    <span style="font-weight:bold">Reply with your chosen track name and let's begin! 🚀</span>
+  </div>
+
+  <nav class="nav-buttons">
+    <a href="course-systems-analysis-design.html" class="nav-btn">← Previous</a>
+    <a href="index.html" class="nav-btn">🏠 Portal</a>
+    <a href="index.html" class="nav-btn">Choose Track →</a>
+  </nav>
+</main>
+
+<script>
+let isDark = localStorage.getItem('elective-theme') === 'true';
+function applyTheme(){document.getElementById('themeBtn').textContent = isDark ? '☀️' : '🌙';}
+applyTheme();
+document.getElementById('themeBtn').addEventListener('click', () => {
+  isDark = !isDark; localStorage.setItem('elective-theme', isDark); applyTheme();
+});
+let fs = parseInt(localStorage.getItem('elective-fs')) || 16;
+function applyFontSize(){document.body.style.fontSize = fs + 'px';}
+applyFontSize();
+document.getElementById('fontUp').addEventListener('click', () => {
+  if(fs < 22){ fs += 2; applyFontSize(); localStorage.setItem('elective-fs', fs); }
+});
+document.getElementById('fontDown').addEventListener('click', () => {
+  if(fs > 12){ fs -= 2; applyFontSize(); localStorage.setItem('elective-fs', fs); }
+});
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('progress').style.width = (window.scrollY / h) * 100 + '%';
+});
+</script>
+</body>
+</html>

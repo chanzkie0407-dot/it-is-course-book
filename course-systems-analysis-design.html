@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🏁 Systems Analysis & Design — Final Phase</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#fffef9;--text:#1a1a1a;--accent:#ec4899;--accent-light:#fce7f3;
+  --light:#f0f4f8;--border:#cbd5e1;--code-bg:#f6f8fa;
+  --success:#22c55e;--warn:#f59e0b;--danger:#ef4444;--arrow:#db2777
+}
+@media(prefers-color-scheme:dark){
+  :root{--bg:#0f172a;--text:#e2e8f0;--accent:#f472b6;--accent-light:#1e293b;
+  --light:#1e293b;--border:#475569;--code-bg:#1e293b}
+}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;padding:0}
+.progress-bar{position:fixed;top:0;left:0;height:3px;background:var(--accent);width:0;z-index:999}
+.top-nav{position:sticky;top:0;background:var(--light);border-bottom:1px solid var(--border);padding:.8rem 2rem;display:flex;justify-content:space-between;align-items:center;z-index:99}
+.top-nav a{color:var(--accent);text-decoration:none;font-weight:bold}
+.top-nav a:hover{text-decoration:underline}
+.controls{display:flex;gap:.5rem}
+.ctrl-btn{padding:.4rem .8rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;cursor:pointer}
+.ctrl-btn:hover{background:var(--accent);color:#fff}
+.content{max-width:900px;margin:0 auto;padding:2rem}
+.book-header{text-align:center;margin-bottom:2.5rem;padding-bottom:2rem;border-bottom:2px solid var(--accent)}
+.book-header h1{font-size:2rem;margin-bottom:.5rem;color:var(--accent)}
+.tag{display:inline-block;padding:.25rem .6rem;border-radius:20px;font-size:.75rem;font-weight:bold;margin-right:.5rem}
+.tag-phase{background:var(--accent-light);color:#be185d}
+.tag-found{background:#dcfce7;color:#166534}
+.chapter{margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px dashed var(--border)}
+.chapter h2{font-size:1.5rem;margin:1.8rem 0 1rem;color:var(--accent)}
+.chapter h3{font-size:1.15rem;margin:1.4rem 0 .7rem}
+.chapter p{margin-bottom:1rem}
+.chapter ul,.chapter ol{margin:1rem 0 1rem 2rem}
+.chapter li{margin:.6rem 0}
+table{width:100%;border-collapse:collapse;margin:1.2rem 0}
+th,td{padding:10px 14px;text-align:left;border:1px solid var(--border)}
+th{background:var(--accent-light);font-weight:bold}
+pre{background:var(--code-bg);border-radius:10px;padding:1.3rem;overflow-x:auto;margin:1.2rem 0;border:1px solid var(--border);font-size:.85rem;line-height:1.6}
+code{font-family:'Consolas','Monaco',monospace}
+:not(pre)>code{background:var(--code-bg);padding:.2rem .5rem;border-radius:4px}
+.box{border-radius:12px;padding:1.3rem;margin:1.5rem 0}
+.box-tip{background:#fef3c7;border-left:5px solid #f59e0b}
+.box-note{background:var(--accent-light);border-left:5px solid var(--accent)}
+.box-success{background:#f0fdf4;border-left:5px solid var(--success)}
+.box-warn{background:#fee2e2;border-left:5px solid #ef4444}
+.diagram{background:var(--light);border-radius:10px;padding:1.5rem;margin:1.2rem 0;text-align:center}
+.nav-buttons{display:flex;justify-content:space-between;margin:2.5rem 0;padding-top:1.5rem;border-top:2px solid var(--border)}
+.nav-btn{padding:.9rem 1.5rem;background:var(--accent);color:#fff;border:none;border-radius:10px;cursor:pointer;font-size:1rem;text-decoration:none;display:inline-block;text-align:center;font-weight:bold;transition:transform .2s}
+.nav-btn:hover{transform:translateY(-2px)}
+/* Tagalog subtitle style — consistent */
+.tagalog-sub{color:#9ca3af;font-size:.85rem;font-style:italic;margin-top:-.3rem;margin-bottom:1rem;display:block;line-height:1.5}
+.tagalog-note{color:#9ca3af;font-size:.8rem;font-style:italic;margin-top:.3rem;display:block}
+@media(max-width:768px){.top-nav{padding:.8rem 1rem;flex-wrap:wrap;gap:.5rem}.content{padding:1rem}}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progress"></div>
+<nav class="top-nav">
+  <a href="index.html">🏠 Portal</a>
+  <span style="font-weight:bold">🏁 Systems Analysis & Design — Final Phase</span>
+  <div class="controls">
+    <button class="ctrl-btn" id="themeBtn">🌙</button>
+    <button class="ctrl-btn" id="fontDown">A-</button>
+    <button class="ctrl-btn" id="fontUp">A+</button>
+  </div>
+</nav>
+<main class="content">
+  <header class="book-header">
+    <span class="tag tag-phase">Final Phase — Complete System</span>
+    <span class="tag tag-found">✅ #7 of 7 — COMPLETE</span>
+    <h1>🏁 Systems Analysis & Design</h1>
+    <p>From Requirements to Delivery — Build a System That Truly Solves Problems ✅</p>
+    <span class="tagalog-sub">Mula kahilingan hanggang paghahatid — bumuo ng sistemang tumutugon sa tunay na pangangailangan</span>
+  </header>
+
+  <section class="chapter">
+    <h2>📖 Chapter 1 — What Is the Full Process?</h2>
+    <span class="tagalog-sub">Ano ang buong siklo ng pagbuo ng sistema?</span>
+    <p>Building software is not just writing code — it is <strong>solving problems</strong> for people. Here is the complete cycle ♻️</p>
+    <span class="tagalog-sub">Hindi lamang pagsusulat ng code — ito ay paglutas ng problema para sa iba. Narito ang buong proseso:</span>
+    <div class="diagram">
+      <p style="font-weight:bold; font-size:1.1rem;">1️⃣ Understand → 2️⃣ Plan → 3️⃣ Design → 4️⃣ Build → 5️⃣ Test → 6️⃣ Deploy → 7️⃣ Maintain</p>
+      <span class="tagalog-note">Alamin → Magplano → Disenyuhin → Bumuo → Subukan → Ihatid → Panatilihin</span>
+    </div>
+    <ul>
+      <li><strong>Analysis</strong> — What is actually needed? What is the current problem?
+        <span class="tagalog-note">Pagsusuri — Ano ba talaga ang kailangan? Ano ang problema sa kasalukuyan?</span>
+      </li>
+      <li><strong>Design</strong> — How will it be built? Structure, components, technology?
+        <span class="tagalog-note">Disenyo — Paano ito gagawin? Anong ayos, bahagi, at teknolohiya ang gagamitin?</span>
+      </li>
+      <li><strong>Implementation</strong> — Write the code, build the working system
+        <span class="tagalog-note">Pagpapatupad — Isulat ang code, itayo ang sistemang gagana</span>
+      </li>
+      <li><strong>Testing</strong> — Ensure correctness; verify it works as expected
+        <span class="tagalog-note">Pagsusuri — Siguraduhing walang mali; gumagana ayon sa inaasahan</span>
+      </li>
+      <li><strong>Deployment & Maintenance</strong> — Deliver to users, fix issues, add improvements over time
+        <span class="tagalog-note">Paghahatid at Pagpapanatili — Ibigay sa gumagamit, ayusin kung may sira, dagdagan kung may bagong kailangan</span>
+      </li>
+    </ul>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 2 — Analysis: Discover Real Needs 🔍</h2>
+    <span class="tagalog-sub">Pagsusuri: Alamin ang tunay na pangangailangan</span>
+    
+    <h3>Talk to the Client:</h3>
+    <span class="tagalog-sub">Pakikipag-usap sa kliyente o gumagamit</span>
+    <p>Do not stop at the first answer — ask deeply to uncover what truly matters:</p>
+    <span class="tagalog-note">Huwag makuntento sa unang sinabi — magtanong nang mas malalim:</span>
+    <ul>
+      <li>What do you do now? How? Who is involved?
+        <span class="tagalog-note">Ano ang ginagawa ninyo sa kasalukuyan? Paano? Sino ang kasangkot?</span>
+      </li>
+      <li>What is the most difficult part? Where do things get stuck?
+        <span class="tagalog-note">Ano ang pinakamahirap na bahagi? Saan kayo nahihirapan?</span>
+      </li>
+      <li>When the system is ready, what will people do first?
+        <span class="tagalog-note">Kapag tapos na ang sistema, ano ang unang gagawin ng gumagamit?</span>
+      </li>
+      <li>What is NOT needed? — prevents scope creep
+        <span class="tagalog-note">Ano ang HINDI kailangan? — para hindi lumaki nang lumaki ang gawain</span>
+      </li>
+    </ul>
+    <h3>Write Down Requirements:</h3>
+    <span class="tagalog-sub">Isulat ang mga kahilingan — paghiwalayin ang mahalaga sa dagdag</span>
+    <p>Separate <strong>Must-Have Core Features</strong> from <strong>Future Nice-to-Haves</strong>:</p>
+    <table>
+      <tr><th>Must-Have (Essential)</th><th>Future / Extra (If Time Permits)</th></tr>
+      <tr>
+        <td>Add, edit, delete product records</td>
+        <td>Export data to Excel / PDF</td>
+      </tr>
+      <tr>
+        <td>Record sales transactions</td>
+        <td>Display income charts & reports</td>
+      </tr>
+      <tr>
+        <td>Search and look up entries</td>
+        <td>Send reports via email</td>
+      </tr>
+    </table>
+    <span class="tagalog-note">Talaan ng produkto • Itala ang benta • Maghanap ng tala | Mag-export • Tsart • Ipadala sa email — sa susunod na bersyon</span>
+    <h3>User Story — From the User's Perspective:</h3>
+    <span class="tagalog-sub">Kwento ng Gumagamit — isulat sa simpleng salita</span>
+<pre><code>As a customer, I want to see product prices
+so I know how much I need to pay.
+
+Acceptance Criteria:
+ ✅ Name and price are clearly listed
+ ✅ Sorted from lowest to highest price
+ ✅ Total amount is clearly shown
+</code></pre>
+    <span class="tagalog-note">Bilang mamimili, gusto kong makita ang presyo upang malaman ko ang babayaran — dapat malinaw, nakaayos, at buo ang halaga</span>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 3 — Diagrams: Draw Before Coding ✏️</h2>
+    <span class="tagalog-sub">Mga Diagram: Iguhit muna bago mag-code — para malinaw sa lahat</span>
+    <p>Never start coding immediately — draw your plan first so everyone shares the same vision!</p>
+    <span class="tagalog-note">Huwag agad magsulat ng programa — iguhit ang balangkas upang magkaintindihan ang lahat</span>
+    <h3>Use Case Diagram — Who Does What:</h3>
+    <span class="tagalog-sub">Ipinapakita kung sino ang gumagamit at ano ang magagawa nila</span>
+    <p>Shows actors and all actions they can perform in the system:</p>
+    <ul>
+      <li>👤 Customer → Browse list → Place order → Receive receipt
+        <span class="tagalog-note">Mamimili → Tingnan → Bumili → Tumanggap ng resibo</span>
+      </li>
+      <li>👤 Manager → Add products → View reports → Set prices
+        <span class="tagalog-note">Tagapamahala → Magdagdag → Tingnan ulat → Magtakda ng presyo</span>
+      </li>
+    </ul>
+    <h3>Class Diagram — Program Structure:</h3>
+    <span class="tagalog-sub">Ipinapakita ang ayos ng programa — klase, katangian, paraan, at ugnayan</span>
+    <p>Your blueprint: classes, attributes, methods, and relationships:</p>
+<pre><code>Product
+ ├─ id: integer
+ ├─ name: text
+ ├─ price: decimal
+ └─ + getPrice(): decimal
+
+Sale
+ ├─ date: date/time
+ ├─ totalAmount: decimal
+ └─ + addItem(Product): void
+</code></pre>
+    <span class="tagalog-note">Produkto — may pagkakakilanlan, pangalan, presyo | Benta — may petsa, kabuuan, para magdagdag ng gamit</span>
+    <h3>Entity-Relationship Diagram (ERD) — Database Layout:</h3>
+    <span class="tagalog-sub">Ayos ng Database — kung paano magkakaugnay ang mga talaan</span>
+    <p>Tables and connections: one-to-one, one-to-many, many-to-many:</p>
+    <div class="diagram">
+      <p>Product ──(1)──(N)── SaleDetail ──(N)──(1)── Sale</p>
+      <p>One sale = many products; one product may appear in many sales ✅</p>
+      <span class="tagalog-note">Isang benta = maraming produkto; Isang produkto = maaaring makita sa iba't ibang benta</span>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 4 — Plan & Architecture 📐</h2>
+    <span class="tagalog-sub">Plano at Istruktura — paano hahatiin ang gawain</span>
+    
+    <h3>Divide by Responsibility:</h3>
+    <span class="tagalog-sub">Hatiin ayon sa tungkulin — huwag pagsama-samahin sa iisang bahagi</span>
+    <p>Keep things organized — separate concerns so code stays clean and changeable:</p>
+    <table>
+      <tr><th>Module / Layer</th><th>Purpose</th></tr>
+      <tr>
+        <td>Model</td>
+        <td>Classes — Product, Sale, Customer; holds data & business rules</td>
+      </tr>
+      <tr>
+        <td>Data Storage</td>
+        <td>Database connection; create, read, update, delete operations</td>
+      </tr>
+      <tr>
+        <td>Interface / View</td>
+        <td>What users see — menus, forms, results display</td>
+      </tr>
+      <tr>
+        <td>Controller / Manager</td>
+        <td>Connects everything — validates, passes data, controls flow</td>
+      </tr>
+    </table>
+    <span class="tagalog-note">Modelo — datos at patakaran | Imbakan — pagkonekta at paghaku | Ugnayan — nakikita ng tao | Tagapamahala — nag-uugnay sa lahat</span>
+    <h3>Technology Selection Guidelines:</h3>
+    <span class="tagalog-sub">Paano pumili ng gagamiting kasangkapan</span>
+    <ul>
+      <li>✅ What does the team already know? — don't learn new tools under a deadline
+        <span class="tagalog-note">Ano na ang alam ng grupo? — huwag subukan ang bago kung may nakatakdang tapusin</span>
+      </li>
+      <li>✅ What does the client require? — Windows, Android, Web?
+        <span class="tagalog-note">Ano ang kailangan ng kliyente? — sa kompyuter ba, sa selpon, o sa pahina?</span>
+      </li>
+      <li>✅ Is it free? — avoids unnecessary cost
+        <span class="tagalog-note">Libre ba? — para hindi magdagdag ng gastos</span>
+      </li>
+      <li>✅ Is there support? — active community, examples, documentation
+        <span class="tagalog-note">May tulong ba? — may komunidad, halimbawa, at malinaw na paliwanag</span>
+      </li>
+    </ul>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 5 — Build in Increments 🔨</h2>
+    <span class="tagalog-sub">Bumuo nang bahagi-bahagi — huwag hintayin ang lahat bago magpakita</span>
+    
+    <h3>Prototype Early & Often:</h3>
+    <span class="tagalog-sub">Gumawa ng simpleng bersyon agad — para makita kung tama ang direksyon</span>
+    <p>Don't hide your work until "finished" — show early, adjust quickly:</p>
+    <ol>
+      <li>Version 0.1 — can add and view records only
+        <span class="tagalog-note">Bersyon 0.1 — makapagtala at makatingin lamang</span>
+      </li>
+      <li>Version 0.5 — basic inputs, calculations, and flow working
+        <span class="tagalog-note">Bersyon 0.5 — may simpleng pagpili at pagkalkula</span>
+      </li>
+      <li>Version 1.0 — complete, tested, ready for users
+        <span class="tagalog-note">Bersyon 1.0 — buo, nasubukan, at maaari nang ibigay</span>
+      </li>
+    </ol>
+    <h3>Writing Clean Code:</h3>
+    <span class="tagalog-sub">Paano sumulat ng malinis at madaling intindihin na programa</span>
+    <ul>
+      <li>✅ Clear names: <code>calculateTotal()</code> not <code>doStuff()</code>
+        <span class="tagalog-note">Malinaw na pangalan — alam agad ang ginagawa</span>
+      </li>
+      <li>✅ One method = one job — don't mix calculation with display
+        <span class="tagalog-note">Isang tungkulin bawat paraan — huwag pagsamahin ang pagkuwenta sa pagpapakita</span>
+      </li>
+      <li>✅ Don't repeat yourself — if used in 3 places, make it shared
+        <span class="tagalog-note">Iwasan ang pag-uulit — gawing iisang bahagi kung paulit-ulit ang ginagawa</span>
+      </li>
+      <li>✅ Explain WHY, not WHAT — clear code is its own best documentation
+        <span class="tagalog-note">Ipaliwanag kung BAKIT ginawa, hindi kung ANO ang ginagawa — malinaw na programa ang pinakamahusay na paliwanag</span>
+      </li>
+    </ul>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 6 — Test: Verify It Works Correctly ✅</h2>
+    <span class="tagalog-sub">Pagsusuri: Siguraduhing tama at ligtas ang lahat</span>
+    
+    <h3>Types of Testing:</h3>
+    <span class="tagalog-sub">Iba't ibang paraan ng pagsusuri</span>
+    <ul>
+      <li><strong>Unit Test</strong> — Check each piece in isolation; known input → verify expected output
+        <span class="tagalog-note">Pagsusuri sa Bahagi — subukan ang bawat piraso nang mag-isa</span>
+      </li>
+      <li><strong>Integration Test</strong> — Do database and program work together correctly?
+        <span class="tagalog-note">Pagsusuri sa Pagkakaugnay — gumagana ba nang sabay ang lahat ng bahagi?</span>
+      </li>
+      <li><strong>User Acceptance Test</strong> — Let real people try it; if they struggle, the system needs fixing
+        <span class="tagalog-note">Pagsusuri ng Gumagamit — kung nahihirapan sila, may kailangang baguhin sa atin</span>
+      </li>
+    </ul>
+    <h3>Test What Should NOT Happen:</h3>
+    <span class="tagalog-sub">Suriin din ang mga hindi inaasahang pangyayari</span>
+<pre><code>❌ Selling with negative amount → must reject
+❌ Searching empty record → must say "not found", not crash
+❌ Closing while saving → data must not corrupt or vanish
+</code></pre>
+    <span class="tagalog-note">Tumanggi sa negatibong halaga • Magsabi kung walang nakita • Huwag sirain ang datos kahit biglang isara</span>
+    <div class="box-warn">
+      ⚠️ <strong>Important:</strong> Testing does NOT prove "zero bugs" — it proves the system behaves correctly for what was tested. Always prepare for the unexpected!
+      <span class="tagalog-note">Hindi nito mapapatunayang walang mali — kundi gumagana para sa inaasahan. Maghanda palagi sa hindi inaasahan!</span>
+    </div>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 7 — Deliver & Maintain 📦</h2>
+    <span class="tagalog-sub">Paghahatid at Patuloy na Pagpapanatili</span>
+    
+    <h3>What Goes to the User:</h3>
+    <span class="tagalog-sub">Ano ang ibibigay kasama ng sistema</span>
+    <ul>
+      <li>✅ Working application — not just raw source code
+        <span class="tagalog-note">Programang gumagana — hindi lamang nakasulat na code</span>
+      </li>
+      <li>✅ User guide — how to start, use, save, change passwords
+        <span class="tagalog-note">Gabay sa paggamit — paano buksan, magsimula, mag-imbak, at magbago ng hiyas</span>
+      </li>
+      <li>✅ Deployment guide — how to install on another computer, how to back up
+        <span class="tagalog-note">Gabay sa paglilipat — paano ilipat at mag-imbak ng kopya ng datos</span>
+      </li>
+      <li>✅ Support contact — who to reach, how, and typical response time
+        <span class="tagalog-note">Sino ang tatawagan — paano at kailan sasagot kung may problema</span>
+      </li>
+    </ul>
+    <h3>Maintenance — It Doesn't End at Delivery:</h3>
+    <span class="tagalog-sub">Hindi natatapos ang trabaho sa paghahatid — patuloy ang pag-aalaga</span>
+    <p>Systems evolve — plan to support them:</p>
+    <ul>
+      <li>Fix unforeseen issues reported by users
+        <span class="tagalog-note">Ayusin ang mga hindi inaasahang pagkakamali</span>
+      </li>
+      <li>Add new features as requirements grow
+        <span class="tagalog-note">Magdagdag ng kakayahan ayon sa bagong kahilingan</span>
+      </li>
+      <li>Back up data daily — computers can fail!
+        <span class="tagalog-note">Mag-imbak ng kopya araw-araw — maaaring masira ang kompyuter!</span>
+      </li>
+    </ul>
+  </section>
+
+  <section class="chapter">
+    <h2>📖 Chapter 8 — Example: Complete Store System 🛒</h2>
+    <span class="tagalog-sub">Halimbawa: Buong Sistema ng Tindahan — mula plano hanggang programa</span>
+    <p>Putting it all together — structure, rules, storage, and flow:</p>
+<pre><code>// ===== MODEL — Data & Rules =====
+public class Product {
+    private int id;
+    private String name;
+    private double price;
+
+    public Product(int id, String name, double price) {
+        this.id = id;
+        this.name = name;
+        setPrice(price);
+    }
+
+    public void setPrice(double price) {
+        if (price &gt;= 0) {
+            this.price = price;
+        } else {
+            throw new IllegalArgumentException("Price cannot be negative");
+        }
+    }
+    // ... getters
+}
+
+// ===== DATA LAYER — Database =====
+public class ProductDB {
+    public static void save(Product p) throws SQLException {
+        String sql = "INSERT INTO Product (name, price) VALUES (?, ?)";
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setString(1, p.getName());
+        stmt.setDouble(2, p.getPrice());
+        stmt.executeUpdate();
+    }
+}
+
+// ===== APPLICATION FLOW =====
+public class StoreApp {
+    public static void main(String[] args) {
+        Product coffee = new Product(0, "Coffee", 35.00);
+        try {
+            ProductDB.save(coffee);
+            System.out.println("Record saved successfully ✅");
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+}
+</code></pre>
+    <span class="tagalog-note">Modelo — may katangian at patakaran | Imbakan — nagtatala sa database | Pangunahing daloy — lumikha, magtala, magsabi kung nagtagumpay o nagkamali</span>
+  </section>
+
+  <div class="box-success">
+    <h3>🎉 SYSTEMS ANALYSIS & DESIGN — COMPLETE!</h3>
+    <p>Congratulations! You have finished the entire course! 🏆✨</p>
+    <span class="tagalog-note">Binabati kita! Natapos mo na ang buong kurso!</span>
+    
+    <p style="margin-top:1rem; font-weight:bold; font-size:1.1rem;">Everything you've learned:</p>
+    <ul>
+      <li>✅ Logic & Problem Solving</li>
+      <li>✅ Computer Fundamentals</li>
+      <li>✅ Java Programming</li>
+      <li>✅ NetBeans IDE & Tools</li>
+      <li>✅ Object-Oriented Programming (OOP)</li>
+      <li>✅ Databases & SQL</li>
+      <li>✅ Full Systems Development Lifecycle</li>
+    </ul>
+    <span class="tagalog-note">Lohika • Batayan • Java • Kasangkapan • OOP • Database • Buong siklo ng pagbuo</span>
+    
+    <p style="margin-top:1rem;">You can now build complete systems — from talking with users to delivering working software! 💪💜</p>
+    <span class="tagalog-note">Kaya mo nang bumuo ng buong sistema — mula pakikipag-usap hanggang sa paghahatid ng gumaganang programa!</span>
+    
+    <p style="margin-top:1rem; font-style:italic;">Keep practicing, keep asking, don't fear mistakes — every error is a step forward. I'm always here to help you grow! 🚀✨</p>
+    <span class="tagalog-note">Huwag kang hihinto — magsanay, magtanong, huwag matakot magkamali. Nandito lang ako palagi para tulungan ka!</span>
+  </div>
+
+  <nav class="nav-buttons">
+    <a href="course-database-systems.html" class="nav-btn">← Previous</a>
+    <a href="index.html" class="nav-btn">🏠 Portal</a>
+  </nav>
+</main>
+
+<script>
+let isDark = localStorage.getItem('sad-theme') === 'true';
+function applyTheme(){document.getElementById('themeBtn').textContent = isDark ? '☀️' : '🌙';}
+applyTheme();
+document.getElementById('themeBtn').addEventListener('click', () => {
+  isDark = !isDark; localStorage.setItem('sad-theme', isDark); applyTheme();
+});
+let fs = parseInt(localStorage.getItem('sad-fs')) || 16;
+function applyFontSize(){document.body.style.fontSize = fs + 'px';}
+applyFontSize();
+document.getElementById('fontUp').addEventListener('click', () => {
+  if(fs < 22){ fs += 2; applyFontSize(); localStorage.setItem('sad-fs', fs); }
+});
+document.getElementById('fontDown').addEventListener('click', () => {
+  if(fs > 12){ fs -= 2; applyFontSize(); localStorage.setItem('sad-fs', fs); }
+});
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('progress').style.width = (window.scrollY / h) * 100 + '%';
+});
+</script>
+</body>
+</html>
